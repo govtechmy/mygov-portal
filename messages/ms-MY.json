@@ -1,0 +1,76 @@
+{
+  "masthead": {
+    "title": "Portal Rasmi Kerajaan Malaysia",
+    "trigger": "Kenal Pasti Begini",
+    "sections": {
+      "domain": {
+        "title": "Laman web rasmi kerajaan berakhir dengan .gov.my",
+        "content": "Jika pautan tidak berakhir dengan .gov.my, keluar dari laman web dengan segera walaupun ia kelihatan serupa."
+      },
+      "security": {
+        "title": "Laman web selamat menggunakan HTTPS",
+        "content": "Cari kunci atau https:// sebagai langkah berjaga-jaga tambahan. Jika tidak ada, jangan kongsi sebarang maklumat sensitif."
+      }
+    }
+  },
+  "portal": {
+    "title": "Selamat Datang ke Portal MyGov",
+    "subtitle": "Gerbang anda kepada perkhidmatan kerajaan Malaysia",
+    "services": {
+      "title": "Perkhidmatan Kerajaan",
+      "description": "Akses pelbagai perkhidmatan dan aplikasi kerajaan."
+    },
+    "information": {
+      "title": "Maklumat",
+      "description": "Cari maklumat rasmi dan kemas kini dari agensi kerajaan."
+    },
+    "contact": {
+      "title": "Hubungi",
+      "description": "Hubungi jabatan dan agensi kerajaan."
+    }
+  },
+  "navigation": {
+    "home": "Kembali ke Laman Utama",
+    "notFound": "Halaman Tidak Dijumpai",
+    "notFoundMessage": "Halaman yang anda cari tidak wujud.",
+    "services": "Perkhidmatan",
+    "information": "Maklumat",
+    "about": "Tentang",
+    "ministry": "Kementerian",
+    "contact": "Hubungi",
+    "news": "Berita"
+  },
+  "footer": {
+    "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
+    "followUs": "Ikuti kami",
+    "groups": {
+      "services": {
+        "title": "Perkhidmatan Kerajaan",
+        "citizen": "Perkhidmatan Rakyat",
+        "business": "Perkhidmatan Perniagaan",
+        "foreigner": "Perkhidmatan Warga Asing",
+        "emergency": "Perkhidmatan Kecemasan"
+      },
+      "information": {
+        "title": "Maklumat & Sumber",
+        "laws": "Undang-undang & Peraturan",
+        "forms": "Borang & Dokumen",
+        "statistics": "Statistik",
+        "publications": "Penerbitan"
+      },
+      "support": {
+        "title": "Sokongan & Hubungi",
+        "help": "Pusat Bantuan",
+        "feedback": "Maklum Balas",
+        "contactUs": "Hubungi Kami",
+        "faq": "Soalan Lazim"
+      }
+    },
+    "legal": {
+      "copyright": "Hak Cipta Terpelihara © 2025",
+      "disclaimer": "Penafian",
+      "privacy": "Dasar Privasi",
+      "lastUpdated": "Terakhir dikemas kini: 11 Mac 2025"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "masthead": {
+    "title": "Official Malaysia Government Website",
+    "trigger": "Here's how you know",
+    "sections": {
+      "domain": {
+        "title": "Official government websites end with .gov.my",
+        "content": "If the link does not end with .gov.my, exit the website immediately even if it looks similar."
+      },
+      "security": {
+        "title": "Secure websites use HTTPS",
+        "content": "Look for a lock or https:// as an added precaution. If not present, do not share any sensitive information."
+      }
+    }
+  },
+  "portal": {
+    "title": "Welcome to MyGov Portal",
+    "subtitle": "Your gateway to Malaysian government services",
+    "services": {
+      "title": "Government Services",
+      "description": "Access a wide range of government services and applications."
+    },
+    "information": {
+      "title": "Information",
+      "description": "Find official information and updates from government agencies."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch with government departments and agencies."
+    }
+  },
+  "navigation": {
+    "home": "Go Home",
+    "notFound": "Page Not Found",
+    "notFoundMessage": "The page you are looking for does not exist.",
+    "services": "Services",
+    "information": "Information",
+    "about": "About",
+    "ministry": "Ministry",
+    "contact": "Contact",
+    "news": "News"
+  },
+  "footer": {
+    "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
+    "followUs": "Follow us",
+    "groups": {
+      "services": {
+        "title": "Government Services",
+        "citizen": "Citizen Services",
+        "business": "Business Services",
+        "foreigner": "Foreigner Services",
+        "emergency": "Emergency Services"
+      },
+      "information": {
+        "title": "Information & Resources",
+        "laws": "Laws & Regulations",
+        "forms": "Forms & Documents",
+        "statistics": "Statistics",
+        "publications": "Publications"
+      },
+      "support": {
+        "title": "Support & Contact",
+        "help": "Help Center",
+        "feedback": "Feedback",
+        "contactUs": "Contact Us",
+        "faq": "FAQ"
+      }
+    },
+    "legal": {
+      "copyright": "All Rights Reserved © 2025",
+      "disclaimer": "Disclaimer",
+      "privacy": "Privacy Policy",
+      "lastUpdated": "Last updated: 11th March 2025"
+    }
+  }
+}
