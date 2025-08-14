@@ -22,6 +22,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      {process.env.APP_ENV === "production" && (
+        <head>
+          {/* Tinybird Analytics */}
+          <script
+            defer
+            src="https://unpkg.com/@tinybirdco/flock.js"
+            data-token={`${process.env.NEXT_PUBLIC_TINYBIRD_TOKEN}`}
+            data-host={`${process.env.NEXT_PUBLIC_TINYBIRD_HOST}`}
+          ></script>
+        </head>
+      )}
       <body className="transition-colors duration-200">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
