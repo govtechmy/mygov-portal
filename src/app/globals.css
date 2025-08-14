@@ -7,3 +7,20 @@
   --font-inter: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
 }
+
+/* Custom styles for connector lines and dots */
+.dashed-line-gray {
+  border-bottom: 2px dashed #a1a1aa;
+}
+
+.connector-dot::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  right: -5px;
+  top: -3px;
+  z-index: 2;
+}

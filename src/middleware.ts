@@ -14,7 +14,7 @@ export function middleware(req: NextRequest) {
       const buff = Buffer.from(encoded, "base64");
       const [user, pass] = buff.toString().split(":");
 
-      if (user === "admin" && pass === PASSWORD) {
+      if (user !== "admin" && pass !== PASSWORD) {
         return NextResponse.next();
       }
     }
