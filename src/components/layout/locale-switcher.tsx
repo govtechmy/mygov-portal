@@ -43,7 +43,7 @@ export default function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
         <Button
           variant="default-outline"
           size="small"
-          className="flex items-center space-x-2 px-3 py-2 h-9 border-gray-300 bg-white"
+          className="flex items-center border-gray-300 bg-white"
           aria-label="Select language"
         >
           <GlobeIcon className="h-4 w-4 text-gray-700" />
