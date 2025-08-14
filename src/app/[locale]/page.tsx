@@ -8,5 +8,9 @@ interface HomePageProps {
 
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
-  return <div>mainpage</div>;
+  return (
+    <div>
+      <div>this is some div</div>
+    </div>
+  );
 }

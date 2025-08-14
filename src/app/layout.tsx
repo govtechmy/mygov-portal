@@ -4,7 +4,8 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export const metadata: Metadata = {
   title: "MyGov Portal - Malaysian Government Services",
-  description: "Official Malaysian government portal providing access to government services and information",
+  description:
+    "Official Malaysian government portal providing access to government services and information",
   keywords: ["Malaysia", "government", "services", "portal", "MyGov"],
   authors: [{ name: "Malaysian Government" }],
 };
@@ -21,10 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body className="transition-colors duration-200">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
