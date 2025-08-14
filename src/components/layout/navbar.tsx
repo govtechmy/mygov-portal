@@ -48,8 +48,7 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
       </NavbarMenu>
 
       <NavbarAction>
-        <div className="flex items-center space-x-2">
-          <LocaleSwitcher currentLocale={locale} />
+        <div className="flex items-center gap-2">
           <Button
             variant="default-ghost"
             size="small"
@@ -65,6 +64,8 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
               <SunIcon className="h-5 w-5" />
             )}
           </Button>
+          <LocaleSwitcher currentLocale={locale} />
+          <Button>Muat Turun Aplikasi</Button>
         </div>
       </NavbarAction>
     </Navbar>
