@@ -16,11 +16,11 @@
   "portal": {
     "title": "Welcome to MyGov Portal",
     "subtitle": "Your gateway to Malaysian government services",
-    "services": {
+    "main": {
       "title": "Government Services",
       "description": "Access a wide range of government services and applications."
     },
-    "information": {
+    "blog": {
       "title": "Information",
       "description": "Find official information and updates from government agencies."
     },
@@ -33,12 +33,9 @@
     "home": "Go Home",
     "notFound": "Page Not Found",
     "notFoundMessage": "The page you are looking for does not exist.",
-    "services": "Services",
-    "information": "Information",
-    "about": "About",
-    "ministry": "Ministry",
-    "contact": "Contact",
-    "news": "News"
+    "main": "Main",
+    "blog": "Blog",
+    "contact": "Contact Us"
   },
   "footer": {
     "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",

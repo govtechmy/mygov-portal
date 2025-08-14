@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Navbar,
@@ -23,39 +23,30 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
     <Navbar>
-      <NavbarLogo 
+      <NavbarLogo
         href={`/${locale}`}
         src="/images/mygov-logo.svg"
         alt="Jata Negara Malaysia"
         className="h-full"
-      >
-      </NavbarLogo>
-      
+      ></NavbarLogo>
+
       <NavbarMenu>
-        <NavbarMenuItem href={`/${locale}/services`}>
-          {messages.navigation.services}
+        <NavbarMenuItem href={`/${locale}`}>
+          {messages.navigation.main}
         </NavbarMenuItem>
-        <NavbarMenuItem href={`/${locale}/information`}>
-          {messages.navigation.information}
+        <NavbarMenuItem href={`/${locale}/blog`}>
+          {messages.navigation.blog}
         </NavbarMenuItem>
-        <NavbarMenuDropdown title={messages.navigation.about}>
-          <NavbarMenuItem href={`/${locale}/about/ministry`}>
-            {messages.navigation.ministry}
-          </NavbarMenuItem>
-          <NavbarMenuItem href={`/${locale}/about/contact`}>
-            {messages.navigation.contact}
-          </NavbarMenuItem>
-        </NavbarMenuDropdown>
-        <NavbarMenuItem href={`/${locale}/news`}>
-          {messages.navigation.news}
+        <NavbarMenuItem href={`/${locale}/contact`}>
+          {messages.navigation.contact}
         </NavbarMenuItem>
       </NavbarMenu>
-      
+
       <NavbarAction>
         <div className="flex items-center space-x-2">
           <LocaleSwitcher currentLocale={locale} />
@@ -64,9 +55,11 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             size="small"
             onClick={toggleTheme}
             className="p-2"
-            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            aria-label={
+              theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+            }
           >
-            {theme === 'light' ? (
+            {theme === "light" ? (
               <MoonIcon className="h-5 w-5" />
             ) : (
               <SunIcon className="h-5 w-5" />

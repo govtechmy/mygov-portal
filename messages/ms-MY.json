@@ -16,11 +16,11 @@
   "portal": {
     "title": "Selamat Datang ke Portal MyGov",
     "subtitle": "Gerbang anda kepada perkhidmatan kerajaan Malaysia",
-    "services": {
+    "main": {
       "title": "Perkhidmatan Kerajaan",
       "description": "Akses pelbagai perkhidmatan dan aplikasi kerajaan."
     },
-    "information": {
+    "blog": {
       "title": "Maklumat",
       "description": "Cari maklumat rasmi dan kemas kini dari agensi kerajaan."
     },
@@ -33,12 +33,9 @@
     "home": "Kembali ke Laman Utama",
     "notFound": "Halaman Tidak Dijumpai",
     "notFoundMessage": "Halaman yang anda cari tidak wujud.",
-    "services": "Perkhidmatan",
-    "information": "Maklumat",
-    "about": "Tentang",
-    "ministry": "Kementerian",
-    "contact": "Hubungi",
-    "news": "Berita"
+    "main": "Utama",
+    "blog": "Blog",
+    "contact": "Hubungi Kami"
   },
   "footer": {
     "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
