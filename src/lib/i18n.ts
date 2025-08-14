@@ -1,15 +1,15 @@
-import enGB from '../../messages/en-GB.json';
-import msMY from '../../messages/ms-MY.json';
+import enGB from "../../messages/en-GB.json";
+import msMY from "../../messages/ms-MY.json";
 
-export type Locale = 'en-GB' | 'ms-MY';
+export type Locale = "en-GB" | "ms-MY";
 
-export const locales: Locale[] = ['en-GB', 'ms-MY'];
+export const locales: Locale[] = ["en-GB", "ms-MY"];
 
-export const defaultLocale: Locale = 'ms-MY';
+export const defaultLocale: Locale = "ms-MY";
 
 export const messages = {
-  'en-GB': enGB,
-  'ms-MY': msMY,
+  "en-GB": enGB,
+  "ms-MY": msMY,
 } as const;
 
 export function getMessages(locale: Locale) {
