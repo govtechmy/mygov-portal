@@ -64,7 +64,9 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             )}
           </Button>*/}
           <LocaleSwitcher currentLocale={locale} />
-          <Button>Muat Turun Aplikasi</Button>
+          <Button className="h-8 py-1.5 px-3 font-medium text-sm whitespace-nowrap">
+            Muat Turun Aplikasi
+          </Button>
         </div>
       </NavbarAction>
     </Navbar>
