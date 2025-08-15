@@ -5,6 +5,13 @@ const PASSWORD = process.env.AUTH_TOKEN;
 const APP_ENV = process.env.APP_ENV; // local | staging | production
 
 export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // Skip auth for Next internal routes and static assets (e.g., public files)
+  if (pathname.startsWith('/_next') || /\.[^/]+$/.test(pathname)) {
+    return NextResponse.next();
+  }
+
   // Skip authentication for local environment
   if (APP_ENV === 'local') {
     return NextResponse.next();
