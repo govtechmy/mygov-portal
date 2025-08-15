@@ -1,22 +1,22 @@
-"use client";
-import Hero from "@/components/layout/hero";
-import { Button } from "@govtechmy/myds-react/button";
+'use client';
+import Hero from '@/components/layout/hero';
+import { Button } from '@govtechmy/myds-react/button';
 import {
   ChevronDownIcon,
   EmailIcon,
   UploadIcon,
-} from "@govtechmy/myds-react/icon";
-import { Input, InputAddon, InputIcon } from "@govtechmy/myds-react/input";
-import { Label } from "@govtechmy/myds-react/label";
+} from '@govtechmy/myds-react/icon';
+import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
+import { Label } from '@govtechmy/myds-react/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@govtechmy/myds-react/select";
-import { TextArea } from "@govtechmy/myds-react/textarea";
-import { useState } from "react";
+} from '@govtechmy/myds-react/select';
+import { TextArea } from '@govtechmy/myds-react/textarea';
+import { useState } from 'react';
 
 export default function ContactPage() {
   return (
@@ -99,7 +99,7 @@ export default function ContactPage() {
             <Label>Cadangan/Maklum Balas</Label>
             <TextArea
               placeholder="Tuliskan cadangan/maklum balas anda"
-              size={"medium"}
+              size={'medium'}
               className="!shadow-sm"
             />
           </div>
@@ -133,21 +133,21 @@ export default function ContactPage() {
 }
 
 function DropdownPhoneNo() {
-  const [selectedCode, setSelectedCode] = useState("+60");
+  const [selectedCode, setSelectedCode] = useState('+60');
   const [open, setOpen] = useState(false);
   const countries = [
-    { code: "+60", name: "Malaysia" },
-    { code: "+65", name: "Singapore" },
-    { code: "+62", name: "Indonesia" },
-    { code: "+66", name: "Thailand" },
-    { code: "+63", name: "Philippines" },
-    { code: "+84", name: "Vietnam" },
-    { code: "+86", name: "China" },
-    { code: "+91", name: "India" },
-    { code: "+81", name: "Japan" },
-    { code: "+1", name: "United States" },
-    { code: "+44", name: "United Kingdom" },
-    { code: "+61", name: "Australia" },
+    { code: '+60', name: 'Malaysia' },
+    { code: '+65', name: 'Singapore' },
+    { code: '+62', name: 'Indonesia' },
+    { code: '+66', name: 'Thailand' },
+    { code: '+63', name: 'Philippines' },
+    { code: '+84', name: 'Vietnam' },
+    { code: '+86', name: 'China' },
+    { code: '+91', name: 'India' },
+    { code: '+81', name: 'Japan' },
+    { code: '+1', name: 'United States' },
+    { code: '+44', name: 'United Kingdom' },
+    { code: '+61', name: 'Australia' },
   ];
 
   return (
@@ -163,12 +163,12 @@ function DropdownPhoneNo() {
         <span>{selectedCode}</span>
         <ChevronDownIcon
           className={` transform transition-transform duration-100 ease-out ${
-            open ? "rotate-180" : "rotate-0"
+            open ? 'rotate-180' : 'rotate-0'
           }`}
         />
       </SelectTrigger>
       <SelectContent className="p-0">
-        {countries.map((c) => (
+        {countries.map(c => (
           <SelectItem className="h-[40px]" key={c.code} value={c.code}>
             {`${c.name} (${c.code})`}
           </SelectItem>

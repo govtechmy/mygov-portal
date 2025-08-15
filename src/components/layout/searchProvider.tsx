@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { createContext, useState, ReactNode, useMemo } from "react";
-import { newsData, NewsItem } from "./NewsItemTypes";
-import { DateRange } from "@govtechmy/myds-react/daterange-picker"; // import DateRange type
+import { createContext, useState, ReactNode, useMemo } from 'react';
+import { newsData, NewsItem } from './NewsItemTypes';
+import { DateRange } from '@govtechmy/myds-react/daterange-picker'; // import DateRange type
 
 export type AllCategories =
-  | "Semua"
-  | "Kesihatan"
-  | "Kelahiran"
-  | "Pendidikan"
-  | "Pekerjaan"
-  | "Keluarga"
-  | "Kediaman"
-  | "Pengangkutan"
-  | "Bantuan"
-  | "Perjalanan"
-  | "Persaraan"
-  | "Kematian"
-  | "Umum"
-  | "Hebahan";
+  | 'Semua'
+  | 'Kesihatan'
+  | 'Kelahiran'
+  | 'Pendidikan'
+  | 'Pekerjaan'
+  | 'Keluarga'
+  | 'Kediaman'
+  | 'Pengangkutan'
+  | 'Bantuan'
+  | 'Perjalanan'
+  | 'Persaraan'
+  | 'Kematian'
+  | 'Umum'
+  | 'Hebahan';
 
 export type GroupedNews = Record<AllCategories, NewsItem[]>;
 
@@ -34,8 +34,8 @@ type SearchContextType = {
 export const SearchContext = createContext<SearchContextType | null>(null);
 
 export function SearchProvider({ children }: { children: ReactNode }) {
-  const [query, setQuery] = useState<string>("");
-  const [type, setType] = useState<AllCategories>("Semua");
+  const [query, setQuery] = useState<string>('');
+  const [type, setType] = useState<AllCategories>('Semua');
   const [dateRange, setDateRange] = useState<DateRange | undefined>(); // updated type
 
   const grouped_news = useMemo(() => {
@@ -60,43 +60,43 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       group.Semua.push(news);
 
       switch (news.category) {
-        case "Kesihatan":
+        case 'Kesihatan':
           group.Kesihatan.push(news);
           break;
-        case "Kelahiran":
+        case 'Kelahiran':
           group.Kelahiran.push(news);
           break;
-        case "Pendidikan":
+        case 'Pendidikan':
           group.Pendidikan.push(news);
           break;
-        case "Pekerjaan":
+        case 'Pekerjaan':
           group.Pekerjaan.push(news);
           break;
-        case "Keluarga":
+        case 'Keluarga':
           group.Keluarga.push(news);
           break;
-        case "Kediaman":
+        case 'Kediaman':
           group.Kediaman.push(news);
           break;
-        case "Pengangkutan":
+        case 'Pengangkutan':
           group.Pengangkutan.push(news);
           break;
-        case "Bantuan":
+        case 'Bantuan':
           group.Bantuan.push(news);
           break;
-        case "Perjalanan":
+        case 'Perjalanan':
           group.Perjalanan.push(news);
           break;
-        case "Persaraan":
+        case 'Persaraan':
           group.Persaraan.push(news);
           break;
-        case "Kematian":
+        case 'Kematian':
           group.Kematian.push(news);
           break;
-        case "Umum":
+        case 'Umum':
           group.Umum.push(news);
           break;
-        case "Hebahan":
+        case 'Hebahan':
           group.Hebahan.push(news);
           break;
       }
@@ -107,8 +107,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
   const result = useMemo(() => {
     return grouped_news[type]
-      .filter((news) => news.title.toLowerCase().includes(query.toLowerCase()))
-      .filter((news) => {
+      .filter(news => news.title.toLowerCase().includes(query.toLowerCase()))
+      .filter(news => {
         if (!dateRange?.from || !dateRange?.to) return true;
         const newsDate = new Date(news.date); // assumes date string like "11 Feb 2024"
         return newsDate >= dateRange.from && newsDate <= dateRange.to;

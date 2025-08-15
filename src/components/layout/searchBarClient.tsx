@@ -18,7 +18,7 @@ import {
 
 export default function SearchBarClient() {
   const [hasFocus, setHasFocus] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const hasQuery = query.length > 0;
   const router = useRouter();
 
@@ -30,7 +30,7 @@ export default function SearchBarClient() {
     <div className="max-w-[600px] px-4">
       <SearchBar
         size="large"
-        onBlur={(e) => {
+        onBlur={e => {
           const blurredByChild = e.currentTarget.contains(e.relatedTarget);
           if (blurredByChild) return;
           setHasFocus(false);
@@ -43,7 +43,7 @@ export default function SearchBarClient() {
             onValueChange={setQuery}
             onFocus={() => setHasFocus(true)}
           />
-          {query && <SearchBarClearButton onClick={() => setQuery("")} />}
+          {query && <SearchBarClearButton onClick={() => setQuery('')} />}
           <SearchBarSearchButton />
           {!hasFocus && (
             <SearchBarHint className="hidden lg:flex">
