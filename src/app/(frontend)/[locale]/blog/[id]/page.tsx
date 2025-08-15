@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@govtechmy/myds-react/button";
+'use client';
+import { Button } from '@govtechmy/myds-react/button';
 import {
   ChevronRightIcon,
   ClockIcon,
@@ -9,7 +9,7 @@ import {
   PdfIcon,
   PrinterIcon,
   TwitterXIcon,
-} from "@govtechmy/myds-react/icon";
+} from '@govtechmy/myds-react/icon';
 
 export default function Hello() {
   return (
