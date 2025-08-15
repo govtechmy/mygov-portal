@@ -1,13 +1,13 @@
-import { useContext, useState, useEffect } from "react";
-import { SearchContext } from "./searchProvider";
-import { ClockIcon } from "@govtechmy/myds-react/icon";
-import { AutoPagination } from "@govtechmy/myds-react/pagination";
-import { useRouter } from "next/navigation";
+import { useContext, useState, useEffect } from 'react';
+import { SearchContext } from './searchProvider';
+import { ClockIcon } from '@govtechmy/myds-react/icon';
+import { AutoPagination } from '@govtechmy/myds-react/pagination';
+import { useRouter } from 'next/navigation';
 
 export default function ResultMap() {
   const context = useContext(SearchContext);
   if (!context)
-    throw new Error("SearchContext must be used within a SearchProvider");
+    throw new Error('SearchContext must be used within a SearchProvider');
   const router = useRouter();
   const { result } = context;
   const [page, setPage] = useState(1);
@@ -46,9 +46,11 @@ export default function ResultMap() {
                 <div className="font-semibold text-base">{news.title}</div>
                 <div className="text-sm">{news.description}</div>
               </div>
-              <div className=" text-[#3F3F46] rounded-lg !border-2 !border-white !shadow-sm shrink-0 w-24 h-24 items-center justify-center flex">
-                {news.svg}
-              </div>
+              {news.svg && (
+                <div className="text-[#3F3F46] rounded-lg !border-2 !border-white !shadow-sm shrink-0 w-24 h-24 items-center justify-center flex">
+                  {news.svg}
+                </div>
+              )}
             </div>
             <div className="flex-grow"></div>
             <div className="text-sm text-[#]">{news.date}</div>
