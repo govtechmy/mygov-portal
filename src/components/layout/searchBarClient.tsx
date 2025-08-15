@@ -1,6 +1,6 @@
-"use client";
-import { UserIcon, ChevronRightIcon } from "@govtechmy/myds-react/icon";
-import { Pill } from "@govtechmy/myds-react/pill";
+'use client';
+import { UserIcon, ChevronRightIcon } from '@govtechmy/myds-react/icon';
+import { Pill } from '@govtechmy/myds-react/pill';
 import {
   SearchBar,
   SearchBarInputContainer,
@@ -11,24 +11,24 @@ import {
   SearchBarResults,
   SearchBarResultsList,
   SearchBarResultsItem,
-} from "@govtechmy/myds-react/search-bar";
-import { useState } from "react";
-import { newsData } from "./NewsItemTypes";
+} from '@govtechmy/myds-react/search-bar';
+import { useState } from 'react';
+import { newsData } from './NewsItemTypes';
 
 export default function SearchBarClient() {
   const [hasFocus, setHasFocus] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const hasQuery = query.length > 0;
 
   const notableMalaysians = newsData;
-  const results = notableMalaysians.filter((person) =>
+  const results = notableMalaysians.filter(person =>
     person.category.toLowerCase().includes(query.toLocaleLowerCase())
   );
   return (
     <div className="max-w-[600px] px-4">
       <SearchBar
         size="large"
-        onBlur={(e) => {
+        onBlur={e => {
           const blurredByChild = e.currentTarget.contains(e.relatedTarget);
           if (blurredByChild) return;
           setHasFocus(false);
@@ -42,7 +42,7 @@ export default function SearchBarClient() {
             onFocus={() => setHasFocus(true)}
             onBlur={() => setHasFocus(false)}
           />
-          {query && <SearchBarClearButton onClick={() => setQuery("")} />}
+          {query && <SearchBarClearButton onClick={() => setQuery('')} />}
           <SearchBarSearchButton />
           {!hasFocus && (
             <SearchBarHint className="hidden lg:flex">
@@ -56,7 +56,7 @@ export default function SearchBarClient() {
           )}
           {hasQuery && results.length > 0 && (
             <SearchBarResultsList className="max-h-[400px] overflow-y-scroll">
-              {results.map((item) => (
+              {results.map(item => (
                 <SearchBarResultsItem
                   key={item.description}
                   value={item.description}
@@ -65,7 +65,7 @@ export default function SearchBarClient() {
                     <UserIcon className="size-4" />
                   </span>
                   <p className="line-clamp-1 flex-1">
-                    {item.category}{" "}
+                    {item.category}{' '}
                     <span className="text-txt-black-500 text-xs">
                       {item.title}
                     </span>

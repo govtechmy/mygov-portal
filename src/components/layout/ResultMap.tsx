@@ -1,12 +1,12 @@
-import { useContext, useState, useEffect } from "react";
-import { SearchContext } from "./searchProvider";
-import { ClockIcon } from "@govtechmy/myds-react/icon";
-import { AutoPagination } from "@govtechmy/myds-react/pagination";
+import { useContext, useState, useEffect } from 'react';
+import { SearchContext } from './searchProvider';
+import { ClockIcon } from '@govtechmy/myds-react/icon';
+import { AutoPagination } from '@govtechmy/myds-react/pagination';
 
 export default function ResultMap() {
   const context = useContext(SearchContext);
   if (!context)
-    throw new Error("SearchContext must be used within a SearchProvider");
+    throw new Error('SearchContext must be used within a SearchProvider');
 
   const { result } = context;
   const [page, setPage] = useState(1);

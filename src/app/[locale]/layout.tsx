@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import SiteScript from "./site-script";
-import { isValidLocale } from "@/lib/i18n";
-import FooterComponent from "@/components/layout/footer";
-import MastheadComponent from "@/components/layout/masthead";
-import NavbarComponent from "@/components/layout/navbar";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import SiteScript from './site-script';
+import { isValidLocale } from '@/lib/i18n';
+import FooterComponent from '@/components/layout/footer';
+import MastheadComponent from '@/components/layout/masthead';
+import NavbarComponent from '@/components/layout/navbar';
 
 export const metadata: Metadata = {
-  title: "MyGov Portal - Malaysian Government Services",
+  title: 'MyGov Portal - Malaysian Government Services',
   description:
-    "Official Malaysian government portal providing access to government services and information",
+    'Official Malaysian government portal providing access to government services and information',
 };
 
 interface LocaleLayoutProps {

@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@govtechmy/myds-react/button";
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from '@govtechmy/myds-react/button';
 import {
   Dropdown,
   DropdownContent,
   DropdownItem,
   DropdownTrigger,
-} from "@govtechmy/myds-react/dropdown";
-import { ChevronDownIcon, GlobeIcon } from "@govtechmy/myds-react/icon";
-import { type Locale } from "@/lib/i18n";
+} from '@govtechmy/myds-react/dropdown';
+import { ChevronDownIcon, GlobeIcon } from '@govtechmy/myds-react/icon';
+import { type Locale } from '@/lib/i18n';
 
 interface LocaleSwitcherProps {
   currentLocale: Locale;
 }
 
 const localeNames: Record<Locale, string> = {
-  "en-GB": "EN",
-  "ms-MY": "BM",
+  'en-GB': 'EN',
+  'ms-MY': 'BM',
 };
 
 const localeFullNames: Record<Locale, string> = {
-  "en-GB": "English",
-  "ms-MY": "Bahasa Melayu",
+  'en-GB': 'English',
+  'ms-MY': 'Bahasa Melayu',
 };
 
 export default function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
@@ -33,7 +33,7 @@ export default function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
 
   const createLocaleHref = (newLocale: string) => {
     // remove current locale from path, then prepend the new one, else it will keep reseting path
-    const pathWithoutLocale = pathname.replace(/^\/[^/]+/, "");
+    const pathWithoutLocale = pathname.replace(/^\/[^/]+/, '');
     return `/${newLocale}${pathWithoutLocale}`;
   };
 

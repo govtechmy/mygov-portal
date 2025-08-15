@@ -1,15 +1,16 @@
-"use client";
-import { useState } from "react";
-import HeroPattern from "@/components/layout/heroPattern";
-import useMediaQuery from "@/lib/mediaQuery";
-import { leftItems, rightItems } from "@/constants/home/third_section";
-import { features } from "@/constants/home/fourth_section";
-import { faq } from "@/constants/home/faq";
+'use client';
+import { useState } from 'react';
+import HeroPattern from '@/components/layout/heroPattern';
+import useMediaQuery from '@/lib/mediaQuery';
+import { leftItems, rightItems } from '@/constants/home/third_section';
+import { features } from '@/constants/home/fourth_section';
+import { faq } from '@/constants/home/faq';
 import {
   ChevronRightIcon,
   ChevronLeftIcon,
   ChevronDownIcon,
-} from "@govtechmy/myds-react/icon";
+} from '@govtechmy/myds-react/icon';
+import Image from 'next/image';
 
 export default function HomePage() {
   const itemsPerPage = 4;
@@ -18,13 +19,13 @@ export default function HomePage() {
 
   const nextFeature = () => {
     if (currentFeatureIndex < features.length - itemsPerPage) {
-      setCurrentFeatureIndex((prev) => prev + 1);
+      setCurrentFeatureIndex(prev => prev + 1);
     }
   };
 
   const prevFeature = () => {
     if (currentFeatureIndex > 0) {
-      setCurrentFeatureIndex((prev) => prev - 1);
+      setCurrentFeatureIndex(prev => prev - 1);
     }
   };
 
@@ -43,10 +44,9 @@ export default function HomePage() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isMobile = useMediaQuery('(max-width: 640px)');
   const itemsPerPageMobile = isMobile ? 1.25 : itemsPerPage;
 
-  const timestamp = new Date().toISOString().slice(0, 19).replace("T", " ");
   return (
     <>
       {/* Hidden SPLaSK Contact Details tag for crawler detection */}
@@ -79,9 +79,9 @@ export default function HomePage() {
             </p>
 
             {/* App store buttons */}
-            <div className="flex flex-col-reverse sm:flex-row gap-4 sm:flex-row">
+            <div className="flex flex-col-reverse gap-4 sm:flex-row">
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <img
+                <Image
                   src="/home/first_section/Apple.png"
                   alt="App Store"
                   width={21}
@@ -93,7 +93,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <img
+                <Image
                   src="/home/first_section/Playstore.png"
                   alt="Google Play"
                   width={21}
@@ -109,7 +109,7 @@ export default function HomePage() {
             {/* Initiative logo */}
             <div className="flex items-center gap-2 pt-4">
               <span className="text-sm text-gray-600">Sebuah inisiatif</span>
-              <img
+              <Image
                 src="/home/first_section/sentuhanmadani.png"
                 alt="Madani"
                 width={84}
@@ -120,7 +120,7 @@ export default function HomePage() {
 
           {/* Phone image */}
           <div className="relative flex items-center justify-center">
-            <img
+            <Image
               src="/home/first_section/hand_holding_phone.png"
               alt="Hand holding a phone with MyGov app"
               width={650}
@@ -138,22 +138,23 @@ export default function HomePage() {
             </div>
 
             <div className="text-base leading-relaxed">
-              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat rujukan
-              sehenti bagi perkhidmatan umum yang ditawarkan kerajaan Malaysia.
-              Melalui MyGOV Malaysia, anda dapat melakukan semakan, membuat permohonan,
-              menerima notifikasi di samping ciri-ciri lain yang bakal dilancarkan.
+              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat
+              rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan
+              Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,
+              membuat permohonan, menerima notifikasi di samping ciri-ciri lain
+              yang bakal dilancarkan.
               <div className="pb-10"></div>
             </div>
           </div>
           <div className="flex-[400px] flex justify-center items-center">
             <div className="relative max-w-[500px]">
               <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                <img
+                <Image
                   src="/home/second_section/line-4.png"
                   alt="line-4"
                   className="absolute -inset-x-5 inset-y-10 w-full h-full object-cover rounded-2xl"
                 />
-                <img
+                <Image
                   src="/home/second_section/couples.png"
                   alt="couple"
                   className="relative w-full h-auto rounded-2xl z-10"
@@ -177,7 +178,7 @@ export default function HomePage() {
                 key={i}
                 className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
               >
-                <img
+                <Image
                   src={item.icon}
                   alt={item.title}
                   width={78}
@@ -191,7 +192,7 @@ export default function HomePage() {
 
           {/* Phone image and connector lines */}
           <div className="relative flex-shrink-0">
-            <img
+            <Image
               src="/home/third_section/phone.png"
               alt="MyGOV Malaysia App"
               width={300}
@@ -203,61 +204,61 @@ export default function HomePage() {
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "190px",
-                left: "-45px",
-                width: "46px",
-                transform: "rotate(-180deg)",
+                top: '190px',
+                left: '-45px',
+                width: '46px',
+                transform: 'rotate(-180deg)',
               }}
             ></div>
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "370px",
-                left: "-45px",
-                width: "46px",
-                transform: "rotate(-180deg)",
+                top: '370px',
+                left: '-45px',
+                width: '46px',
+                transform: 'rotate(-180deg)',
               }}
             ></div>
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "535px",
-                left: "-45px",
-                width: "46px",
-                transform: "rotate(-180deg)",
+                top: '535px',
+                left: '-45px',
+                width: '46px',
+                transform: 'rotate(-180deg)',
               }}
             ></div>
 
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "100px",
-                right: "-45px",
-                width: "46px",
+                top: '100px',
+                right: '-45px',
+                width: '46px',
               }}
             ></div>
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "285px",
-                right: "-46px",
-                width: "46px",
+                top: '285px',
+                right: '-46px',
+                width: '46px',
               }}
             ></div>
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "450px",
-                right: "-44px",
-                width: "46px",
+                top: '450px',
+                right: '-44px',
+                width: '46px',
               }}
             ></div>
             <div
               className="absolute dashed-line-gray connector-dot z-10"
               style={{
-                top: "620px",
-                right: "-42px",
-                width: "46px",
+                top: '620px',
+                right: '-42px',
+                width: '46px',
               }}
             ></div>
           </div>
@@ -269,7 +270,7 @@ export default function HomePage() {
                 key={i}
                 className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
               >
-                <img
+                <Image
                   src={item.icon}
                   alt={item.title}
                   width={78}
@@ -288,7 +289,7 @@ export default function HomePage() {
               key={i}
               className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
             >
-              <img
+              <Image
                 src={item.icon}
                 alt={item.title}
                 width={78}
@@ -326,7 +327,7 @@ export default function HomePage() {
                     onClick={() => openModal(index)}
                   >
                     <div className="flex flex-grow items-center justify-center">
-                      <img
+                      <Image
                         src={feature.image}
                         alt={feature.title}
                         width={200}
@@ -369,7 +370,7 @@ export default function HomePage() {
         >
           <div
             className="relative flex bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             <button
               onClick={closeModal}
@@ -391,9 +392,9 @@ export default function HomePage() {
                 />
               </svg>
             </button>
-            
+
             <div className="flex-auto">
-              <img
+              <Image
                 src={features[currentFeatureIndex].open}
                 alt={features[currentFeatureIndex].title}
                 width={300}
@@ -402,7 +403,6 @@ export default function HomePage() {
               />
             </div>
             <div className="flex-auto">
-              
               <div className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">
                   {features[currentFeatureIndex].title}
@@ -431,7 +431,7 @@ export default function HomePage() {
                 <span className="font-medium">{item.question}</span>
                 <ChevronDownIcon
                   className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
-                    openIndex === index ? "rotate-180" : ""
+                    openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
               </button>

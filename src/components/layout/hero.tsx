@@ -1,4 +1,4 @@
-import HeroPattern from "./heroPattern";
+import HeroPattern from './heroPattern';
 
 export default function Hero({
   title,

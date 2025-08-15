@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import DatePickerClient from "@/components/layout/DatePickerClient";
-import Hero from "@/components/layout/hero";
-import ResultMap from "@/components/layout/ResultMap";
-import SearchBarClient from "@/components/layout/searchBarClient";
-import { SearchProvider } from "@/components/layout/searchProvider";
-import TabFiltered from "@/components/layout/tabFiltered";
+import DatePickerClient from '@/components/layout/DatePickerClient';
+import Hero from '@/components/layout/hero';
+import ResultMap from '@/components/layout/ResultMap';
+import SearchBarClient from '@/components/layout/searchBarClient';
+import { SearchProvider } from '@/components/layout/searchProvider';
+import TabFiltered from '@/components/layout/tabFiltered';
 
 export default function BlogPage() {
   return (
