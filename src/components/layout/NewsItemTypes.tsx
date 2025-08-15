@@ -22,6 +22,7 @@ export type NewsItem = {
   date: string;
   readTime: string;
   svg?: React.ReactNode;
+  id: string;
 };
 
 export const newsData: NewsItem[] = [
@@ -34,6 +35,7 @@ export const newsData: NewsItem[] = [
     date: "11 Feb 2024",
     readTime: "5 min",
     svg: <JataNegaraIcon className="size-18" />,
+    id: "1",
   },
   {
     category: "Kesihatan",
@@ -42,6 +44,7 @@ export const newsData: NewsItem[] = [
       "Ketahui cara menjaga kesihatan jantung anda melalui gaya hidup sihat.",
     date: "12 Feb 2024",
     readTime: "4 min",
+    id: "2",
   },
 
   // Kelahiran
@@ -52,6 +55,7 @@ export const newsData: NewsItem[] = [
       "Kini anda boleh mendaftar kelahiran anak secara atas talian dengan mudah.",
     date: "13 Feb 2024",
     readTime: "3 min",
+    id: "3",
   },
   {
     category: "Kelahiran",
@@ -61,6 +65,7 @@ export const newsData: NewsItem[] = [
     date: "14 Feb 2024",
     readTime: "5 min",
     svg: <JataNegaraIcon className="size-18" />,
+    id: "4",
   },
 
   // Pendidikan
@@ -70,6 +75,7 @@ export const newsData: NewsItem[] = [
     description: "Peluang biasiswa untuk pelajar cemerlang kini tersedia.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "5",
   },
   {
     category: "Pendidikan",
@@ -78,6 +84,7 @@ export const newsData: NewsItem[] = [
       "Program untuk meningkatkan literasi digital dalam kalangan pelajar sekolah.",
     date: "12 Feb 2024",
     readTime: "4 min",
+    id: "6",
   },
 
   // Pekerjaan
@@ -88,6 +95,7 @@ export const newsData: NewsItem[] = [
     date: "11 Feb 2024",
     readTime: "4 min",
     svg: <JataNegaraIcon className="size-18" />,
+    id: "7",
   },
   {
     category: "Pekerjaan",
@@ -97,6 +105,7 @@ export const newsData: NewsItem[] = [
     date: "15 Feb 2024",
     readTime: "5 min",
     svg: <JataNegaraIcon className="size-18" />,
+    id: "8",
   },
 
   // Keluarga
@@ -106,6 +115,7 @@ export const newsData: NewsItem[] = [
     description: "Rahsia mengekalkan keharmonian dalam keluarga moden.",
     date: "16 Feb 2024",
     readTime: "4 min",
+    id: "9",
   },
   {
     category: "Keluarga",
@@ -114,6 +124,7 @@ export const newsData: NewsItem[] = [
       "Bantuan kewangan dan sokongan untuk keluarga berpendapatan rendah.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "10",
   },
 
   // Kediaman
@@ -124,6 +135,7 @@ export const newsData: NewsItem[] = [
       "Maklumat terkini tentang permohonan rumah mampu milik kerajaan.",
     date: "12 Feb 2024",
     readTime: "4 min",
+    id: "11",
   },
   {
     category: "Kediaman",
@@ -131,6 +143,7 @@ export const newsData: NewsItem[] = [
     description: "Hias rumah anda dengan kos minimum dan hasil yang menarik.",
     date: "14 Feb 2024",
     readTime: "3 min",
+    id: "12",
   },
 
   // Pengangkutan
@@ -140,6 +153,7 @@ export const newsData: NewsItem[] = [
     description: "Sistem pengangkutan awam lebih efisien dan mesra pengguna.",
     date: "13 Feb 2024",
     readTime: "4 min",
+    id: "13",
   },
   {
     category: "Pengangkutan",
@@ -148,6 +162,7 @@ export const newsData: NewsItem[] = [
       "Nikmati diskaun tambang bagi pengguna kerap pengangkutan awam.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "14",
   },
 
   // Bantuan
@@ -157,6 +172,7 @@ export const newsData: NewsItem[] = [
     description: "Pembayaran fasa pertama akan dilakukan bermula minggu ini.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "15",
   },
   {
     category: "Bantuan",
@@ -165,6 +181,7 @@ export const newsData: NewsItem[] = [
       "Maklumat tentang bantuan pakaian sekolah dan peralatan pembelajaran.",
     date: "12 Feb 2024",
     readTime: "3 min",
+    id: "16",
   },
 
   // Perjalanan
@@ -175,6 +192,7 @@ export const newsData: NewsItem[] = [
       "Nikmati pelbagai pakej pelancongan tempatan dengan harga menarik.",
     date: "11 Feb 2024",
     readTime: "4 min",
+    id: "17",
   },
   {
     category: "Perjalanan",
@@ -182,6 +200,7 @@ export const newsData: NewsItem[] = [
     description: "Ketahui SOP semasa untuk perjalanan antarabangsa.",
     date: "14 Feb 2024",
     readTime: "5 min",
+    id: "18",
   },
 
   // Persaraan
@@ -191,6 +210,7 @@ export const newsData: NewsItem[] = [
     description: "Tips simpanan untuk memastikan persaraan selesa.",
     date: "13 Feb 2024",
     readTime: "4 min",
+    id: "19",
   },
   {
     category: "Persaraan",
@@ -198,6 +218,7 @@ export const newsData: NewsItem[] = [
     description: "Maklumat terkini tentang pengeluaran akaun untuk persaraan.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "20",
   },
 
   // Kematian
@@ -208,6 +229,7 @@ export const newsData: NewsItem[] = [
       "Garis panduan mengurus pampasan selepas kematian ahli keluarga.",
     date: "15 Feb 2024",
     readTime: "4 min",
+    id: "21",
   },
   {
     category: "Kematian",
@@ -216,6 +238,7 @@ export const newsData: NewsItem[] = [
       "Permohonan pendaftaran kematian kini lebih mudah atas talian.",
     date: "14 Feb 2024",
     readTime: "3 min",
+    id: "22",
   },
 
   // Umum
@@ -226,6 +249,7 @@ export const newsData: NewsItem[] = [
     date: "11 Feb 2024",
     readTime: "5 min",
     svg: <JataNegaraIcon className="size-18" />,
+    id: "23",
   },
   {
     category: "Umum",
@@ -233,6 +257,7 @@ export const newsData: NewsItem[] = [
     description: "Maklumat terkini tentang jadual gangguan air.",
     date: "12 Feb 2024",
     readTime: "3 min",
+    id: "24",
   },
 
   // Hebahan
@@ -243,6 +268,7 @@ export const newsData: NewsItem[] = [
       "Ketahui bantuan khusus yang diumumkan dalam belanjawan terkini.",
     date: "11 Feb 2024",
     readTime: "5 min",
+    id: "25",
   },
   {
     category: "Hebahan",
@@ -251,5 +277,6 @@ export const newsData: NewsItem[] = [
       "Platform khas untuk memperkukuh kemahiran digital rakyat Malaysia.",
     date: "12 Feb 2024",
     readTime: "4 min",
+    id: "26",
   },
 ];
