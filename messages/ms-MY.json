@@ -35,7 +35,8 @@
     "notFoundMessage": "Halaman yang anda cari tidak wujud.",
     "main": "Utama",
     "blog": "Blog",
-    "contact": "Hubungi Kami"
+    "contact": "Hubungi Kami",
+    "download": "Muat Turun Aplikasi"
   },
   "footer": {
     "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
@@ -69,5 +70,26 @@
       "privacy": "Dasar Privasi",
       "lastUpdated": "Terakhir dikemas kini: 11 Mac 2025"
     }
+  },
+  "contactpg": {
+    "contactUs": "Hubungi Kami",
+    "category": "Kategori",
+    "name": "Nama",
+    "ic": "No Kad Pengenalan",
+    "address": "Alamat",
+    "phone": "Telefon",
+    "email": "E-mel",
+    "suggestion": "Cadangan",
+    "suggestionPlaceholder": "Kongsi cadangan atau maklum balas anda",
+    "upload": "Muat Naik Fail",
+    "filetype": "Jenis fail: JPG, PNG & PDF",
+    "maxsize": "Saiz fail maksimum",
+    "upload2": "Muat Naik",
+    "send": "Hantar",
+    "chooseCategory": "Pilih Kategori",
+    "suggestionDropdown": " Cadangan/Maklum Balas",
+    "reportDropdown": "Aduan-MyDigitalID",
+    "reportDropdownMyGov": "Aduan-Aplikasi MyGOV Malaysia",
+    "questionsDropdown": "Pertanyaan"
   }
 }

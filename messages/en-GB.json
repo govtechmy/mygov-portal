@@ -35,7 +35,8 @@
     "notFoundMessage": "The page you are looking for does not exist.",
     "main": "Main",
     "blog": "Blog",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "download": "Download App"
   },
   "footer": {
     "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
@@ -69,5 +70,26 @@
       "privacy": "Privacy Policy",
       "lastUpdated": "Last updated: 11th March 2025"
     }
+  },
+  "contactpg": {
+    "contactUs": "Contact Us",
+    "category": "Category",
+    "name": "Name",
+    "ic": "National ID number",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "suggestion": "Suggestion",
+    "suggestionPlaceholder": "Share your suggestions or feedback",
+    "upload": "Upload File",
+    "filetype": "File types: JPG, PNG & PDF",
+    "maxsize": "Max file size",
+    "upload2": "Upload",
+    "send": "Send",
+    "chooseCategory": "Choose Category",
+    "suggestionDropdown": "Suggestions/Feedback",
+    "reportDropdown": "Complaint-MyDigitalID",
+    "reportDropdownMyGov": "Aduan-Aplikasi MyGOV Malaysia",
+    "questionsDropdown": "Questions"
   }
 }

@@ -64,7 +64,7 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             )}
           </Button>
           <LocaleSwitcher currentLocale={locale} />
-          <Button>Muat Turun Aplikasi</Button>
+          <Button> {messages.navigation.download}</Button>
         </div>
       </NavbarAction>
     </Navbar>
