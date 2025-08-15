@@ -38,7 +38,7 @@ export default function FAQSection({ items }: FAQSectionProps) {
               />
             </button>
             {openIndex === index && (
-              <div className="p-4 border-t border-gray-200 bg-gray-50 text-gray-700">
+              <div className="p-4 border-t border-gray-200 bg-gray-50 text-[#3F3F46] whitespace-pre-line">
                 {item.answers}
               </div>
             )}

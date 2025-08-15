@@ -20,10 +20,15 @@ interface FeaturesCarouselProps {
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const itemsPerPage = 4;
+
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const itemsPerPage = isMobile ? 1.25 : 4;
+
+  // Compute the last starting index before overflow
+  const maxIndex = Math.max(0, features.length - Math.floor(itemsPerPage));
 
   const nextFeature = () => {
-    if (currentFeatureIndex < features.length - itemsPerPage) {
+    if (currentFeatureIndex < maxIndex) {
       setCurrentFeatureIndex(prev => prev + 1);
     }
   };
@@ -43,36 +48,35 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
     setIsModalOpen(false);
   };
 
-  const isMobile = useMediaQuery('(max-width: 640px)');
-  const itemsPerPageMobile = isMobile ? 1.25 : itemsPerPage;
-
   return (
     <section className="bg-white py-16 relative">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="overflow-hidden relative">
+          {/* Carousel track */}
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${currentFeatureIndex * (100 / itemsPerPageMobile)}%)`,
+              transform: `translateX(-${currentFeatureIndex * 314}px)`,
             }}
           >
             {features.map((feature, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 px-2"
-                style={{ width: `${100 / itemsPerPageMobile}%` }}
+                style={{
+                  width: '314px',
+                  height: '354px',
+                }}
               >
                 <div
-                  className="flex flex-col items-center w-full h-[352px] cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-white p-4"
+                  className="flex flex-col items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-white p-4"
                   onClick={() => openModal(index)}
                 >
                   <div className="flex flex-grow items-center justify-center">
-                    <Image
+                    <img
                       src={feature.image}
                       alt={feature.title}
-                      width={200}
-                      height={400}
-                      className="object-contain"
+                      className="object-contain w-full h-full"
                     />
                   </div>
                 </div>
@@ -81,32 +85,42 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
           </div>
         </div>
 
+        {/* Arrows - bottom right */}
         <div className="absolute bottom-4 right-6 flex gap-3">
           <button
             onClick={prevFeature}
-            className="flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md hover:bg-white transition-colors"
-            aria-label="Previous feature"
+            disabled={currentFeatureIndex === 0}
+            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+              currentFeatureIndex === 0
+                ? 'opacity-40 cursor-not-allowed'
+                : 'hover:bg-white'
+            }`}
           >
             <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
           </button>
 
           <button
             onClick={nextFeature}
-            className="flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md hover:bg-white transition-colors"
-            aria-label="Next feature"
+            disabled={currentFeatureIndex >= maxIndex}
+            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+              currentFeatureIndex >= maxIndex
+                ? 'opacity-40 cursor-not-allowed'
+                : 'hover:bg-white'
+            }`}
           >
             <ChevronRightIcon className="w-6 h-6 text-gray-800" />
           </button>
         </div>
       </div>
 
+      {/* Modal Popup */}
       {isModalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
           onClick={closeModal}
         >
           <div
-            className="relative flex bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
+            className="relative flex flex-col md:flex-row bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
             onClick={e => e.stopPropagation()}
           >
             <button
@@ -130,13 +144,11 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
               </svg>
             </button>
 
-            <div className="flex-auto">
-              <Image
+            <div className="flex justify-center">
+              <img
                 src={features[currentFeatureIndex].open}
                 alt={features[currentFeatureIndex].title}
-                width={300}
-                height={350}
-                className=""
+                className="w-[200px] h-[247.08px]"
               />
             </div>
             <div className="flex-auto">
