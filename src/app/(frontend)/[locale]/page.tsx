@@ -2,7 +2,12 @@
 import { useState } from 'react';
 import HeroPattern from '@/components/layout/heroPattern';
 import useMediaQuery from '@/lib/mediaQuery';
-import { leftItems, rightItems } from '@/constants/home/third_section';
+import {
+  leftItems,
+  rightItems,
+  leftItemsMobile,
+  rightItemsMobile,
+} from '@/constants/home/third_section';
 import { features } from '@/constants/home/fourth_section';
 import { faq } from '@/constants/home/faq';
 import {
@@ -10,7 +15,7 @@ import {
   ChevronLeftIcon,
   ChevronDownIcon,
 } from '@govtechmy/myds-react/icon';
-import Image from 'next/image';
+import React from 'react';
 
 export default function HomePage() {
   const itemsPerPage = 4;
@@ -58,6 +63,8 @@ export default function HomePage() {
       >
         Contact Details Available
       </div>*/}
+
+      {/* ====================================== FIRST SECTION ======= START ======================================= */}
       <section className="relative w-screen p-6 overflow-hidden bg-gradient-radial from-brand-200 from-0% via-[#F1F5FF] via-[27.57%] to-white to-100%">
         {/* Background pattern */}
 
@@ -82,14 +89,10 @@ export default function HomePage() {
             </div>
 
             {/* App store buttons */}
-<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
-            <div className="flex flex-col-reverse gap-4 sm:flex-row">
-=======
-            <div className="flex flex-row gap-[18px] w-64 h-10 justify-center sm:justify-start">
->>>>>>> Stashed changes:src/app/[locale]/page.tsx
+            <div className="flex flex-col-reverse sm:flex-row gap-4 ">
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
-                  src="/home/first_section/Apple.png"
+                <img
+                  src="/home/first_section/apple.png"
                   alt="App Store"
                   width={21}
                   height={24}
@@ -100,8 +103,8 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
-                  src="/home/first_section/Playstore.png"
+                <img
+                  src="/home/first_section/playstore.png"
                   alt="Google Play"
                   width={21}
                   height={24}
@@ -116,15 +119,9 @@ export default function HomePage() {
             {/* Initiative logo */}
             <div className="flex flex-col items-center gap-2 pt-4 justify-center sm:justify-start">
               <span className="text-sm text-gray-600">Sebuah inisiatif</span>
-<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
-              <Image
+              <img
                 src="/home/first_section/sentuhanmadani.png"
                 alt="Madani"
-=======
-              <img
-                src="/home/first_section/sentuhanmadani.svg"
-                alt="Sentuhan Madani"
->>>>>>> Stashed changes:src/app/[locale]/page.tsx
                 width={84}
                 height={32}
               />
@@ -133,7 +130,7 @@ export default function HomePage() {
 
           {/* Phone image */}
           <div className="relative flex items-center justify-center">
-            <Image
+            <img
               src="/home/first_section/hand_holding_phone.png"
               alt="Hand holding a phone with MyGov app"
               className="w-[237.06px] h-[366.33px] md:w-[650px] md:h-[850px]"
@@ -142,26 +139,15 @@ export default function HomePage() {
         </div>
       </section>
 
-<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
+      {/* ====================================== FIRST SECTION ======= END ======================================= */}
+
+      {/* ====================================== SECOND SECTION ======= START ======================================= */}
+
       <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
         <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
           <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
             <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
               Apa itu MyGOV Malaysia?
-      <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
-        <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
-          <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
-            <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
-              Apa itu MyGOV Malaysia?
-=======
-      <section className="px-4  sm:px-[225px] pb-12 sm:pb-[84px] pt-16 sm:pt-[129px] flex justify-center">
-        <div className="relative flex flex-col sm:flex-row items-center gap-8 rounded-[32px] border border-[#F4F4F5] p-6 sm:p-[60px]  w-full max-w-[1062px]">
-          {/* Text */}
-          <div className="flex flex-col gap-4 w-full sm:w-[434px]">
-            <div className="text-3xl sm:text-4xl  font-bold">
-              Apa itu MyGOV <br />
-              Malaysia?
->>>>>>> Stashed changes:src/app/[locale]/page.tsx
             </div>
 
             <div className="text-base leading-relaxed">
@@ -193,147 +179,88 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ====================================== SECOND SECTION ======= END ======================================= */}
+
+      {/* ====================================== THIRD SECTION ======= START ======================================= */}
+
       <section className="flex flex-col gap-8 pb-20 font-bold justify-center items-center">
         <h2 className="mb-12 p-5 text-center text-2xl font-[600px] sm:text-3xl lg:text-4xl">
           Akses lebih mudah kepada perkhidmatan kerajaan
         </h2>
 
-        <div className="hidden sm:flex gap-24 flex-row relative">
-          {/* Left column */}
-          <div className="flex flex-col justify-center gap-6">
-            {leftItems.map((item, i) => (
-              <div
-                key={i}
-                className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-              >
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={78}
-                  height={78}
-                  className="mb-3"
-                />
-                <p className="text-center text-sm font-medium">{item.title}</p>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 gap-3 justify-center align-middle">
+          {leftItemsMobile.map((leftItem, index) => {
+            const rightItem = rightItemsMobile[index];
+            return (
+              <React.Fragment key={index}>
+                {/* Left item */}
+                <div className="flex p-3 flex-col items-center w-[166px] min-h-[280px] rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <img
+                    src={leftItem.icon}
+                    alt={leftItem.title}
+                    width={78}
+                    height={78}
+                    className="mb-3"
+                  />
+                  <p className="text-center text-[16px] font-medium">
+                    {leftItem.title}
+                  </p>
+                  <ul className="mt-3 text-center list-disc font-inter list-inside text-sm flex flex-col gap-3 font-normal text-gray-700">
+                    {Object.values(leftItem.lists).map((listItem, i) => (
+                      <li key={i}>{listItem}</li>
+                    ))}
+                  </ul>
+                </div>
 
-          {/* Phone image and connector lines */}
-<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
-          <div className="relative flex-shrink-0">
-            <Image
-=======
-          <div className="">
-            <img
->>>>>>> Stashed changes:src/app/[locale]/page.tsx
-              src="/home/third_section/phone.png"
-              alt="MyGOV Malaysia App"
-              width={300}
-              height={600}
-              className="object-cover"
-            />
-
-            {/* Lines */}
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '190px',
-                left: '-45px',
-                width: '46px',
-                transform: 'rotate(-180deg)',
-              }}
-            ></div>
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '370px',
-                left: '-45px',
-                width: '46px',
-                transform: 'rotate(-180deg)',
-              }}
-            ></div>
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '535px',
-                left: '-45px',
-                width: '46px',
-                transform: 'rotate(-180deg)',
-              }}
-            ></div>
-
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '100px',
-                right: '-45px',
-                width: '46px',
-              }}
-            ></div>
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '285px',
-                right: '-46px',
-                width: '46px',
-              }}
-            ></div>
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '450px',
-                right: '-44px',
-                width: '46px',
-              }}
-            ></div>
-            <div
-              className="absolute dashed-line-gray connector-dot z-10"
-              style={{
-                top: '620px',
-                right: '-42px',
-                width: '46px',
-              }}
-            ></div>
-          </div>
-
-          {/* Right column */}
-          <div className="flex flex-col justify-center gap-6">
-            {rightItems.map((item, i) => (
-              <div
-                key={i}
-                className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-              >
-                <Image
-                  src={item.icon}
-                  alt={item.title}
-                  width={78}
-                  height={78}
-                  className="mb-3"
-                />
-                <p className="text-center text-sm font-medium">{item.title}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6  p-5">
-          {[...leftItems, ...rightItems].map((item, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-            >
-              <Image
-                src={item.icon}
-                alt={item.title}
+                {/* Right item */}
+                {rightItem ? (
+                  <div className="flex p-3 flex-col items-center w-[166px] min-h-[280px] rounded-xl border border-gray-200 bg-white shadow-sm">
+                    <img
+                      src={rightItem.icon}
+                      alt={rightItem.title}
+                      width={78}
+                      height={78}
+                      className="mb-3"
+                    />
+                    <p className="text-center text-[16px] font-medium">
+                      {rightItem.title}
+                    </p>
+                    <ul className="mt-3 text-center list-disc font-inter list-inside text-sm flex flex-col gap-3 font-normal text-gray-700">
+                      {Object.values(rightItem.lists).map((listItem, i) => (
+                        <li key={i}>{listItem}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  // If rightItem is undefined (uneven lengths), render an empty box
+                  <div className="w-[166px]" />
+                )}
+              </React.Fragment>
+            );
+          })}
+          <div className="col-span-2 flex justify-center">
+            <div className="flex p-3 flex-col items-center w-[166px] min-h-[280px] rounded-xl border border-gray-200 bg-white shadow-sm">
+              <img
+                src="/home/third_section/umum.png"
+                alt="umum"
                 width={78}
                 height={78}
                 className="mb-3"
               />
-              <p className="text-center text-sm font-medium">{item.title}</p>
+              <p className="text-center text-[16px] font-medium">Umum</p>
+              <ul className="mt-3 text-center list-disc font-inter list-inside text-sm flex flex-col gap-3 font-normal text-gray-700">
+                <li>Direktori Kementerian dan Agensi</li>
+                <li>MYSPR Semak</li>
+                <li>Portal Data Terbuka</li>
+              </ul>
             </div>
-          ))}
+          </div>
         </div>
       </section>
+
+      {/* ====================================== THIRD SECTION ======= END ======================================= */}
+
+      {/* ====================================== FOURTH SECTION ======= START ======================================= */}
 
       <section className="bg-white py-16 relative">
         <div className="container mx-auto px-4">
@@ -360,7 +287,7 @@ export default function HomePage() {
                     onClick={() => openModal(index)}
                   >
                     <div className="flex flex-grow items-center justify-center">
-                      <Image
+                      <img
                         src={feature.image}
                         alt={feature.title}
                         width={200}
@@ -427,7 +354,7 @@ export default function HomePage() {
             </button>
 
             <div className="flex-auto">
-              <Image
+              <img
                 src={features[currentFeatureIndex].open}
                 alt={features[currentFeatureIndex].title}
                 width={300}
@@ -448,6 +375,10 @@ export default function HomePage() {
           </div>
         </div>
       )}
+
+      {/* ====================================== FOURTH SECTION ======= END ======================================= */}
+
+      {/* ====================================== FIFTH SECTION ======= START ======================================= */}
 
       <section className="max-w-4xl mx-auto px-4 py-8">
         <h2 className="text-3xl font-semibold mb-6">Soalan Lazim (FAQ)</h2>
@@ -478,6 +409,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ====================================== FIFTH SECTION ======= END ======================================= */}
     </>
   );
 }
