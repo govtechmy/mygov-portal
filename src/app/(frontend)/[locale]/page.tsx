@@ -10,7 +10,6 @@ import {
   ChevronLeftIcon,
   ChevronDownIcon,
 } from '@govtechmy/myds-react/icon';
-import Image from 'next/image';
 
 export default function HomePage() {
   const itemsPerPage = 4;
@@ -81,7 +80,7 @@ export default function HomePage() {
             {/* App store buttons */}
             <div className="flex flex-col-reverse gap-4 sm:flex-row">
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
+                <img
                   src="/home/first_section/Apple.png"
                   alt="App Store"
                   width={21}
@@ -93,7 +92,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
+                <img
                   src="/home/first_section/Playstore.png"
                   alt="Google Play"
                   width={21}
@@ -109,7 +108,7 @@ export default function HomePage() {
             {/* Initiative logo */}
             <div className="flex items-center gap-2 pt-4">
               <span className="text-sm text-gray-600">Sebuah inisiatif</span>
-              <Image
+              <img
                 src="/home/first_section/sentuhanmadani.png"
                 alt="Madani"
                 width={84}
@@ -120,7 +119,7 @@ export default function HomePage() {
 
           {/* Phone image */}
           <div className="relative flex items-center justify-center">
-            <Image
+            <img
               src="/home/first_section/hand_holding_phone.png"
               alt="Hand holding a phone with MyGov app"
               width={650}
@@ -130,12 +129,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
-        <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
-          <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
-            <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
-              Apa itu MyGOV Malaysia?
-      <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
+      <section className="p-8 max-w-[1200px] mx-auto">
         <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
           <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
             <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
@@ -143,10 +137,11 @@ export default function HomePage() {
             </div>
 
             <div className="text-base leading-relaxed">
-              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat rujukan
-              sehenti bagi perkhidmatan umum yang ditawarkan kerajaan Malaysia.
-              Melalui MyGOV Malaysia, anda dapat melakukan semakan, membuat permohonan,
-              menerima notifikasi di samping ciri-ciri lain yang bakal dilancarkan.
+              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat
+              rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan
+              Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,
+              membuat permohonan, menerima notifikasi di samping ciri-ciri lain
+              yang bakal dilancarkan.
               <div className="pb-10"></div>
             </div>
           </div>
@@ -182,7 +177,7 @@ export default function HomePage() {
                 key={i}
                 className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
               >
-                <Image
+                <img
                   src={item.icon}
                   alt={item.title}
                   width={78}
@@ -196,7 +191,7 @@ export default function HomePage() {
 
           {/* Phone image and connector lines */}
           <div className="relative flex-shrink-0">
-            <Image
+            <img
               src="/home/third_section/phone.png"
               alt="MyGOV Malaysia App"
               width={300}
@@ -274,7 +269,7 @@ export default function HomePage() {
                 key={i}
                 className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
               >
-                <Image
+                <img
                   src={item.icon}
                   alt={item.title}
                   width={78}
@@ -293,7 +288,7 @@ export default function HomePage() {
               key={i}
               className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
             >
-              <Image
+              <img
                 src={item.icon}
                 alt={item.title}
                 width={78}
@@ -331,7 +326,7 @@ export default function HomePage() {
                     onClick={() => openModal(index)}
                   >
                     <div className="flex flex-grow items-center justify-center">
-                      <Image
+                      <img
                         src={feature.image}
                         alt={feature.title}
                         width={200}
@@ -398,7 +393,7 @@ export default function HomePage() {
             </button>
 
             <div className="flex-auto">
-              <Image
+              <img
                 src={features[currentFeatureIndex].open}
                 alt={features[currentFeatureIndex].title}
                 width={300}
