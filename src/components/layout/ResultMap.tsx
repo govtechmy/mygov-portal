@@ -44,10 +44,11 @@ export default function ResultMap() {
                 <div className="font-semibold text-base">{news.title}</div>
                 <div className="text-sm">{news.description}</div>
               </div>
-              <div className=" text-[#3F3F46] rounded-lg !border-2 !border-white !shadow-md shrink-0 w-24 h-24 items-center justify-center flex">
+              <div className=" text-[#3F3F46] rounded-lg !border-2 !border-white !shadow-sm shrink-0 w-24 h-24 items-center justify-center flex">
                 {news.svg}
               </div>
             </div>
+            <div className="flex-grow"></div>
             <div className="text-sm text-[#]">{news.date}</div>
           </div>
         ))}
