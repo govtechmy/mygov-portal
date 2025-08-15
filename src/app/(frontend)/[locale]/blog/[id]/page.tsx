@@ -54,9 +54,10 @@ export default function Hello() {
           </p>
 
           <p>
-            Namun, di sebalik label "rendah kalori", amalan mengambil minuman
-            ini secara kerap dan berlebihan sebenarnya boleh membawa risiko
-            kesihatan yang membimbangkan khususnya terhadap buah pinggang.
+            Namun, di sebalik label &quot;rendah kalori&quot;, amalan mengambil
+            minuman ini secara kerap dan berlebihan sebenarnya boleh membawa
+            risiko kesihatan yang membimbangkan khususnya terhadap buah
+            pinggang.
           </p>
 
           <p>
@@ -173,8 +174,8 @@ export default function Hello() {
             Oleh itu, orang ramai perlu membaca label kandungan minuman dan
             memahami jenis pemanis yang digunakan. Kita perlu berhati-hati dalam
             pengambilan makanan dan minuman harian. Jangan hanya melihat kepada
-            'kalori rendah', tetapi nilai kesan jangka panjang terhadap organ
-            dalaman.
+            &apos;kalori rendah&apos;, tetapi nilai kesan jangka panjang
+            terhadap organ dalaman.
           </p>
 
           <h4>
