@@ -20,7 +20,7 @@ interface NavbarComponentProps {
 export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const messages = getMessages(locale);
   const { theme, setTheme } = useTheme();
-
+  setTheme('light'); // For now, always set to light mode
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -50,6 +50,8 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
         <div className="flex items-center gap-2">
           {/* integrate properly before theme
           <Button
+        <div className="flex items-end justify-end gap-2">
+          {/* <Button
             variant="default-ghost"
             size="small"
             onClick={toggleTheme}
@@ -65,7 +67,9 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             )}
           </Button> */}
           <LocaleSwitcher currentLocale={locale} />
-          <Button> {messages.navigation.download}</Button>
+          <Button size="small" className="p-2 w-[160px] justify-center">
+            {messages.navigation.download}
+          </Button>
         </div>
       </NavbarAction>
     </Navbar>

@@ -39,7 +39,7 @@ export default function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
 
   return (
     <Dropdown open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownTrigger asChild>
+      {/* <DropdownTrigger asChild>
         <Button
           variant="default-outline"
           size="small"
@@ -52,7 +52,7 @@ export default function LocaleSwitcher({ currentLocale }: LocaleSwitcherProps) {
           </span>
           <ChevronDownIcon className="h-4 w-4 text-gray-700" />
         </Button>
-      </DropdownTrigger>
+      </DropdownTrigger> */}
 
       <DropdownContent align="end" className="w-40">
         {Object.entries(localeNames).map(([locale]) => (
