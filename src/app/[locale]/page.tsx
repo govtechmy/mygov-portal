@@ -396,14 +396,18 @@ export default function HomePage() {
                 />
               </svg>
             </button>
-            <div className="flex flex-col md:flex-row items-center gap-6">
+            
+            <div className="flex-auto">
               <img
                 src={features[currentFeatureIndex].open}
                 alt={features[currentFeatureIndex].title}
-                width={200}
-                height={250}
+                width={300}
+                height={350}
                 className=""
               />
+            </div>
+            <div className="flex-auto">
+              
               <div className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">
                   {features[currentFeatureIndex].title}
