@@ -7,9 +7,9 @@ import {
   MastheadTitle,
   MastheadTrigger,
   MastheadSection,
-} from "@govtechmy/myds-react/masthead";
-import { PutrajayaIcon, Lock2Icon } from "@govtechmy/myds-react/icon";
-import { getMessages, type Locale } from "@/lib/i18n";
+} from '@govtechmy/myds-react/masthead';
+import { PutrajayaIcon, Lock2Icon } from '@govtechmy/myds-react/icon';
+import { getMessages, type Locale } from '@/lib/i18n';
 
 interface MastheadComponentProps {
   locale: Locale;
@@ -17,7 +17,7 @@ interface MastheadComponentProps {
 
 export default function MastheadComponent({ locale }: MastheadComponentProps) {
   const messages = getMessages(locale);
-  
+
   return (
     <Masthead>
       <MastheadHeader>

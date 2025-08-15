@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
 import {
   Navbar,
   NavbarLogo,
   NavbarMenu,
   NavbarMenuItem,
-  NavbarMenuDropdown,
   NavbarAction,
-} from "@govtechmy/myds-react/navbar";
-import { Button } from "@govtechmy/myds-react/button";
-import { SunIcon, MoonIcon } from "@govtechmy/myds-react/icon";
-import { useTheme } from "@/components/providers/theme-provider";
-import { getMessages, type Locale } from "@/lib/i18n";
-import LocaleSwitcher from "./locale-switcher";
+} from '@govtechmy/myds-react/navbar';
+import { Button } from '@govtechmy/myds-react/button';
+import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
+import { useTheme } from '@/components/providers/theme-provider';
+import { getMessages, type Locale } from '@/lib/i18n';
+import LocaleSwitcher from './locale-switcher';
 
 interface NavbarComponentProps {
   locale: Locale;
@@ -23,7 +22,7 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -55,10 +54,10 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             onClick={toggleTheme}
             className="p-2"
             aria-label={
-              theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+              theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'
             }
           >
-            {theme === "light" ? (
+            {theme === 'light' ? (
               <MoonIcon className="h-5 w-5" />
             ) : (
               <SunIcon className="h-5 w-5" />

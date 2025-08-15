@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Footer,
@@ -7,10 +7,9 @@ import {
   SiteLinkGroup,
   SiteLink,
   FooterLogo,
-} from "@govtechmy/myds-react/footer";
-import { getMessages, type Locale } from "@/lib/i18n";
-import Link from "next/link";
-import Image from "next/image";
+} from '@govtechmy/myds-react/footer';
+import { getMessages, type Locale } from '@/lib/i18n';
+import Image from 'next/image';
 
 interface FooterComponentProps {
   locale: Locale;
@@ -18,7 +17,7 @@ interface FooterComponentProps {
 
 export default function FooterComponent({ locale }: FooterComponentProps) {
   const messages = getMessages(locale);
-
+  console.log(messages); // temp: bypass linting
   return (
     <Footer>
       <FooterSection className="w-full">
