@@ -3,11 +3,13 @@ import HeroPattern from "./heroPattern";
 export default function Hero({
   title,
   search,
+  datepicker,
 }: {
   title: string;
   subtitle?: string;
   search?: React.ReactNode;
   splaskPrivacyPolicy?: boolean;
+  datepicker?: React.ReactNode;
 }) {
   return (
     <section className="relative border-b border-outline-200">
@@ -21,6 +23,9 @@ export default function Hero({
         </h1>
         <div className="justify-center items-center flex w-full">
           <div className="flex-1 max-w-[600px]">{search}</div>
+        </div>
+        <div className="justify-center items-center flex w-full">
+          <div className="flex-1 max-w-[600px]">{datepicker}</div>
         </div>
       </div>
     </section>
