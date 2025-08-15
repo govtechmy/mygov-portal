@@ -2,12 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "./searchProvider";
 import { ClockIcon } from "@govtechmy/myds-react/icon";
 import { AutoPagination } from "@govtechmy/myds-react/pagination";
+import { useRouter } from "next/navigation";
 
 export default function ResultMap() {
   const context = useContext(SearchContext);
   if (!context)
     throw new Error("SearchContext must be used within a SearchProvider");
-
+  const router = useRouter();
   const { result } = context;
   const [page, setPage] = useState(1);
   const limit = 12;
@@ -26,7 +27,8 @@ export default function ResultMap() {
         {paginatedResult.map((news, index) => (
           <div
             key={startIndex + index}
-            className="border shadow-sm border-[#E4E4E7] rounded-md p-6 flex flex-col "
+            className="border shadow-sm border-[#E4E4E7] rounded-md p-6 flex flex-col hover:cursor-pointer"
+            onClick={() => router.push(`blog/${news.id}`)}
           >
             <div className="flex gap-2 items-center">
               <div className="text-sm font-semibold text-[#6B6B74]">
