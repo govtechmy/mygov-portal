@@ -130,41 +130,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 md:px-12 lg:px-[225px] pb-12 md:pb-[84px] pt-16 md:pt-[129px] flex justify-center">
-        <div className="relative flex flex-col lg:flex-row items-center gap-8 rounded-[32px] border border-[#F4F4F5] p-6 md:p-[60px] lg:p-[109px] w-full max-w-[1062px]">
-          {/* Text */}
-          <div className="flex flex-col gap-4 w-full lg:w-[434px]">
-            <div className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              Apa itu MyGOV <br />
-              Malaysia?
+      <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
+        <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
+          <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
+            <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
+              Apa itu MyGOV Malaysia?
             </div>
 
-            <div className="text-sm leading-relaxed">
-              MyGOV Malaysia merupakan aplikasi yang <br /> dibangunkan sebagai
-              pusat rujukan sehenti bagi <br /> perkhidmatan umum yang
-              ditawarkan kerajaan <br />
-              Malaysia. Melalui MyGOV Malaysia, anda dapat <br />
-              melakukan semakan, membuat permohonan, <br /> menerima notifikasi
-              di samping ciri-ciri lain yang <br />
-              bakal dilancarkan.
+            <div className="text-base leading-relaxed">
+              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat rujukan
+              sehenti bagi perkhidmatan umum yang ditawarkan kerajaan Malaysia.
+              Melalui MyGOV Malaysia, anda dapat melakukan semakan, membuat permohonan,
+              menerima notifikasi di samping ciri-ciri lain yang bakal dilancarkan.
+              <div className="pb-10"></div>
             </div>
           </div>
-
-          {/* Images */}
-          <div className="relative w-full max-w-[457px] lg:absolute lg:-right-6 lg:bottom-0">
-            {/* Background line */}
-            <img
-              src="/home/second_section/line-4.png"
-              alt="line-4"
-              className="absolute inset-0 lg:right-36 lg:bottom-0 rounded-2xl object-cover"
-            />
-
-            {/* Foreground couple */}
-            <img
-              src="/home/second_section/couples.png"
-              alt="couple"
-              className="relative h-auto w-full rounded-2xl object-cover z-10"
-            />
+          <div className="flex-[400px] flex justify-center items-center">
+            <div className="relative max-w-[500px]">
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                <img
+                  src="/home/second_section/line-4.png"
+                  alt="line-4"
+                  className="absolute -inset-x-5 inset-y-10 w-full h-full object-cover rounded-2xl"
+                />
+                <img
+                  src="/home/second_section/couples.png"
+                  alt="couple"
+                  className="relative w-full h-auto rounded-2xl z-10"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
