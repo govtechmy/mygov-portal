@@ -3,7 +3,7 @@ interface Feature {
   title: string;
   open: string;
   desc: string;
-  support?: string; // optional
+  support?: string;
 }
 
 export const features: Feature[] = [

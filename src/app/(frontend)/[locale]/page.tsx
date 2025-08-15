@@ -58,28 +58,35 @@ export default function HomePage() {
       >
         Contact Details Available
       </div>*/}
-      <section className="relative w-screen p-3 overflow-hidden bg-gradient-radial from-brand-200 from-0% via-[#F1F5FF] via-[27.57%] to-white to-100%">
+      <section className="relative w-screen p-6 overflow-hidden bg-gradient-radial from-brand-200 from-0% via-[#F1F5FF] via-[27.57%] to-white to-100%">
         {/* Background pattern */}
+
         <div className="absolute inset-0 z-0">
           <HeroPattern />
         </div>
 
         {/* Foreground content */}
-        <div className="container relative z-10 mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6 lg:grid-cols-2">
-          <div className="flex flex-col items-center md:items-start space-y-6 text-center md:text-start">
-            <div className="text-[18px] tracking-wide font-medium text-[#2563EB] md:text-base">
-              MYGOV MALAYSIA
+        <div className="container pt-6 relative w-96 h-[736.33px] z-10 mx-auto grid grid-cols-1 items-center gap-12 px-4 sm:px-6 sm:grid-cols-2">
+          <div className="flex flex-col items-center space-y-6 text-center sm:text-left">
+            {/* Hero Header */}
+            <div className=" flex flex-col gap-6">
+              <div className="text-[12px] tracking-[0.7em] font-inter font-semibold text-[#2563EB]">
+                MYGOV MALAYSIA
+              </div>
+              <h1 className="text-balance font-poppins text-3xl font-semibold leading-tight">
+                Aplikasi Pusat Sehenti Digital Perkhidmatan Kerajaan
+              </h1>
+              <p className=" font-normal font-inter text-sm text-[#3F3F46]">
+                Menyatukan Perkhidmatan Kerajaan dalam Satu Aplikasi
+              </p>
             </div>
-            <h1 className="text-balance text-4xl font-semibold leading-tight">
-              Aplikasi Pusat Sehenti <br />
-              Digital Perkhidmatan <br /> Kerajaan
-            </h1>
-            <p className="text-base font-normal text-[#3F3F46]">
-              Menyatukan Perkhidmatan Kerajaan dalam Satu Aplikasi
-            </p>
 
             {/* App store buttons */}
+<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
             <div className="flex flex-col-reverse gap-4 sm:flex-row">
+=======
+            <div className="flex flex-row gap-[18px] w-64 h-10 justify-center sm:justify-start">
+>>>>>>> Stashed changes:src/app/[locale]/page.tsx
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
                 <Image
                   src="/home/first_section/Apple.png"
@@ -107,11 +114,17 @@ export default function HomePage() {
             </div>
 
             {/* Initiative logo */}
-            <div className="flex items-center gap-2 pt-4">
+            <div className="flex flex-col items-center gap-2 pt-4 justify-center sm:justify-start">
               <span className="text-sm text-gray-600">Sebuah inisiatif</span>
+<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
               <Image
                 src="/home/first_section/sentuhanmadani.png"
                 alt="Madani"
+=======
+              <img
+                src="/home/first_section/sentuhanmadani.svg"
+                alt="Sentuhan Madani"
+>>>>>>> Stashed changes:src/app/[locale]/page.tsx
                 width={84}
                 height={32}
               />
@@ -123,13 +136,13 @@ export default function HomePage() {
             <Image
               src="/home/first_section/hand_holding_phone.png"
               alt="Hand holding a phone with MyGov app"
-              width={650}
-              height={850}
+              className="w-[237.06px] h-[366.33px] md:w-[650px] md:h-[850px]"
             />
           </div>
         </div>
       </section>
 
+<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
       <section className="p-8 lg:p-16 md:p-12 sm:p-4 max-w-[1000px] mx-auto">
         <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
           <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
@@ -140,41 +153,52 @@ export default function HomePage() {
           <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
             <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
               Apa itu MyGOV Malaysia?
+=======
+      <section className="px-4  sm:px-[225px] pb-12 sm:pb-[84px] pt-16 sm:pt-[129px] flex justify-center">
+        <div className="relative flex flex-col sm:flex-row items-center gap-8 rounded-[32px] border border-[#F4F4F5] p-6 sm:p-[60px]  w-full max-w-[1062px]">
+          {/* Text */}
+          <div className="flex flex-col gap-4 w-full sm:w-[434px]">
+            <div className="text-3xl sm:text-4xl  font-bold">
+              Apa itu MyGOV <br />
+              Malaysia?
+>>>>>>> Stashed changes:src/app/[locale]/page.tsx
             </div>
 
             <div className="text-base leading-relaxed">
-              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat rujukan
-              sehenti bagi perkhidmatan umum yang ditawarkan kerajaan Malaysia.
-              Melalui MyGOV Malaysia, anda dapat melakukan semakan, membuat permohonan,
-              menerima notifikasi di samping ciri-ciri lain yang bakal dilancarkan.
+              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat
+              rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan
+              Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,
+              membuat permohonan, menerima notifikasi di samping ciri-ciri lain
+              yang bakal dilancarkan.
               <div className="pb-10"></div>
             </div>
           </div>
-          <div className="flex-[400px] flex justify-center items-center">
-            <div className="relative max-w-[500px]">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
-                <img
-                  src="/home/second_section/line-4.png"
-                  alt="line-4"
-                  className="absolute -inset-x-5 inset-y-10 w-full h-full object-cover rounded-2xl"
-                />
-                <img
-                  src="/home/second_section/couples.png"
-                  alt="couple"
-                  className="relative w-full h-auto rounded-2xl z-10"
-                />
-              </div>
-            </div>
+
+          {/* Images */}
+          <div className="relative w-full max-w-[457px] sm:absolute sm:-right-11 sm:-bottom-6">
+            {/* Background line */}
+            <img
+              src="/home/second_section/line-4.png"
+              alt="line-4"
+              className="absolute sm:right-36 sm:bottom-0 object-cover"
+            />
+
+            {/* Foreground couple */}
+            <img
+              src="/home/second_section/couples.png"
+              alt="couple"
+              className="relative h-auto w-full rounded-2xl object-cover z-10"
+            />
           </div>
         </div>
       </section>
 
       <section className="flex flex-col gap-8 pb-20 font-bold justify-center items-center">
-        <h2 className="mb-12 p-5 text-center text-2xl font-[600px] md:text-3xl lg:text-4xl">
+        <h2 className="mb-12 p-5 text-center text-2xl font-[600px] sm:text-3xl lg:text-4xl">
           Akses lebih mudah kepada perkhidmatan kerajaan
         </h2>
 
-        <div className="hidden lg:flex gap-24 flex-row relative">
+        <div className="hidden sm:flex gap-24 flex-row relative">
           {/* Left column */}
           <div className="flex flex-col justify-center gap-6">
             {leftItems.map((item, i) => (
@@ -195,8 +219,13 @@ export default function HomePage() {
           </div>
 
           {/* Phone image and connector lines */}
+<<<<<<< Updated upstream:src/app/(frontend)/[locale]/page.tsx
           <div className="relative flex-shrink-0">
             <Image
+=======
+          <div className="">
+            <img
+>>>>>>> Stashed changes:src/app/[locale]/page.tsx
               src="/home/third_section/phone.png"
               alt="MyGOV Malaysia App"
               width={300}
@@ -287,7 +316,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:hidden p-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6  p-5">
           {[...leftItems, ...rightItems].map((item, i) => (
             <div
               key={i}
