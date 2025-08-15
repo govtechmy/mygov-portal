@@ -19,7 +19,7 @@ export default function MastheadComponent({ locale }: MastheadComponentProps) {
   const messages = getMessages(locale);
 
   return (
-    <Masthead>
+    <Masthead className="w-full">
       <MastheadHeader>
         <MastheadTitle>{messages.masthead.title}</MastheadTitle>
         <MastheadTrigger>{messages.masthead.trigger}</MastheadTrigger>

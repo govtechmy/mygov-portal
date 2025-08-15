@@ -17,40 +17,110 @@ interface FooterComponentProps {
 
 export default function FooterComponent({ locale }: FooterComponentProps) {
   const messages = getMessages(locale);
-  console.log(messages); // temp: bypass linting
+
   return (
     <Footer>
-      <FooterSection className="w-full">
-        <SiteInfo>
-          <div className="flex items-center gap-x-2.5">
+      <div className="flex flex-col items-center w-full">
+        <div className="flex flex-row justify-center w-full">
+          <div className="flex flex-col items-center gap-y-4">
+            SEBUAH INISIATIF
             <FooterLogo
               logo={
-                <Image
-                  src="/images/mygov-logo.svg"
-                  alt="Jata Negara Malaysia"
-                  width={220}
-                  height={87}
+                <img
+                  src="/images/logo-govtech.png"
+                  alt="GovTech Malaysia"
+                  width={240}
+                  height={85}
                 />
               }
             />
           </div>
-        </SiteInfo>
-
-        <div className="col-span-full lg:col-start-5 lg:col-end-13 flex justify-end gap-12">
-          <SiteLinkGroup groupTitle="MyGOV Malaysia">
-            <SiteLink href="#">Perkidmatan</SiteLink>
-            <SiteLink href="#">FAQ</SiteLink>
-            <SiteLink href="#">Blog</SiteLink>
-            <SiteLink href="#">Hubungi Kami</SiteLink>
-          </SiteLinkGroup>
-          <SiteLinkGroup groupTitle="Open Source">
-            <SiteLink href="#">Github Repo</SiteLink>
-            <SiteLink href="#">Figma</SiteLink>
-          </SiteLinkGroup>
+          <div className="flex flex-col items-center gap-y-4">
+            DIBANGUNKAN OLEH
+            <FooterLogo
+              logo={
+                <img
+                  src="/images/logo-kementerian-digital.png"
+                  alt="GovTech Malaysia"
+                  width={150}
+                  height={92}
+                />
+              }
+            />
+          </div>
         </div>
+      </div>
+
+      <div className="flex flex-col items-center w-full pt-4 gap-y-4">
+        DENGAN KERJASAMA
+        <div className="flex flex-row items-center gap-6">
+          <FooterLogo
+            logo={
+              <img
+                src="/images/logo-mydigital.png"
+                alt="MyDigital"
+                width={200}
+                height={40}
+              />
+            }
+          />
+
+          <FooterLogo
+            logo={
+              <img
+                src="/images/logo-mynic.png"
+                alt="MyNIC"
+                width={120}
+                height={40}
+              />
+            }
+          />
+
+          <FooterLogo
+            logo={
+              <img
+                src="/images/logo-cybersecurity-malaysia.png"
+                alt="CyberSecurity Malaysia"
+                width={180}
+                height={40}
+              />
+            }
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center w-full pt-4 gap-y-4">
+        KOLABORASI STRATEGIK
+        <div className="flex flex-row items-center gap-6">
+          <FooterLogo
+            logo={
+              <img
+                src="/images/logo-mydigitalid.png"
+                alt="MyDigital ID"
+                width={170}
+                height={40}
+              />
+            }
+          />
+
+          <FooterLogo
+            logo={
+              <img
+                src="/images/logo-mygcc.png"
+                alt="Malaysia Government Call Center"
+                width={100}
+                height={40}
+              />
+            }
+          />
+        </div>
+      </div>
+
+      <FooterSection className="w-full">
+        <SiteInfo></SiteInfo>
       </FooterSection>
 
-      <FooterSection className="text-txt-black-500 md:max-lg:gap-4.5 mx-auto flex w-full max-w-[1280px] max-lg:flex-col justify-between border-none text-sm max-md:gap-4 lg:gap-6">
+      <FooterSection className="text-txt-black-500 md:max-lg:gap-4.5 mx-auto flex w-full max-w-[1000px] max-lg:flex-col justify-between border-none text-sm max-md:gap-4 lg:gap-6">
         <div className="flex gap-3 max-lg:flex-col">
           <p>© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
           <p className="text-[#D4D4D8] max-lg:hidden">|</p>
@@ -60,7 +130,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
             <SiteLink>Privacy Policy</SiteLink>
           </div>
         </div>
-        <p>Last updated: 11th March 2025</p>
+        <p>Last updated: 15th Aug 2025</p>
       </FooterSection>
     </Footer>
   );

@@ -20,7 +20,7 @@ interface NavbarComponentProps {
 export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const messages = getMessages(locale);
   const { theme, setTheme } = useTheme();
-
+  setTheme('light'); // For now, always set to light mode
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -47,8 +47,8 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
       </NavbarMenu>
 
       <NavbarAction>
-        <div className="flex items-center gap-2">
-          <Button
+        <div className="flex items-end justify-end gap-2">
+          {/* <Button
             variant="default-ghost"
             size="small"
             onClick={toggleTheme}
@@ -62,9 +62,11 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
             ) : (
               <SunIcon className="h-5 w-5" />
             )}
-          </Button>
+          </Button> */}
           <LocaleSwitcher currentLocale={locale} />
-          <Button>Muat Turun Aplikasi</Button>
+          <Button size="small" className="p-2 w-[160px] justify-center">
+            Muat Turun Aplikasi
+          </Button>
         </div>
       </NavbarAction>
     </Navbar>
