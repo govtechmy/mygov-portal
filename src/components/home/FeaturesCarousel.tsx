@@ -21,13 +21,23 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isMobile = useMediaQuery('(max-width: 640px)');
-  const itemsPerPage = isMobile ? 1.25 : 4;
+  const isLaptop = useMediaQuery('(max-width: 992px)');
+  let itemsPerPage = 4; // default desktop
 
-  // Compute the last starting index before overflow
-  const maxIndex = Math.max(0, features.length - Math.floor(itemsPerPage));
+  if (isMobile) {
+    itemsPerPage = 1.25;
+  } else if (isLaptop) {
+    itemsPerPage = 2;
+  }
+
+  // Allow fixed maxIndex for laptop+
+  const maxClicks =
+    isLaptop || !isMobile
+      ? 4
+      : Math.max(0, features.length - Math.floor(itemsPerPage));
 
   const nextFeature = () => {
-    if (currentFeatureIndex < maxIndex) {
+    if (currentFeatureIndex < maxClicks) {
       setCurrentFeatureIndex(prev => prev + 1);
     }
   };
@@ -48,68 +58,66 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   };
 
   return (
-    <section className="bg-white py-16 relative">
-      <div className="container mx-auto">
-        <div className="overflow-hidden relative">
-          {/* Carousel track */}
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentFeatureIndex * 314}px)`,
-            }}
-          >
-            {features.map((feature, index) => (
+    <section className=" py-16 relative  md:flex md:justify-end">
+      <div className="overflow-hidden relative ">
+        {/* Carousel track */}
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(-${currentFeatureIndex * 334}px)`,
+          }}
+        >
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 px-2"
+              style={{
+                width: '334px',
+                height: '354px',
+              }}
+            >
               <div
-                key={index}
-                className="flex-shrink-0 px-2"
-                style={{
-                  width: '314px',
-                  height: '354px',
-                }}
+                className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-yellow-400"
+                onClick={() => openModal(index)}
               >
-                <div
-                  className="flex flex-col items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-white p-4"
-                  onClick={() => openModal(index)}
-                >
-                  <div className="flex flex-grow items-center justify-center">
-                    <img
-                      src={feature.image}
-                      alt={feature.title}
-                      className="object-contain w-full h-full"
-                    />
-                  </div>
+                <div className="flex flex-grow md:absolute  items-center justify-center">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="object-contain w-full h-full"
+                  />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Arrows - bottom right */}
-        <div className="absolute bottom-4 right-6 flex gap-3">
-          <button
-            onClick={prevFeature}
-            disabled={currentFeatureIndex === 0}
-            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-              currentFeatureIndex === 0
-                ? 'opacity-40 cursor-not-allowed'
-                : 'hover:bg-white'
-            }`}
-          >
-            <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
-          </button>
+      {/* Arrows - bottom right */}
+      <div className="absolute -bottom-6 right-10 flex gap-3">
+        <button
+          onClick={prevFeature}
+          disabled={currentFeatureIndex === 0}
+          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+            currentFeatureIndex === 0
+              ? 'opacity-40 cursor-not-allowed'
+              : 'hover:bg-white'
+          }`}
+        >
+          <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
+        </button>
 
-          <button
-            onClick={nextFeature}
-            disabled={currentFeatureIndex >= maxIndex}
-            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-              currentFeatureIndex >= maxIndex
-                ? 'opacity-40 cursor-not-allowed'
-                : 'hover:bg-white'
-            }`}
-          >
-            <ChevronRightIcon className="w-6 h-6 text-gray-800" />
-          </button>
-        </div>
+        <button
+          onClick={nextFeature}
+          disabled={currentFeatureIndex >= maxClicks}
+          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+            currentFeatureIndex >= maxClicks
+              ? 'opacity-40 cursor-not-allowed'
+              : 'hover:bg-white'
+          }`}
+        >
+          <ChevronRightIcon className="w-6 h-6 text-gray-800" />
+        </button>
       </div>
 
       {/* Modal Popup */}
