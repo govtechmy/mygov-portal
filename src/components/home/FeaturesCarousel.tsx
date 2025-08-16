@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import useMediaQuery from '@/lib/mediaQuery';
 import { ChevronRightIcon, ChevronLeftIcon } from '@govtechmy/myds-react/icon';
 
