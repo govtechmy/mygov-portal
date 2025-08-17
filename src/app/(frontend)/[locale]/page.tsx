@@ -25,7 +25,10 @@ export default async function HomePage() {
         Contact Details Available
       </div>*/}
       <HeroSection />
-      <AboutSection />
+      <AboutSection
+        title={data.aboutTitle}
+        description={data.aboutDescription}
+      />
       <FeaturesTilesSection
         leftItems={data.leftItems}
         rightItems={data.rightItems}

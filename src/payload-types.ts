@@ -425,6 +425,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomePage {
   id: string;
+  aboutTitle: string;
+  aboutDescription: string;
   leftItems: {
     icon: string | Media;
     title: string;
@@ -454,6 +456,8 @@ export interface HomePage {
  * via the `definition` "homePage_select".
  */
 export interface HomePageSelect<T extends boolean = true> {
+  aboutTitle?: T;
+  aboutDescription?: T;
   leftItems?:
     | T
     | {

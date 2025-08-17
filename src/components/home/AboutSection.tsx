@@ -1,20 +1,25 @@
 import Image from 'next/image';
+import { HomePage as homePageType } from '@/payload-types';
 
-export default function AboutSection() {
+interface AboutSectionProps {
+  title: homePageType['aboutTitle'];
+  description: homePageType['aboutDescription'];
+}
+
+export default function AboutSection({
+  title,
+  description,
+}: AboutSectionProps) {
   return (
     <section className="p-8 max-w-[1200px] mx-auto">
       <div className="flex flex-row flex-wrap items-stretch justify-center rounded-[32px] border border-[#F4F4F5]">
         <div className="flex-[400px] lg:pt-16 lg:px-16 pt-8 px-8">
           <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
-            Apa itu MyGOV Malaysia?
+            {title}
           </div>
 
           <div className="text-base leading-relaxed">
-            MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat
-            rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan
-            Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,
-            membuat permohonan, menerima notifikasi di samping ciri-ciri lain
-            yang bakal dilancarkan.
+            {description}
             <div className="pb-10"></div>
           </div>
         </div>

@@ -7,6 +7,16 @@ const HomePage: GlobalConfig = {
   },
   fields: [
     {
+      name: 'aboutTitle',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'aboutDescription',
+      type: 'textarea',
+      required: true,
+    },
+    {
       name: 'leftItems',
       type: 'array',
       minRows: 3,
