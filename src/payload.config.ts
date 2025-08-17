@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import PayloadCollections, { Users } from './collections';
+import HomePage from './globals/HomePage';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -20,6 +21,7 @@ export default buildConfig({
     },
   },
   collections: PayloadCollections,
+  globals: [HomePage],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
