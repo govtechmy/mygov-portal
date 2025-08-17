@@ -3,17 +3,12 @@
 import { useState } from 'react';
 import useMediaQuery from '@/lib/mediaQuery';
 import { ChevronRightIcon, ChevronLeftIcon } from '@govtechmy/myds-react/icon';
-
-export interface FeatureItem {
-  image: string;
-  title: string;
-  open: string;
-  desc: string;
-  support?: string;
-}
+import { HomePage as homePageType } from '@/payload-types';
+import Image from 'next/image';
+import { resolveMediaSrc } from '@/lib/media';
 
 interface FeaturesCarouselProps {
-  features: FeatureItem[];
+  features: homePageType['features'];
 }
 
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
@@ -23,6 +18,8 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   const isMobile = useMediaQuery('(max-width: 640px)');
   const isLaptop = useMediaQuery('(max-width: 992px)');
   let itemsPerPage = 4; // default desktop
+
+  const safeFeatures = Array.isArray(features) ? features : [];
 
   if (isMobile) {
     itemsPerPage = 1.25;
@@ -34,7 +31,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   const maxClicks =
     isLaptop || !isMobile
       ? 4
-      : Math.max(0, features.length - Math.floor(itemsPerPage));
+      : Math.max(0, safeFeatures.length - Math.floor(itemsPerPage));
 
   const nextFeature = () => {
     if (currentFeatureIndex < maxClicks) {
@@ -67,29 +64,38 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             transform: `translateX(-${currentFeatureIndex * 334}px)`,
           }}
         >
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 px-2"
-              style={{
-                width: '334px',
-                height: '354px',
-              }}
-            >
+          {safeFeatures.map((feature, index) => {
+            const imageSrc = resolveMediaSrc(feature.image);
+            return (
               <div
-                className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-yellow-400"
-                onClick={() => openModal(index)}
+                key={index}
+                className="flex-shrink-0 px-2"
+                style={{
+                  width: '334px',
+                  height: '354px',
+                }}
               >
-                <div className="flex flex-grow md:absolute  items-center justify-center">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="object-contain w-full h-full"
-                  />
+                <div
+                  className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-yellow-400"
+                  onClick={() => openModal(index)}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-full h-full bg-white">
+                      {imageSrc && (
+                        <Image
+                          src={imageSrc}
+                          alt={feature.title}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 100vw, (max-width: 992px) 50vw, 334px"
+                        />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -152,19 +158,31 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             </button>
 
             <div className="flex justify-center">
-              <img
-                src={features[currentFeatureIndex].open}
-                alt={features[currentFeatureIndex].title}
-                className="w-[200px] h-[247.08px]"
-              />
+              <div className="relative w-[200px] h-[247.08px]">
+                {(() => {
+                  const openSrc = resolveMediaSrc(
+                    safeFeatures[currentFeatureIndex]?.open
+                  );
+                  return (
+                    openSrc && (
+                      <Image
+                        src={openSrc}
+                        alt={safeFeatures[currentFeatureIndex]?.title ?? ''}
+                        fill
+                        className="object-contain"
+                      />
+                    )
+                  );
+                })()}
+              </div>
             </div>
             <div className="flex-auto">
               <div className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">
-                  {features[currentFeatureIndex].title}
+                  {safeFeatures[currentFeatureIndex]?.title ?? ''}
                 </h2>
                 <p className="mt-4 text-gray-700 max-w-sm">
-                  {features[currentFeatureIndex].desc}
+                  {safeFeatures[currentFeatureIndex]?.desc ?? ''}
                 </p>
               </div>
             </div>

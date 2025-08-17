@@ -1,13 +1,10 @@
 import Image from 'next/image';
-
-export interface TileItem {
-  icon: string;
-  title: string;
-}
+import { HomePage as homePageType } from '@/payload-types';
+import { resolveMediaSrc } from '@/lib/media';
 
 interface FeaturesTilesSectionProps {
-  leftItems: TileItem[];
-  rightItems: TileItem[];
+  leftItems: homePageType['leftItems'];
+  rightItems: homePageType['rightItems'];
 }
 
 export default function FeaturesTilesSection({
@@ -22,21 +19,26 @@ export default function FeaturesTilesSection({
 
       <div className="hidden lg:flex gap-24 flex-row relative">
         <div className="flex flex-col justify-center gap-6">
-          {leftItems.map((item, i) => (
-            <div
-              key={i}
-              className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-            >
-              <Image
-                src={item.icon}
-                alt={item.title}
-                width={78}
-                height={78}
-                className="mb-3"
-              />
-              <p className="text-center text-sm font-medium">{item.title}</p>
-            </div>
-          ))}
+          {leftItems.map((item, i) => {
+            const iconSrc = resolveMediaSrc(item.icon);
+            return (
+              <div
+                key={i}
+                className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+              >
+                {iconSrc && (
+                  <Image
+                    src={iconSrc}
+                    alt={item.title}
+                    width={78}
+                    height={78}
+                    className="mb-3"
+                  />
+                )}
+                <p className="text-center text-sm font-medium">{item.title}</p>
+              </div>
+            );
+          })}
         </div>
 
         <div className="relative flex-shrink-0">
@@ -95,40 +97,50 @@ export default function FeaturesTilesSection({
         </div>
 
         <div className="flex flex-col justify-center gap-6">
-          {rightItems.map((item, i) => (
-            <div
-              key={i}
-              className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-            >
-              <Image
-                src={item.icon}
-                alt={item.title}
-                width={78}
-                height={78}
-                className="mb-3"
-              />
-              <p className="text-center text-sm font-medium">{item.title}</p>
-            </div>
-          ))}
+          {rightItems.map((item, i) => {
+            const iconSrc = resolveMediaSrc(item.icon);
+            return (
+              <div
+                key={i}
+                className="flex w-[200px] flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+              >
+                {iconSrc && (
+                  <Image
+                    src={iconSrc}
+                    alt={item.title}
+                    width={78}
+                    height={78}
+                    className="mb-3"
+                  />
+                )}
+                <p className="text-center text-sm font-medium">{item.title}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:hidden p-5">
-        {[...leftItems, ...rightItems].map((item, i) => (
-          <div
-            key={i}
-            className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
-          >
-            <Image
-              src={item.icon}
-              alt={item.title}
-              width={78}
-              height={78}
-              className="mb-3"
-            />
-            <p className="text-center text-sm font-medium">{item.title}</p>
-          </div>
-        ))}
+        {[...leftItems, ...rightItems].map((item, i) => {
+          const iconSrc = resolveMediaSrc(item.icon);
+          return (
+            <div
+              key={i}
+              className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+            >
+              {iconSrc && (
+                <Image
+                  src={iconSrc}
+                  alt={item.title}
+                  width={78}
+                  height={78}
+                  className="mb-3"
+                />
+              )}
+              <p className="text-center text-sm font-medium">{item.title}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -3,9 +3,16 @@ import AboutSection from '@/components/home/AboutSection';
 import FeaturesTilesSection from '@/components/home/FeaturesTilesSection';
 import FeaturesCarousel from '@/components/home/FeaturesCarousel';
 import FAQSection from '@/components/home/FAQSection';
-import { data } from '@/constants/home';
+import { getPayload } from 'payload';
+import config from '@/payload.config';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const payload = await getPayload({ config });
+  const data = await payload.findGlobal({
+    slug: 'homePage',
+    depth: 3,
+  });
+
   return (
     <>
       {/* Hidden SPLaSK Contact Details tag for crawler detection */}
