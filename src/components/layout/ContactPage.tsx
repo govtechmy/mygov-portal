@@ -44,6 +44,82 @@ export default function ContactPage({ messages }: ContactPageProps) {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   setSubmitStatus({ type: null, message: '' });
+
+  //   try {
+  //     const descriptionHtml = `
+  //     <div>
+  //       <p><strong>Name:</strong> ${formData.name}</p>
+  //       <p><strong>Email:</strong> ${formData.email}</p>
+  //       <p><strong>Phone:</strong> ${formData.phoneCode} ${formData.phone}</p>
+  //       <p><strong>IC:</strong> ${formData.ic}</p>
+  //       <p><strong>Address:</strong> ${formData.address}</p>
+  //       <p><strong>Category:</strong> ${formData.category}</p>
+  //       <p><strong>Suggestion:</strong> ${formData.suggestion}</p>
+  //     </div>
+  //     `;
+
+  //     const minifiedDescriptionHtml = descriptionHtml
+  //       .replace(/\s+/g, ' ')
+  //       .trim();
+  //     const freshdeskData = {
+  //       name: formData.name,
+  //       email: formData.email,
+  //       phone: `${formData.phoneCode}${formData.phone}`,
+  //       subject: `${formData.category} - ${formData.name}`,
+  //       source: 2, // PORTAL
+  //       priority: 2, // Medium priority
+  //       status: 2, // Open status
+  //       description: minifiedDescriptionHtml,
+  //     };
+
+  //     const response = await fetch(process.env.FRESHDESK_API_URL ?? '', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: 'Basic ' + btoa(process.env.FRESHDESK_API_KEY ?? ''),
+  //       },
+  //       body: JSON.stringify(freshdeskData),
+  //     });
+
+  //     const result = await response.json();
+
+  //     if (response.ok) {
+  //       setSubmitStatus({
+  //         type: 'success',
+  //         message: 'Your message has been submitted successfully!',
+  //       });
+
+  //       // Reset form
+  //       setFormData({
+  //         category: '',
+  //         name: '',
+  //         ic: '',
+  //         address: '',
+  //         phone: '',
+  //         phoneCode: '+60',
+  //         email: '',
+  //         suggestion: '',
+  //       });
+  //     } else {
+  //       setSubmitStatus({
+  //         type: 'error',
+  //         message:
+  //           result.error || 'Failed to submit your message. Please try again.',
+  //       });
+  //     }
+  //   } catch (error) {
+  //     setSubmitStatus({
+  //       type: 'error',
+  //       message: 'An error occurred. Please try again later.',
+  //     });
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -51,36 +127,34 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
     try {
       const descriptionHtml = `
-      <div>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
-        <p><strong>Phone:</strong> ${formData.phoneCode} ${formData.phone}</p>
-        <p><strong>IC:</strong> ${formData.ic}</p>
-        <p><strong>Address:</strong> ${formData.address}</p>
-        <p><strong>Category:</strong> ${formData.category}</p>
-        <p><strong>Suggestion:</strong> ${formData.suggestion}</p>
-      </div>
-      `;
-
-      const minifiedDescriptionHtml = descriptionHtml
+        <div>
+          <p><strong>Name:</strong> ${formData.name}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Phone:</strong> ${formData.phoneCode} ${formData.phone}</p>
+          <p><strong>IC:</strong> ${formData.ic}</p>
+          <p><strong>Address:</strong> ${formData.address}</p>
+          <p><strong>Category:</strong> ${formData.category}</p>
+          <p><strong>Suggestion:</strong> ${formData.suggestion}</p>
+        </div>
+      `
         .replace(/\s+/g, ' ')
         .trim();
+
       const freshdeskData = {
         name: formData.name,
         email: formData.email,
         phone: `${formData.phoneCode}${formData.phone}`,
         subject: `${formData.category} - ${formData.name}`,
         source: 2, // PORTAL
-        priority: 2, // Medium priority
-        status: 2, // Open status
-        description: minifiedDescriptionHtml,
+        priority: 1, // Medium
+        status: 2, // Open
+        description: descriptionHtml,
       };
 
-      const response = await fetch(process.env.FRESHDESK_API_URL ?? '', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Basic ' + btoa(process.env.FRESHDESK_API_KEY ?? ''),
         },
         body: JSON.stringify(freshdeskData),
       });
@@ -92,8 +166,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
           type: 'success',
           message: 'Your message has been submitted successfully!',
         });
-
-        // Reset form
         setFormData({
           category: '',
           name: '',
