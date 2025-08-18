@@ -12,7 +12,8 @@ import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
 import { useTheme } from '@/components/providers/theme-provider';
 import { getMessages, type Locale } from '@/lib/i18n';
 import LocaleSwitcher from './locale-switcher';
-import { useEffect } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
+import DownloadPopup from './DownloadPopup';
+import { useEffect, useState } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
 
 interface NavbarComponentProps {
   locale: Locale;
@@ -21,6 +22,7 @@ interface NavbarComponentProps {
 export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const messages = getMessages(locale);
   const { theme, setTheme } = useTheme();
+  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   useEffect(() => {
     setTheme('light');
   }, [setTheme]); // default light mode using useEffect, preventing errors
@@ -29,29 +31,33 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
   };
 
   return (
-    <Navbar>
-      <NavbarLogo
-        href={`/${locale}`}
-        src="/images/mygov-logo.svg"
-        alt="Jata Negara Malaysia"
-        className="h-full"
-      ></NavbarLogo>
+    <>
+      <Navbar>
+        <NavbarLogo
+          href={`/${locale}`}
+          src="/images/mygov-logo.svg"
+          alt="Jata Negara Malaysia"
+          className="h-full"
+        ></NavbarLogo>
 
-      <NavbarMenu>
-        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}`}>
-          {messages.navigation.main}
-        </NavbarMenuItem>
-        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}/blog`}>
-          {messages.navigation.blog}
-        </NavbarMenuItem>
-        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}/contact`}>
-          {messages.navigation.contact}
-        </NavbarMenuItem>
-      </NavbarMenu>
+        <NavbarMenu>
+          <NavbarMenuItem className="flex-none w-fit" href={`/${locale}`}>
+            {messages.navigation.main}
+          </NavbarMenuItem>
+          <NavbarMenuItem className="flex-none w-fit" href={`/${locale}/blog`}>
+            {messages.navigation.blog}
+          </NavbarMenuItem>
+          <NavbarMenuItem
+            className="flex-none w-fit"
+            href={`/${locale}/contact`}
+          >
+            {messages.navigation.contact}
+          </NavbarMenuItem>
+        </NavbarMenu>
 
-      <NavbarAction>
-        <div className="flex items-center gap-2">
-          {/* integrate properly before theme
+        <NavbarAction>
+          <div className="flex items-center gap-2">
+            {/* integrate properly before theme
           <Button
         <div className="flex items-end justify-end gap-2">
           {/* <Button
@@ -69,12 +75,22 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
               <SunIcon className="h-5 w-5" />
             )}
           </Button> */}
-          <LocaleSwitcher currentLocale={locale} />
-          <Button size="small" className="p-2 w-[160px] justify-center">
-            {messages.navigation.download}
-          </Button>
-        </div>
-      </NavbarAction>
-    </Navbar>
+            <LocaleSwitcher currentLocale={locale} />
+            <Button
+              size="small"
+              className="p-2 w-[160px] justify-center"
+              onClick={() => setIsDownloadOpen(true)}
+            >
+              {messages.navigation.download}
+            </Button>
+          </div>
+        </NavbarAction>
+      </Navbar>
+
+      <DownloadPopup
+        open={isDownloadOpen}
+        onClose={() => setIsDownloadOpen(false)}
+      />
+    </>
   );
 }
