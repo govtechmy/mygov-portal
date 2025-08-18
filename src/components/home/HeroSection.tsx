@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import HeroPattern from '@/components/layout/heroPattern';
+import Link from 'next/link';
 
 export default function HeroSection() {
   return (
@@ -22,30 +23,34 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
-            <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-              <Image
-                src="/home/first_section/Apple.png"
-                alt="App Store"
-                width={21}
-                height={24}
-              />
-              <div className="flex flex-col text-[10px]">
-                <span>Muat Turun di</span>
-                <span className="font-semibold">App Store</span>
+            <Link href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525">
+              <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
+                <Image
+                  src="/home/first_section/Apple.png"
+                  alt="App Store"
+                  width={21}
+                  height={24}
+                />
+                <div className="flex flex-col text-[10px]">
+                  <span>Muat Turun di</span>
+                  <span className="font-semibold">App Store</span>
+                </div>
               </div>
-            </div>
-            <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-              <Image
-                src="/home/first_section/Playstore.png"
-                alt="Google Play"
-                width={21}
-                height={24}
-              />
-              <div className="flex flex-col text-[10px]">
-                <span>Muat Turun di</span>
-                <span className="font-semibold">Google Play</span>
+            </Link>
+            <Link href="https://play.google.com/store/apps/details?id=my.gov.onegovappstore.jdn&hl=en">
+              <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
+                <Image
+                  src="/home/first_section/Playstore.png"
+                  alt="Google Play"
+                  width={21}
+                  height={24}
+                />
+                <div className="flex flex-col text-[10px]">
+                  <span>Muat Turun di</span>
+                  <span className="font-semibold">Google Play</span>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
 
           <div className="flex items-center gap-2 pt-4">
