@@ -4,7 +4,11 @@ import { ClockIcon } from '@govtechmy/myds-react/icon';
 import { AutoPagination } from '@govtechmy/myds-react/pagination';
 import { useRouter } from 'next/navigation';
 
-export default function ResultMap() {
+interface ResultMapProps {
+  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+}
+
+export default function ResultMap({ messages }: ResultMapProps) {
   const context = useContext(SearchContext);
   if (!context)
     throw new Error('SearchContext must be used within a SearchProvider');
