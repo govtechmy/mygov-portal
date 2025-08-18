@@ -13,6 +13,7 @@ import { useTheme } from '@/components/providers/theme-provider';
 import { getMessages, type Locale } from '@/lib/i18n';
 import LocaleSwitcher from './locale-switcher';
 import DownloadPopup from './DownloadPopup';
+
 import { useEffect, useState } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
 
 interface NavbarComponentProps {

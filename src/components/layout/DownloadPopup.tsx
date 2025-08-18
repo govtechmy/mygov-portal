@@ -3,6 +3,7 @@
 import { Dialog, DialogBody, DialogTitle } from '@govtechmy/myds-react/dialog';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Fragment } from 'react';
 
 interface DownloadPopupProps {
   open: boolean;
@@ -17,36 +18,35 @@ export default function DownloadPopup({ open, onClose }: DownloadPopupProps) {
         if (!v) onClose();
       }}
     >
-      {/* We build our own card so we can match Figma exactly */}
-      <DialogBody
-        onDismiss={onClose}
-        className="lg:h-[339.54px] justify-center"
-      >
-        <DialogTitle></DialogTitle>
-        <div className="relative rounded-2xl shadow-xl  mx-auto p-6 lg:p-12  ">
+      <DialogBody hideClose={true}>
+        {/* Close Button are on fixed position.. causing missed place for laptop and larger devide settings.. not sure if I should create custom button for close */}
+
+        <DialogTitle />
+        <div className="relative rounded-2xl border bg-white border-[#E4E4E7] shadow-2xl shadow-black mx-auto pt-14 px-3  lg:pt-0  lg:p-3 lg:w-[585px] lg:h-[339.54px] lg:flex lg:items-center lg:gap-6 ">
           {/* Content */}
-          <div className="grid grid-cols-1 lg:flex items-center gap-6 ">
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 lg">
-              <div className="text-2xl font-semibold  text-black">
+          <div className="grid grid-cols-1 lg:flex lg:pl items-center gap-6 lg:p-3 lg:w-[561px] lg:h-[283.54px]">
+            <div className="  flex flex-col items-center lg:items-start text-center lg:text-left gap-8 lg:w-[252.21px] lg:h-[200px] ">
+              <div className=" text-2xl font-semibold text-black lg:hidden">
                 Muat turun aplikasi MyGov Malaysia melalui platform berikut
               </div>
 
+              <div className="hidden text-2xl font-semibold text-black lg:flex">
+                Muat turun <br /> aplikasi MyGov Malaysia melalui platform
+                berikut
+              </div>
+
               {/* Store buttons */}
-              <div className="flex gap-2.5">
+              <div className="flex gap-[18px] w-[258px]">
                 <StoreButtons />
               </div>
             </div>
 
-            <div className="relative flex justify-center lg:justify-end ">
-              <div
-                className="absolute bottom-0 translate-y-2 lg:translate-y-4 w-[260px] h-[48px] rounded-full
-                              bg-gradient-to-b from-[#4FAAFF] to-[#2E82FF] shadow-[0_8px_24px_rgba(46,130,255,0.35)]"
-              />
+            <div className=" flex justify-center">
               {/* phone */}
               <img
                 src="/images/download_.png"
                 alt="Aplikasi"
-                className="relative "
+                className="w-[260.79px] h-[283.54px]"
               />
             </div>
           </div>
@@ -58,16 +58,16 @@ export default function DownloadPopup({ open, onClose }: DownloadPopupProps) {
 
 function StoreButtons() {
   return (
-    <>
+    <Fragment>
       <Link href="https://play.google.com/store/apps/details?id=my.gov.onegovappstore.jdn&hl=en">
-        <div className="flex bg-black h-[44px] lg:w-32 px-3 items-center gap-2 rounded-md border border-[#A6A6A6] text-white shadow-md transition-shadow hover:shadow-lg">
+        <div className="flex bg-black h-[44px] lg:w-[130px] px-3 items-center gap-2 rounded-md border border-[#A6A6A6] text-white shadow-md transition-shadow hover:shadow-lg">
           <Image
             src="/home/first_section/Playstore.png"
             alt="Google Play"
             width={21}
             height={24}
           />
-          <div className="flex flex-col text-[10px] leading-tight ">
+          <div className="flex flex-col text-[10px] leading-tight">
             <span>Muat Turun di</span>
             <span className="text-[12px] font-semibold">Google Play</span>
           </div>
@@ -75,7 +75,7 @@ function StoreButtons() {
       </Link>
 
       <Link href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525">
-        <div className="flex bg-black h-[44px] lg:w-32 px-3 items-center gap-2 rounded-md border border-[#A6A6A6] text-white shadow-md transition-shadow hover:shadow-lg">
+        <div className="flex bg-black h-[44px] lg:w-[130px] px-3 items-center gap-2 rounded-md border border-[#A6A6A6] text-white shadow-md transition-shadow hover:shadow-lg">
           <Image
             src="/home/first_section/Apple.png"
             alt="App Store"
@@ -88,6 +88,6 @@ function StoreButtons() {
           </div>
         </div>
       </Link>
-    </>
+    </Fragment>
   );
 }
