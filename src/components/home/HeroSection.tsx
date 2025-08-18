@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import HeroPattern from '@/components/layout/heroPattern';
+import BlueCircleGradient from '../layout/blueCircleGradient';
 import Link from 'next/link';
 
 export default function HeroSection() {
@@ -7,6 +8,7 @@ export default function HeroSection() {
     <section className="relative w-screen p-3 overflow-hidden bg-gradient-radial from-brand-200 from-0% via-[#F1F5FF] via-[27.57%] to-white to-100%">
       <div className="absolute inset-0 z-0">
         <HeroPattern />
+        <BlueCircleGradient />
       </div>
 
       <div className="container relative z-10 mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6 lg:grid-cols-2">
