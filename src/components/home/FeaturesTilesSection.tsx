@@ -3,6 +3,7 @@ import Image from 'next/image';
 export interface TileItem {
   icon: string;
   title: string;
+  highlights: string[];
 }
 
 interface FeaturesTilesSectionProps {
@@ -15,7 +16,7 @@ export default function FeaturesTilesSection({
   rightItems,
 }: FeaturesTilesSectionProps) {
   return (
-    <section className="flex flex-col gap-8 pb-20 font-bold justify-center items-center">
+    <section className="flex flex-col pb-20 font-bold justify-center items-center">
       <h2 className="mb-12 p-5 text-center text-2xl font-[600px] md:text-3xl lg:text-4xl">
         Akses lebih mudah kepada perkhidmatan kerajaan
       </h2>
@@ -113,11 +114,11 @@ export default function FeaturesTilesSection({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:hidden p-5">
+      <div className="flex flex-row flex-wrap gap-6 lg:hidden p-5 items-stretch justify-center">
         {[...leftItems, ...rightItems].map((item, i) => (
           <div
             key={i}
-            className="flex flex-col items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+            className="flex flex-col w-[200px] items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
           >
             <Image
               src={item.icon}
@@ -127,6 +128,16 @@ export default function FeaturesTilesSection({
               className="mb-3"
             />
             <p className="text-center text-sm font-medium">{item.title}</p>
+            <div className="text-center text-xs font-medium text-gray-500 mt-1">
+              <ol className="list-disc list-inside">
+                {item.highlights.map((highlight, index) => (
+                  <li className="p-1" key={index}>
+                    {' '}
+                    {highlight}{' '}
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         ))}
       </div>
