@@ -1,9 +1,14 @@
+'use client';
 import Image from 'next/image';
 import HeroPattern from '@/components/layout/heroPattern';
 import BlueCircleGradient from '../layout/blueCircleGradient';
 import Link from 'next/link';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+}
+
+export default function HeroSection({ messages }: HeroSectionProps) {
   return (
     <section className="relative w-screen p-3 overflow-hidden bg-gradient-radial from-brand-200 from-0% via-[#F1F5FF] via-[27.57%] to-white to-100%">
       <div className="absolute inset-0 z-0">
@@ -14,14 +19,16 @@ export default function HeroSection() {
       <div className="container relative z-10 mx-auto grid grid-cols-1 items-center gap-12 px-4 md:px-6 lg:grid-cols-2">
         <div className="flex flex-col items-center md:items-start space-y-6 text-center md:text-start">
           <div className="text-[18px] tracking-wide font-medium text-[#2563EB] md:text-base">
-            MYGOV MALAYSIA
+            {messages.homepg.herosection.mygovmy}
           </div>
           <h1 className="text-balance text-4xl font-semibold leading-tight">
-            Aplikasi Pusat Sehenti <br />
-            Digital Perkhidmatan <br /> Kerajaan
+            {messages.homepg.herosection.header1}
+            <br />
+            {messages.homepg.herosection.header2} <br />
+            {messages.homepg.herosection.header3}
           </h1>
           <p className="text-base font-normal text-[#3F3F46]">
-            Menyatukan Perkhidmatan Kerajaan dalam Satu Aplikasi
+            {messages.homepg.herosection.parag}
           </p>
 
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
@@ -34,8 +41,11 @@ export default function HeroSection() {
                   height={24}
                 />
                 <div className="flex flex-col text-[10px]">
-                  <span>Muat Turun di</span>
-                  <span className="font-semibold">App Store</span>
+                  <span> {messages.homepg.herosection.buttondownload}</span>
+                  <span className="font-semibold">
+                    {' '}
+                    {messages.homepg.herosection.buttonapple}
+                  </span>
                 </div>
               </div>
             </Link>
@@ -48,15 +58,19 @@ export default function HeroSection() {
                   height={24}
                 />
                 <div className="flex flex-col text-[10px]">
-                  <span>Muat Turun di</span>
-                  <span className="font-semibold">Google Play</span>
+                  <span> {messages.homepg.herosection.buttondownload}</span>
+                  <span className="font-semibold">
+                    {messages.homepg.herosection.buttongoogle}
+                  </span>
                 </div>
               </div>
             </Link>
           </div>
 
           <div className="flex items-center gap-2 pt-4">
-            <span className="text-sm text-gray-600">Sebuah inisiatif</span>
+            <span className="text-sm text-gray-600">
+              {messages.homepg.herosection.inisiatif}
+            </span>
             <Image
               src="/home/first_section/sentuhanmadani.png"
               alt="Madani"
