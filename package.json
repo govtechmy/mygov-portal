@@ -19,6 +19,7 @@
     "@payloadcms/db-mongodb": "^3.52.0",
     "@payloadcms/next": "^3.52.0",
     "@payloadcms/payload-cloud": "^3.52.0",
+    "@payloadcms/plugin-search": "^3.52.0",
     "@payloadcms/richtext-lexical": "^3.52.0",
     "@payloadcms/storage-vercel-blob": "^3.52.0",
     "graphql": "^16.11.0",

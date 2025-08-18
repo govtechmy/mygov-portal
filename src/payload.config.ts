@@ -7,6 +7,7 @@ import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { searchPlugin } from '@payloadcms/plugin-search';
 import PayloadCollections, { Users } from './collections';
 import HomePage from './globals/HomePage';
 
@@ -33,6 +34,9 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    searchPlugin({
+      collections: ['blog'],
+    }),
     // storage-adapter-placeholder
     vercelBlobStorage({
       collections: {
