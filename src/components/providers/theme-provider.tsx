@@ -15,21 +15,28 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    // Check for saved theme preference or default to light
+    // This is the line that will force the theme to always be light
+    setTheme('light');
+
+    // optionally remove the rest of the code in this useEffect
+    // or comment it out, as it will no longer be used.
+    /*
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme) {
       setTheme(savedTheme);
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
     }
-  }, []);
+    */
+  }, []); // The empty dependency array ensures this only runs once on mount.
 
-  useEffect(() => {
-    // Update document class and save to localStorage
+  {
+    /*useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme]);*/
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

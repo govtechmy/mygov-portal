@@ -38,6 +38,17 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  @media (min-width: 640px) {
+    #navbar .hidden.xl\:flex {
+      display: flex !important;
+      justify-content: flex-start !important; /* force justify-start */
+    }
+
+    #navbar button[aria-label='Open navigation menu'] {
+      display: none !important;
+    }
+  }
 }
 
 /* Custom styles for connector lines and dots */
