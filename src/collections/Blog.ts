@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Blog: CollectionConfig = {
   slug: 'blog',
@@ -54,6 +54,7 @@ export const Blog: CollectionConfig = {
     {
       name: 'caption',
       type: 'text',
+      required: false,
     },
     {
       name: 'content',
@@ -61,6 +62,4 @@ export const Blog: CollectionConfig = {
       required: true,
     },
   ],
-}
-
-
+};
