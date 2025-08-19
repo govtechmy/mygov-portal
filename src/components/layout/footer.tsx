@@ -1,15 +1,17 @@
 'use client';
 
 import { Footer, SiteInfo, FooterSection, FooterLogo } from '@govtechmy/myds-react/footer';
-import { FacebookIcon, TwitterXIcon, InstagramIcon } from '@govtechmy/myds-react/icon';
+import { FacebookIcon, TwitterXIcon, InstagramIcon, TiktokIcon, LinkedinIcon } from '@govtechmy/myds-react/icon';
 import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
 import Image from 'next/image';
+import { Footer as FooterType } from '@/payload-types';
 
 interface FooterComponentProps {
   locale: Locale;
+  footerData: FooterType;
 }
-export default function FooterComponent({}: FooterComponentProps) {
+export default function FooterComponent({ locale, footerData }: FooterComponentProps) {
   // Comment for now since not using i18n
   // export default function FooterComponent({ locale }: FooterComponentProps) {
   return (
@@ -78,22 +80,35 @@ export default function FooterComponent({}: FooterComponentProps) {
           </div>
           <div className="flex flex-row gap-3">
             <Link
-              href=""
+              href={footerData.facebookUrl || ''}
+              target="_blank"
               className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
             >
               <FacebookIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
             <Link
-              href=""
+              href={footerData.twitterUrl || ''}
               className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
             >
               <TwitterXIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
             <Link
-              href=""
+              href={footerData.instagramUrl || ''}
               className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
             >
               <InstagramIcon scale={32} className="md:scale-40 text-[#2563EB]" />
+            </Link>
+            <Link
+              href={footerData.tiktokUrl || ''}
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <TiktokIcon scale={32} className="md:scale-40 text-[#2563EB]" />
+            </Link>
+            <Link
+              href={footerData.linkedinUrl || ''}
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <LinkedinIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
           </div>
         </div>

@@ -5,11 +5,12 @@ import { isValidLocale } from '@/lib/i18n';
 import FooterComponent from '@/components/layout/footer';
 import MastheadComponent from '@/components/layout/masthead';
 import NavbarComponent from '@/components/layout/navbar';
+import { getPayload } from 'payload';
+import config from '@/payload.config';
 
 export const metadata: Metadata = {
   title: 'MyGov Portal - Malaysian Government Services',
-  description:
-    'Official Malaysian government portal providing access to government services and information',
+  description: 'Official Malaysian government portal providing access to government services and information',
 };
 
 interface LocaleLayoutProps {
@@ -19,12 +20,13 @@ interface LocaleLayoutProps {
   }>;
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LocaleLayoutProps) {
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
-
+  const payload = await getPayload({ config });
+  const footerData = await payload.findGlobal({
+    slug: 'footer',
+    depth: 3,
+  });
   // Validate locale parameter
   if (!isValidLocale(locale)) {
     notFound();
@@ -36,7 +38,7 @@ export default async function LocaleLayout({
         <MastheadComponent locale={locale} />
         <NavbarComponent locale={locale} />
         {children}
-        <FooterComponent locale={locale} />
+        <FooterComponent locale={locale} footerData={footerData} />
       </div>
       <SiteScript />
     </>
