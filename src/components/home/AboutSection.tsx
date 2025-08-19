@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { HomePage as homePageType } from '@/payload-types';
 
 interface AboutSectionProps {
   title: homePageType['aboutTitle'];

@@ -1,7 +1,7 @@
 'use client';
 
-import { Footer, SiteInfo, FooterSection, SiteLinkGroup, SiteLink, FooterLogo } from '@govtechmy/myds-react/footer';
-import { getMessages, type Locale } from '@/lib/i18n';
+import { Footer, SiteInfo, FooterSection, SiteLink, FooterLogo } from '@govtechmy/myds-react/footer';
+import { type Locale } from '@/lib/i18n';
 import Image from 'next/image';
 
 interface FooterComponentProps {
@@ -9,8 +9,6 @@ interface FooterComponentProps {
 }
 
 export default function FooterComponent({ locale }: FooterComponentProps) {
-  const messages = getMessages(locale);
-
   return (
     <Footer>
       <div className="flex flex-col items-center w-full">

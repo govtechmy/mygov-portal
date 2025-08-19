@@ -3,7 +3,7 @@
 import Hero from '@/components/layout/hero';
 import { useRef } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
-import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
+import { ChevronDownIcon, EmailIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
 import { Label } from '@govtechmy/myds-react/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@govtechmy/myds-react/select';
@@ -19,7 +19,7 @@ interface ContactPageProps {
 }
 
 export default function ContactPage({ messages }: ContactPageProps) {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
@@ -100,10 +100,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
         });
       }
     } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'An error occurred. Please try again later.',
-      });
+      console.error('Error submitting contact form:', error);
+      setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
     } finally {
       setIsSubmitting(false);
     }

@@ -8,10 +8,7 @@ export async function POST(req: NextRequest) {
     const url = process.env.FRESHDESK_API_URL; // e.g. "https://yourdomain.freshdesk.com/api/v2/tickets"
 
     if (!apiKey || !url) {
-      return NextResponse.json(
-        { error: 'Freshdesk API credentials not configured' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Freshdesk API credentials not configured' }, { status: 500 });
     }
 
     const response = await fetch(url, {
@@ -23,19 +20,18 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     });
 
-    let data: any;
+    let data: Record<string, unknown>;
     try {
       data = await response.json();
     } catch {
-      data = await response.text();
+      const text = await response.text();
+      data = { response: text };
     }
 
     return NextResponse.json(data, { status: response.status });
-  } catch (error: any) {
+  } catch (error) {
+    const err = error as Error;
     console.error('Freshdesk proxy error:', error);
-    return NextResponse.json(
-      { error: error.message ?? 'Unknown error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message ?? 'Unknown error' }, { status: 500 });
   }
 }
