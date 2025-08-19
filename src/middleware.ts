@@ -13,7 +13,7 @@ export function middleware(req: NextRequest) {
   }
 
   // Skip authentication for local environment
-  if (APP_ENV === 'local') {
+  if (APP_ENV === 'local' || APP_ENV === 'production') {
     return NextResponse.next();
   }
 
