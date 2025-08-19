@@ -165,6 +165,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
     control,
     reset,
     formState: { errors },
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -209,23 +210,24 @@ export default function ContactPage({ messages }: ContactPageProps) {
         .replace(/\s+/g, ' ')
         .trim();
 
-      const freshdeskData = {
-        name: data.name,
-        email: data.email,
-        phone: `${data.phoneCode}${data.phone}`,
-        subject: `${data.category} - ${data.name}`,
-        source: 2,
-        priority: 1,
-        status: 2,
-        description: descriptionHtml,
-      };
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', `${data.phoneCode}${data.phone}`);
+      formData.append('subject', `${data.category} - ${data.name}`);
+      formData.append('source', '2');
+      formData.append('priority', '1');
+      formData.append('status', '2');
+      formData.append('description', descriptionHtml);
+      formData.append('cf-turnstile-response', turnstileToken);
+
+      if (data.file) {
+        formData.append('attachments[]', data.file);
+      }
 
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(freshdeskData),
+        body: formData,
       });
 
       const result = await response.json();
@@ -389,9 +391,11 @@ export default function ContactPage({ messages }: ContactPageProps) {
               <input
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
-                {...register('file', {
-                  onChange: e => e.target.files?.[0] ?? undefined,
-                })}
+                ref={fileInputRef}
+                onChange={e => {
+                  const file = e.target.files?.[0] ?? undefined;
+                  setValue('file', file, { shouldValidate: true });
+                }}
               />
 
               {errors.file && <span className="text-red-600 text-sm">{errors.file.message as string}</span>}
@@ -436,13 +440,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 <input type="hidden" name="cf-turnstile-response" value={turnstileToken} />
               </div>
             )}
-
-          {/* Error Message */}
-          {errorMessage && (
-            <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-              {errorMessage}
-            </div>
-          )}
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-4">
