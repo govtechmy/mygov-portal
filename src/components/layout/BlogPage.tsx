@@ -20,7 +20,7 @@ export default function BlogPage({ messages, initialDocs, initialTotal }: BlogPa
       <Hero title="Blog" search={<SearchBarClient />} datepicker={<DatePickerClient />}></Hero>
       <div className="mx-auto px-[18px] sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] py-16">
         <TabFiltered />
-        <ResultMap messages={messages} initialDocs={initialDocs} initialTotal={initialTotal} />
+        <ResultMap initialDocs={initialDocs} initialTotal={initialTotal} />
       </div>
     </SearchProvider>
   );

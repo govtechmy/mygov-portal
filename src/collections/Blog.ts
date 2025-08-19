@@ -14,6 +14,7 @@ export const Blog: CollectionConfig = {
       label: 'Type',
       type: 'select',
       required: true,
+      index: true,
       options: [
         { label: 'Kesihatan', value: 'kesihatan' },
         { label: 'Kelahiran', value: 'kelahiran' },
@@ -34,6 +35,7 @@ export const Blog: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      index: true,
     },
     {
       name: 'readtime',
@@ -44,6 +46,7 @@ export const Blog: CollectionConfig = {
       name: 'datePublished',
       type: 'date',
       required: true,
+      index: true,
     },
     {
       name: 'picture',
@@ -55,6 +58,7 @@ export const Blog: CollectionConfig = {
       name: 'caption',
       type: 'text',
       required: false,
+      index: true,
     },
     {
       name: 'content',
