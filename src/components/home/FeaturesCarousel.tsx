@@ -73,7 +73,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
                 }}
               >
                 <div
-                  className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-yellow-400"
+                  className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl"
                   onClick={() => openModal(index)}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
