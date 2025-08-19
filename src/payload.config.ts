@@ -10,6 +10,7 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { searchPlugin } from '@payloadcms/plugin-search';
 import PayloadCollections, { Users } from './collections';
 import HomePage from './globals/HomePage';
+import Footer from './globals/Footer';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -22,7 +23,7 @@ export default buildConfig({
     },
   },
   collections: PayloadCollections,
-  globals: [HomePage],
+  globals: [HomePage, Footer],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
