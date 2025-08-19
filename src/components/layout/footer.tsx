@@ -1,7 +1,7 @@
 'use client';
 
 import { Footer, SiteInfo, FooterSection, FooterLogo } from '@govtechmy/myds-react/footer';
-import { FacebookIcon, TwitterXIcon, InstagramIcon, TiktokIcon } from '@govtechmy/myds-react/icon';
+import { FacebookIcon, TwitterXIcon, InstagramIcon, TiktokIcon, LinkedinIcon } from '@govtechmy/myds-react/icon';
 import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
 import Image from 'next/image';
@@ -103,6 +103,12 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
               className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
             >
               <TiktokIcon scale={32} className="md:scale-40 text-[#2563EB]" />
+            </Link>
+            <Link
+              href={footerData.linkedinUrl || ''}
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <LinkedinIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
           </div>
         </div>

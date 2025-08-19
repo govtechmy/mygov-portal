@@ -499,6 +499,7 @@ export interface Footer {
   twitterUrl?: string | null;
   instagramUrl?: string | null;
   tiktokUrl?: string | null;
+  linkedinUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -559,6 +560,7 @@ export interface FooterSelect<T extends boolean = true> {
   twitterUrl?: T;
   instagramUrl?: T;
   tiktokUrl?: T;
+  linkedinUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

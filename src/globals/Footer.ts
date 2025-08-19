@@ -34,6 +34,11 @@ const Footer: GlobalConfig = {
       label: 'TikTok URL',
       type: 'text',
     },
+    {
+      name: 'linkedinUrl',
+      label: 'LinkedIn URL',
+      type: 'text',
+    },
   ],
 };
 
