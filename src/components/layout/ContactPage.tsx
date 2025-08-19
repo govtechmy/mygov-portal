@@ -39,8 +39,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Label>{messages.contactpg.name}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="name"
+              type="text"
               placeholder={messages.contactpg.name}
               className="!shadow-sm"
               required
@@ -50,8 +50,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Label>{messages.contactpg.ic}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="icNumber"
+              type="text"
               placeholder="000000-00-0000"
               className="!shadow-sm"
               required
@@ -61,8 +61,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Label>{messages.contactpg.address}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="address"
+              type="text"
               placeholder={messages.contactpg.address}
               className="!shadow-sm"
               required
@@ -78,7 +78,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   </InputAddon>
                 }
                 size="medium"
-                id="email"
+                id="phoneNumber"
                 type="number"
                 placeholder="12 345 6789"
                 className="!shadow-sm"
@@ -106,6 +106,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <TextArea
               placeholder={messages.contactpg.suggestionPlaceholder}
               size="medium"
+              name="suggestion"
               className="!shadow-sm"
             />
           </div>

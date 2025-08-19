@@ -22,7 +22,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
     <Footer>
       <div className="flex flex-col items-center w-full">
         <div className="flex flex-row justify-center w-full">
-          <div className="flex flex-col items-center gap-y-4">
+          <div className="flex flex-col items-center justify-center gap-y-4">
             SEBUAH INISIATIF
             <FooterLogo
               logo={
@@ -35,7 +35,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
               }
             />
           </div>
-          <div className="flex flex-col items-center gap-y-4">
+          <div className="flex flex-col items-center justify-center gap-y-4">
             DIBANGUNKAN OLEH
             <FooterLogo
               logo={
@@ -59,7 +59,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
               <img
                 src="/images/logo-mydigital.png"
                 alt="MyDigital"
-                width={200}
+                width={210}
                 height={40}
               />
             }
@@ -70,7 +70,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
               <img
                 src="/images/logo-mynic.png"
                 alt="MyNIC"
-                width={120}
+                width={130}
                 height={40}
               />
             }
@@ -81,7 +81,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
               <img
                 src="/images/logo-cybersecurity-malaysia.png"
                 alt="CyberSecurity Malaysia"
-                width={180}
+                width={200}
                 height={40}
               />
             }
@@ -108,7 +108,7 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
               <img
                 src="/images/logo-mygcc.png"
                 alt="Malaysia Government Call Center"
-                width={100}
+                width={140}
                 height={40}
               />
             }
