@@ -222,7 +222,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 size="medium"
                 id="email"
                 type="email"
-                placeholder="hello@tech.gov.my"
+                placeholder="hello@mygov.gov.my"
                 className="!shadow-sm"
                 {...register('email')}
               >
