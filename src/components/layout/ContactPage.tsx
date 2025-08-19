@@ -487,7 +487,10 @@ export default function ContactPage({ messages }: ContactPageProps) {
             type="submit"
             size="medium"
             className="w-full items-center justify-center !shadow-md"
-            disabled={isSubmitting || (!isFlutterWebView && !turnstileToken)}
+            disabled={
+              isSubmitting ||
+              (!isFlutterWebView && !turnstileToken && process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true')
+            }
           >
             {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>
