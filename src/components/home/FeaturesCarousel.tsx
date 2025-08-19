@@ -6,6 +6,7 @@ import { ChevronRightIcon, ChevronLeftIcon } from '@govtechmy/myds-react/icon';
 import { HomePage as homePageType } from '@/payload-types';
 import Image from 'next/image';
 import { resolveMediaSrc } from '@/lib/media';
+import HorizontalCard from './HorizontalCard';
 
 interface FeaturesCarouselProps {
   features: homePageType['features'];
@@ -14,53 +15,21 @@ interface FeaturesCarouselProps {
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const isMobile = useMediaQuery('(max-width: 640px)');
-  const isLaptop = useMediaQuery('(max-width: 992px)');
-  let itemsPerPage = 4; // default desktop
-
   const safeFeatures = Array.isArray(features) ? features : [];
-
-  if (isMobile) {
-    itemsPerPage = 1.25;
-  } else if (isLaptop) {
-    itemsPerPage = 2;
-  }
-
-  // Allow fixed maxIndex for laptop+
-  const maxClicks = isLaptop || !isMobile ? 4 : Math.max(0, safeFeatures.length - Math.floor(itemsPerPage));
-
-  const nextFeature = () => {
-    if (currentFeatureIndex < maxClicks) {
-      setCurrentFeatureIndex(prev => prev + 1);
-    }
-  };
-
-  const prevFeature = () => {
-    if (currentFeatureIndex > 0) {
-      setCurrentFeatureIndex(prev => prev - 1);
-    }
-  };
-
   const openModal = (index: number) => {
     setCurrentFeatureIndex(index);
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
   return (
-    <section className=" py-16 relative  md:flex md:justify-end">
-      <div className="overflow-hidden relative ">
+    <section className=" flex flex-row justify-center py-12 px-[18px]">
+      <div className=" w-full ">
         {/* Carousel track */}
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(-${currentFeatureIndex * 334}px)`,
-          }}
-        >
+
+        <HorizontalCard>
           {safeFeatures.map((feature, index) => {
             const imageSrc = resolveMediaSrc(feature.image);
             return (
@@ -73,10 +42,10 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
                 }}
               >
                 <div
-                  className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl"
+                  className="flex flex-col relative md:left-40 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl"
                   onClick={() => openModal(index)}
                 >
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className=" absolute inset-0 flex items-center justify-center">
                     <div className="relative w-full h-full bg-white">
                       {imageSrc && (
                         <Image
@@ -93,30 +62,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
               </div>
             );
           })}
-        </div>
-      </div>
-
-      {/* Arrows - bottom right */}
-      <div className="absolute -bottom-6 right-10 flex gap-3">
-        <button
-          onClick={prevFeature}
-          disabled={currentFeatureIndex === 0}
-          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-            currentFeatureIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
-          }`}
-        >
-          <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
-        </button>
-
-        <button
-          onClick={nextFeature}
-          disabled={currentFeatureIndex >= maxClicks}
-          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-            currentFeatureIndex >= maxClicks ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
-          }`}
-        >
-          <ChevronRightIcon className="w-6 h-6 text-gray-800" />
-        </button>
+        </HorizontalCard>
       </div>
 
       {/* Modal Popup */}
@@ -150,8 +96,8 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
                     <Image
                       src={openSrc}
                       alt={safeFeatures[currentFeatureIndex]?.title ?? ''}
-                      width={300}
-                      height={300}
+                      width={222}
+                      height={275}
                       priority={true}
                     />
                   );
