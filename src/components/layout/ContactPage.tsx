@@ -1,6 +1,8 @@
 'use client';
 
 import Hero from '@/components/layout/hero';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useRef, useEffect, useState } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
 import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
@@ -36,151 +38,152 @@ export default function ContactPage({ messages }: ContactPageProps) {
     message: string;
   }>({ type: null, message: '' });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [turnstileToken, setTurnstileToken] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [turnstileWidgetId, setTurnstileWidgetId] = useState<string>('');
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [turnstileVerified, setTurnstileVerified] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isFlutterWebView, setIsFlutterWebView] = useState<boolean>(false);
 
-  useEffect(() => {
-    // Simple Flutter WebView detection
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isWebView = userAgent.includes('flutter') || userAgent.includes('webview');
-    setIsFlutterWebView(isWebView);
+  // useEffect(() => {
+  //   // Simple Flutter WebView detection
+  //   const userAgent = navigator.userAgent.toLowerCase();
+  //   const isWebView = userAgent.includes('flutter') || userAgent.includes('webview');
+  //   setIsFlutterWebView(isWebView);
 
-    if (isWebView) {
-      setTurnstileToken('webview-bypass');
-      setTurnstileVerified(true);
-    }
+  //   if (isWebView) {
+  //     setTurnstileToken('webview-bypass');
+  //     setTurnstileVerified(true);
+  //   }
 
-    // Skip Turnstile if in Flutter WebView
-    if (isFlutterWebView) return;
+  //   // Skip Turnstile if in Flutter WebView
+  //   if (isFlutterWebView) return;
 
-    const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
-    if (!isTurnstileEnabled) {
-      console.log('Turnstile is disabled');
-      return;
-    }
+  //   const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
+  //   if (!isTurnstileEnabled) {
+  //     console.log('Turnstile is disabled');
+  //     return;
+  //   }
 
-    const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
-    const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
+  //   const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
+  //   const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
-    // Skip Turnstile in development or if not properly configured
-    if (isDevelopment || !turnstileSiteKey || turnstileSiteKey === '1x00000000000000000000AA') {
-      console.log('Turnstile skipped:', isDevelopment ? 'development mode' : 'not configured');
-      return;
-    }
+  //   // Skip Turnstile in development or if not properly configured
+  //   if (isDevelopment || !turnstileSiteKey || turnstileSiteKey === '1x00000000000000000000AA') {
+  //     console.log('Turnstile skipped:', isDevelopment ? 'development mode' : 'not configured');
+  //     return;
+  //   }
 
-    // Prevent multiple initializations
-    if (turnstileWidgetId) {
-      return;
-    }
+  //   // Prevent multiple initializations
+  //   if (turnstileWidgetId) {
+  //     return;
+  //   }
 
-    let scriptLoaded = false;
-    let scriptElement: HTMLScriptElement | null = null;
-    let retryCount = 0;
-    const maxRetries = 3;
+  //   let scriptLoaded = false;
+  //   let scriptElement: HTMLScriptElement | null = null;
+  //   let retryCount = 0;
+  //   const maxRetries = 3;
 
-    const loadTurnstile = () => {
-      if (!window.turnstile || turnstileWidgetId) {
-        return;
-      }
+  //   const loadTurnstile = () => {
+  //     if (!window.turnstile || turnstileWidgetId) {
+  //       return;
+  //     }
 
-      try {
-        // Clear any existing widget first
-        const existingWidget = document.querySelector('#turnstile-widget');
-        if (existingWidget) {
-          existingWidget.innerHTML = '';
-        }
+  //     try {
+  //       // Clear any existing widget first
+  //       const existingWidget = document.querySelector('#turnstile-widget');
+  //       if (existingWidget) {
+  //         existingWidget.innerHTML = '';
+  //       }
 
-        const widgetId = window.turnstile.render('#turnstile-widget', {
-          sitekey: turnstileSiteKey,
-          callback: (token: string) => {
-            console.log('Turnstile success, token received');
-            setTurnstileToken(token);
-            setTurnstileVerified(true);
-          },
-          'expired-callback': () => {
-            console.log('Turnstile token expired');
-            setTurnstileToken('');
-            setTurnstileVerified(false);
-            // Reset the widget when token expires
-            if (window.turnstile && turnstileWidgetId) {
-              window.turnstile.reset(turnstileWidgetId);
-            }
-          },
-          'error-callback': () => {
-            console.log('Turnstile error occurred');
-            setTurnstileToken('');
-            setTurnstileVerified(false);
-          },
-          // Add theme and size options for better UX
-          theme: 'light',
-          size: 'normal',
-        });
+  //       const widgetId = window.turnstile.render('#turnstile-widget', {
+  //         sitekey: turnstileSiteKey,
+  //         callback: (token: string) => {
+  //           console.log('Turnstile success, token received');
+  //           setTurnstileToken(token);
+  //           setTurnstileVerified(true);
+  //         },
+  //         'expired-callback': () => {
+  //           console.log('Turnstile token expired');
+  //           setTurnstileToken('');
+  //           setTurnstileVerified(false);
+  //           // Reset the widget when token expires
+  //           if (window.turnstile && turnstileWidgetId) {
+  //             window.turnstile.reset(turnstileWidgetId);
+  //           }
+  //         },
+  //         'error-callback': () => {
+  //           console.log('Turnstile error occurred');
+  //           setTurnstileToken('');
+  //           setTurnstileVerified(false);
+  //         },
+  //         // Add theme and size options for better UX
+  //         theme: 'light',
+  //         size: 'normal',
+  //       });
 
-        setTurnstileWidgetId(widgetId);
-        console.log('Turnstile widget rendered successfully');
-      } catch (error) {
-        console.error('Error rendering Turnstile widget:', error);
-        // Retry if widget rendering fails
-        if (retryCount < maxRetries) {
-          retryCount++;
-          setTimeout(loadTurnstile, 1000 * retryCount);
-        }
-      }
-    };
+  //       setTurnstileWidgetId(widgetId);
+  //       console.log('Turnstile widget rendered successfully');
+  //     } catch (error) {
+  //       console.error('Error rendering Turnstile widget:', error);
+  //       // Retry if widget rendering fails
+  //       if (retryCount < maxRetries) {
+  //         retryCount++;
+  //         setTimeout(loadTurnstile, 1000 * retryCount);
+  //       }
+  //     }
+  //   };
 
-    const initializeTurnstile = () => {
-      if (window.turnstile) {
-        loadTurnstile();
-      } else if (!scriptLoaded) {
-        // Check if script is already loaded
-        const existingScript = document.querySelector('script[src*="turnstile"]');
-        if (existingScript) {
-          scriptLoaded = true;
-          // Wait a bit for the script to initialize
-          setTimeout(loadTurnstile, 100);
-          return;
-        }
+  //   const initializeTurnstile = () => {
+  //     if (window.turnstile) {
+  //       loadTurnstile();
+  //     } else if (!scriptLoaded) {
+  //       // Check if script is already loaded
+  //       const existingScript = document.querySelector('script[src*="turnstile"]');
+  //       if (existingScript) {
+  //         scriptLoaded = true;
+  //         // Wait a bit for the script to initialize
+  //         setTimeout(loadTurnstile, 100);
+  //         return;
+  //       }
 
-        scriptElement = document.createElement('script');
-        scriptElement.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-        scriptElement.async = true;
-        scriptElement.defer = true;
-        scriptElement.onload = () => {
-          scriptLoaded = true;
-          // Add a small delay to ensure Turnstile is fully loaded
-          setTimeout(loadTurnstile, 100);
-        };
-        scriptElement.onerror = () => {
-          console.error('Failed to load Turnstile script');
-        };
-        document.head.appendChild(scriptElement);
-      }
-    };
+  //       scriptElement = document.createElement('script');
+  //       scriptElement.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  //       scriptElement.async = true;
+  //       scriptElement.defer = true;
+  //       scriptElement.onload = () => {
+  //         scriptLoaded = true;
+  //         // Add a small delay to ensure Turnstile is fully loaded
+  //         setTimeout(loadTurnstile, 100);
+  //       };
+  //       scriptElement.onerror = () => {
+  //         console.error('Failed to load Turnstile script');
+  //       };
+  //       document.head.appendChild(scriptElement);
+  //     }
+  //   };
 
-    // Initialize with a longer delay to ensure DOM is ready and component is fully mounted
-    const timer = setTimeout(initializeTurnstile, 300);
+  //   // Initialize with a longer delay to ensure DOM is ready and component is fully mounted
+  //   const timer = setTimeout(initializeTurnstile, 300);
 
-    return () => {
-      clearTimeout(timer);
-      if (turnstileWidgetId && window.turnstile) {
-        try {
-          window.turnstile.remove(turnstileWidgetId);
-        } catch (error) {
-          console.error('Error removing Turnstile widget:', error);
-        }
-      }
-      if (scriptElement && scriptElement.parentNode) {
-        scriptElement.parentNode.removeChild(scriptElement);
-      }
-    };
-  }, [turnstileWidgetId, isFlutterWebView]);
+  //   return () => {
+  //     clearTimeout(timer);
+  //     if (turnstileWidgetId && window.turnstile) {
+  //       try {
+  //         window.turnstile.remove(turnstileWidgetId);
+  //       } catch (error) {
+  //         console.error('Error removing Turnstile widget:', error);
+  //       }
+  //     }
+  //     if (scriptElement && scriptElement.parentNode) {
+  //       scriptElement.parentNode.removeChild(scriptElement);
+  //     }
+  //   };
+  // }, [turnstileWidgetId, isFlutterWebView]);
 
   const {
     register,
@@ -205,13 +208,13 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
   const onSubmit = async (data: ContactFormData) => {
     // Skip Turnstile check for WebView
-    if (!isFlutterWebView && !turnstileToken) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please complete the security verification.',
-      });
-      return;
-    }
+    // if (!isFlutterWebView && !turnstileToken) {
+    //   setSubmitStatus({
+    //     type: 'error',
+    //     message: 'Please complete the security verification.',
+    //   });
+    //   return;
+    // }
 
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
@@ -219,16 +222,16 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
     try {
       // --- Captcha check ---
-      const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
-      const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
-      const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
+      // const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
+      // const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
+      // const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
-      if (isTurnstileEnabled) {
-        if (!isDevelopment && turnstileSiteKey && turnstileSiteKey !== '1x00000000000000000000AA' && !turnstileToken) {
-          setErrorMessage('Please complete the verification before submitting.');
-          return; // stop here, no spinner
-        }
-      }
+      // if (isTurnstileEnabled) {
+      //   if (!isDevelopment && turnstileSiteKey && turnstileSiteKey !== '1x00000000000000000000AA' && !turnstileToken) {
+      //     setErrorMessage('Please complete the verification before submitting.');
+      //     return; // stop here, no spinner
+      //   }
+      // }
 
       const descriptionHtml = `
         <div>
@@ -254,9 +257,9 @@ export default function ContactPage({ messages }: ContactPageProps) {
       formData.append('status', '2');
       formData.append('description', descriptionHtml);
 
-      if (isTurnstileEnabled) {
-        formData.append('cf-turnstile-response', turnstileToken);
-      }
+      // if (isTurnstileEnabled) {
+      //   formData.append('cf-turnstile-response', turnstileToken);
+      // }
 
       if (data.file) {
         formData.append('attachments[]', data.file);
@@ -451,35 +454,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
               </Button>
             </div>
           </div>
-
-          {/* Row 6: Cloudflare Turnstile */}
-          {!isFlutterWebView &&
-            process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
-            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true' &&
-            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
-            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
-                    <svg className="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <label className="text-sm font-medium text-gray-700">Security Verification</label>
-                </div>
-
-                <div className="flex justify-left">
-                  <div id="turnstile-widget"></div>
-                </div>
-
-                {/* Hidden input for Turnstile response */}
-                <input type="hidden" name="cf-turnstile-response" value={turnstileToken} />
-              </div>
-            )}
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-4">
@@ -487,10 +461,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             type="submit"
             size="medium"
             className="w-full items-center justify-center !shadow-md"
-            disabled={
-              isSubmitting ||
-              (!isFlutterWebView && !turnstileToken && process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true')
-            }
+            disabled={isSubmitting}
           >
             {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>

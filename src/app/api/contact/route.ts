@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // --- Turnstile verification helper ---
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
-  const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
   const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
-  if (isDevelopment || !isTurnstileEnabled) {
+  if (isDevelopment) {
     console.log('Turnstile verification skipped in development mode');
     return true;
   }
@@ -43,23 +43,24 @@ export async function POST(req: NextRequest) {
   try {
     // 🔹 Extract Turnstile token from the form submission
     const formData = await req.formData();
-    const turnstileToken = formData.get('cf-turnstile-response')?.toString();
-    const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
 
-    // 🔹 Check if Turnstile is enabled before requiring verification
-    const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
+    // const turnstileToken = formData.get('cf-turnstile-response')?.toString();
+    // const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
 
-    // 🔹 Verify Turnstile before hitting Freshdesk
-    if (isTurnstileEnabled) {
-      if (!turnstileToken) {
-        return NextResponse.json({ error: 'Verification token is required' }, { status: 400 });
-      }
+    // // 🔹 Check if Turnstile is enabled before requiring verification
+    // const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
 
-      const isValidTurnstile = await verifyTurnstile(turnstileToken, ip);
-      if (!isValidTurnstile) {
-        return NextResponse.json({ error: 'Invalid verification token' }, { status: 400 });
-      }
-    }
+    // // 🔹 Verify Turnstile before hitting Freshdesk
+    // if (isTurnstileEnabled) {
+    //   if (!turnstileToken) {
+    //     return NextResponse.json({ error: 'Verification token is required' }, { status: 400 });
+    //   }
+
+    //   const isValidTurnstile = await verifyTurnstile(turnstileToken, ip);
+    //   if (!isValidTurnstile) {
+    //     return NextResponse.json({ error: 'Invalid verification token' }, { status: 400 });
+    //   }
+    // }
 
     formData.delete('cf-turnstile-response'); // Remove Turnstile token from form data
 
