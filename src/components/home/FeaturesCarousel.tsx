@@ -123,7 +123,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={closeModal}>
           <div
-            className="relative flex flex-col md:flex-row bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
+            className="relative flex flex-col md:flex-row bg-white rounded-3xl shadow-xl p-4 max-w-[800px] w-full mx-4"
             onClick={e => e.stopPropagation()}
           >
             <button
@@ -142,29 +142,30 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
               </svg>
             </button>
 
-            <div className="flex justify-center">
-              <div className="relative w-[200px] h-[247.08px]">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-8">
+              <div className="">
                 {(() => {
                   const openSrc = resolveMediaSrc(safeFeatures[currentFeatureIndex]?.open);
                   return (
-                    openSrc && (
-                      <Image
-                        src={openSrc}
-                        alt={safeFeatures[currentFeatureIndex]?.title ?? ''}
-                        fill
-                        className="object-contain"
-                      />
-                    )
+                    <Image
+                      src={openSrc}
+                      alt={safeFeatures[currentFeatureIndex]?.title ?? ''}
+                      width={300}
+                      height={300}
+                      priority={true}
+                    />
                   );
                 })()}
               </div>
-            </div>
-            <div className="flex-auto">
-              <div className="p-6">
+
+              <div className="">
                 <h2 className="text-2xl font-semibold mb-4">{safeFeatures[currentFeatureIndex]?.title ?? ''}</h2>
                 <p className="mt-4 text-gray-700 max-w-sm">{safeFeatures[currentFeatureIndex]?.desc ?? ''}</p>
               </div>
             </div>
+
+            <div className="flex justify-center"></div>
+            <div className="flex-auto"></div>
           </div>
         </div>
       )}
