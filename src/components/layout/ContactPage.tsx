@@ -14,8 +14,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema, ContactFormData } from '@/lib/contactValidation';
 
 // Global Turnstile state to prevent multiple instances
-let turnstileLoaded = false;
-let turnstileWidgets: any[] = [];
+const turnstileLoadedRef = { current: false };
+const turnstileWidgets: any[] = [];
 
 // Turnstile widget component
 function TurnstileWidget({ onVerify }: { onVerify: (token: string) => void }) {
@@ -28,8 +28,8 @@ function TurnstileWidget({ onVerify }: { onVerify: (token: string) => void }) {
 
     const loadTurnstile = async () => {
       // Load script only once globally
-      if (!turnstileLoaded) {
-        turnstileLoaded = true;
+      if (!turnstileLoadedRef.current) {
+        turnstileLoadedRef.current = true;
 
         return new Promise<void>(resolve => {
           const script = document.createElement('script');
@@ -73,6 +73,7 @@ function TurnstileWidget({ onVerify }: { onVerify: (token: string) => void }) {
             (window as any).turnstile.remove(widget);
           } catch (e) {
             // Widget might already be removed
+            console.error(e);
           }
         }
       }
