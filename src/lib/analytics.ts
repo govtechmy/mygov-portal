@@ -1,7 +1,7 @@
 declare global {
   interface Window {
     tb?: {
-      track: (eventName: string, properties: Record<string, any>) => void;
+      track: (eventName: string, properties: AnalyticsEvent) => void;
     };
   }
 }
@@ -18,7 +18,7 @@ export function generateSessionId(): string {
   return `sess_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
 
-export function trackEvent(eventName: string, customPayload: Record<string, any> = {}): void {
+export function trackEvent(eventName: string, customPayload: Record<string, unknown> = {}): void {
   if (typeof window === 'undefined' || !window.tb) {
     console.warn('Flock.js not loaded, cannot track event:', eventName);
     return;
@@ -43,25 +43,25 @@ export function trackEvent(eventName: string, customPayload: Record<string, any>
   window.tb.track(eventName, event);
 }
 
-export function trackPageView(customPayload: Record<string, any> = {}): void {
+export function trackPageView(customPayload: Record<string, unknown> = {}): void {
   trackEvent('page_view', customPayload);
 }
 
-export function trackButtonClick(buttonName: string, customPayload: Record<string, any> = {}): void {
+export function trackButtonClick(buttonName: string, customPayload: Record<string, unknown> = {}): void {
   trackEvent('button_click', {
     button_name: buttonName,
     ...customPayload,
   });
 }
 
-export function trackFormSubmission(formName: string, customPayload: Record<string, any> = {}): void {
+export function trackFormSubmission(formName: string, customPayload: Record<string, unknown> = {}): void {
   trackEvent('form_submission', {
     form_name: formName,
     ...customPayload,
   });
 }
 
-export function trackSearch(query: string, customPayload: Record<string, any> = {}): void {
+export function trackSearch(query: string, customPayload: Record<string, unknown> = {}): void {
   trackEvent('search', {
     search_query: query,
     ...customPayload,

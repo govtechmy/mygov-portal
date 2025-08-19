@@ -7,7 +7,7 @@ import { getMessages, type Locale } from '@/lib/i18n';
 import LocaleSwitcher from './locale-switcher';
 import ModalWindow from './ModalWindow';
 
-import { useEffect, useState } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
+import { useEffect } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
 
 interface NavbarComponentProps {
   locale: Locale;

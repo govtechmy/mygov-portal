@@ -1,6 +1,6 @@
 'use client';
 
-import { Footer, SiteInfo, FooterSection, SiteLink, FooterLogo } from '@govtechmy/myds-react/footer';
+import { Footer, SiteInfo, FooterSection, FooterLogo } from '@govtechmy/myds-react/footer';
 import { FacebookIcon, TwitterXIcon, InstagramIcon } from '@govtechmy/myds-react/icon';
 import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
