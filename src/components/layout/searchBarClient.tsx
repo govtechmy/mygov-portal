@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ChevronRightIcon } from '@govtechmy/myds-react/icon';
 import { Pill } from '@govtechmy/myds-react/pill';
@@ -28,29 +28,35 @@ export default function SearchBarClient() {
   const hasQuery = query.length > 0;
   const router = useRouter();
   const { locale } = useParams<{ locale: string }>();
+  const debounceMs = 300;
+  const timerRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     let isActive = true;
 
-    const run = async () => {
-      if (!query) {
+    // Clear any pending debounce
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+
+    // Debounce search and enforce a minimum length to avoid noisy queries
+    timerRef.current = window.setTimeout(async () => {
+      if (!isActive) return;
+      if (!query || query.trim().length < 2) {
         setResults([]);
         return;
       }
       try {
-        const res = await searchBarServer(query);
+        const res = await searchBarServer(query.trim());
         if (!isActive) return;
-        // Payload returns PaginatedDocs<Blog>
         setResults(res?.docs ?? []);
       } catch {
         if (!isActive) return;
         setResults([]);
       }
-    };
+    }, debounceMs);
 
-    run();
     return () => {
       isActive = false;
+      if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, [query]);
 
