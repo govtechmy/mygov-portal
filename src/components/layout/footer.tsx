@@ -18,7 +18,7 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
     <Footer>
       <div className="flex flex-col items-center w-full">
         <div className="flex flex-row justify-center w-full">
-          <div className="flex flex-col items-center justify-center gap-y-4">
+          <div className="flex flex-col items-center justify-center gap-y-4 mb-5">
             SEBUAH INISIATIF
             <FooterLogo
               logo={<Image src="/images/logo-govtech.png" alt="GovTech Malaysia" width={240} height={85} />}
@@ -27,7 +27,14 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
           <div className="flex flex-col items-center justify-center gap-y-4">
             DIBANGUNKAN OLEH
             <FooterLogo
-              logo={<Image src="/images/logo-kementerian-digital.png" alt="GovTech Malaysia" width={150} height={92} />}
+              logo={
+                <Image
+                  src="/images/logo-kementerian-digital.png"
+                  alt="Logo Kementerian Digital"
+                  width={150}
+                  height={92}
+                />
+              }
             />
           </div>
         </div>
