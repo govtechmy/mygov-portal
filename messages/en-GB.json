@@ -86,6 +86,20 @@
       "buttonapple": "App Store",
       "buttongoogle": "Google Play",
       "inisiatif": "An initiative of"
+    },
+    "aboutsection": {
+      "mygovintro": "What is MyGOV Malaysia?",
+      "body1": "MyGOV Malaysia is an application developed as a one-stop reference",
+      "body2": "center for public services offered by the Government of Malaysia.",
+      "body3": "Through MyGOV Malaysia, you can perform checks, submit applications,",
+      "body4": "receive notifications, as well as access other features that will be",
+      "body5": "introduced in the future."
+    },
+    "featurestilessection": {
+      "header": "Seamless access to government services"
+    },
+    "faqsection": {
+      "header": "Frequently Asked Questions (FAQ)"
     }
   },
 
