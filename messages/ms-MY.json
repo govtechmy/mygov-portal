@@ -71,6 +71,21 @@
       "lastUpdated": "Terakhir dikemas kini: 11 Mac 2025"
     }
   },
+
+  "homepg": {
+    "herosection": {
+      "mygovmy": "MYGOV MALAYSIA",
+      "header1": "Aplikasi Pusat Sehenti",
+      "header2": "Digital Perkhidmatan",
+      "header3": "Kerajaan",
+      "parag": "   Menyatukan Perkhidmatan Kerajaan dalam Satu Aplikasi",
+      "buttondownload": "Muat Turun di",
+      "buttonapple": "App Store",
+      "buttongoogle": "Google Play",
+      "inisiatif": "Sebuah inisiatif"
+    }
+  },
+
   "contactpg": {
     "contactUs": "Hubungi Kami",
     "category": "Kategori",

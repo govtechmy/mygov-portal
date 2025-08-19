@@ -2,20 +2,10 @@
 
 import Hero from '@/components/layout/hero';
 import { Button } from '@govtechmy/myds-react/button';
-import {
-  ChevronDownIcon,
-  EmailIcon,
-  UploadIcon,
-} from '@govtechmy/myds-react/icon';
+import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
 import { Label } from '@govtechmy/myds-react/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@govtechmy/myds-react/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@govtechmy/myds-react/select';
 import { TextArea } from '@govtechmy/myds-react/textarea';
 import { useState } from 'react';
 
@@ -30,17 +20,15 @@ export default function ContactPage({ messages }: ContactPageProps) {
       <form className="mx-auto flex max-w-[876px] flex-col items-center justify-center gap-12 px-4 py-20 font-inter">
         <div className="flex w-full flex-col gap-6">
           <div className="flex w-full flex-col gap-1.5">
-            <Label className="font-inter text-base">
-              {messages.contactpg.category}
-            </Label>
+            <Label className="font-inter text-base">{messages.contactpg.category}</Label>
             <DropdownCategory messages={messages} />
           </div>
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.name}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="name"
+              type="text"
               placeholder={messages.contactpg.name}
               className="!shadow-sm"
               required
@@ -50,8 +38,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Label>{messages.contactpg.ic}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="icNumber"
+              type="text"
               placeholder="000000-00-0000"
               className="!shadow-sm"
               required
@@ -61,8 +49,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Label>{messages.contactpg.address}</Label>
             <Input
               size="medium"
-              id="email"
-              type="email"
+              id="address"
+              type="text"
               placeholder={messages.contactpg.address}
               className="!shadow-sm"
               required
@@ -78,7 +66,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   </InputAddon>
                 }
                 size="medium"
-                id="email"
+                id="phoneNumber"
                 type="number"
                 placeholder="12 345 6789"
                 className="!shadow-sm"
@@ -106,6 +94,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <TextArea
               placeholder={messages.contactpg.suggestionPlaceholder}
               size="medium"
+              name="suggestion"
               className="!shadow-sm"
             />
           </div>
@@ -126,10 +115,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           </div>
         </div>
         <div className="flex w-full flex-col items-center justify-center gap-4">
-          <Button
-            size="medium"
-            className="w-full items-center justify-center !shadow-md"
-          >
+          <Button size="medium" className="w-full items-center justify-center !shadow-md">
             {messages.contactpg.send}
           </Button>
         </div>
@@ -168,9 +154,7 @@ function DropdownPhoneNo() {
       <SelectTrigger className=" flex items-center justify-between">
         <span>{selectedCode}</span>
         <ChevronDownIcon
-          className={`transform transition-transform duration-100 ease-out ${
-            open ? 'rotate-180' : 'rotate-0'
-          }`}
+          className={`transform transition-transform duration-100 ease-out ${open ? 'rotate-180' : 'rotate-0'}`}
         />
       </SelectTrigger>
       <SelectContent className="p-0">
