@@ -34,8 +34,8 @@ export default function FeaturesTilesSection({ leftItems, rightItems }: Features
           <Image
             src="/home/third_section/phone.png"
             alt="MyGOV Malaysia App"
-            width={300}
-            height={600}
+            width={291.12}
+            height={704}
             className="object-cover"
           />
 

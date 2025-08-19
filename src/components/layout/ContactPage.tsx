@@ -1,6 +1,7 @@
 'use client';
 
 import Hero from '@/components/layout/hero';
+import { useRef } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
 import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
@@ -9,20 +10,134 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { TextArea } from '@govtechmy/myds-react/textarea';
 import { useState } from 'react';
 
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { contactSchema, ContactFormData } from '@/lib/contactValidation';
+
 interface ContactPageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
 }
 
 export default function ContactPage({ messages }: ContactPageProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      category: '',
+      name: '',
+      ic: '',
+      address: '',
+      phone: '',
+      phoneCode: '+60',
+      email: '',
+      suggestion: '',
+      // file: undefined,
+    },
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const descriptionHtml = `
+        <div>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Phone:</strong> ${data.phoneCode} ${data.phone}</p>
+          <p><strong>IC:</strong> ${data.ic}</p>
+          <p><strong>Address:</strong> ${data.address}</p>
+          <p><strong>Category:</strong> ${data.category}</p>
+          <p><strong>Suggestion:</strong> ${data.suggestion}</p>
+        </div>
+      `
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      const freshdeskData = {
+        name: data.name,
+        email: data.email,
+        phone: `${data.phoneCode}${data.phone}`,
+        subject: `${data.category} - ${data.name}`,
+        source: 2,
+        priority: 1,
+        status: 2,
+        description: descriptionHtml,
+      };
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(freshdeskData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Your message has been submitted successfully!',
+        });
+        reset();
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: result.error || 'Failed to submit your message. Please try again.',
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div>
       <Hero title={messages.contactpg.contactUs}></Hero>
-      <form className="mx-auto flex max-w-[876px] flex-col items-center justify-center gap-12 px-4 py-20 font-inter">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mx-auto flex max-w-[876px] flex-col items-center justify-center gap-12 px-4 py-20 font-inter"
+      >
+        {submitStatus.type && (
+          <div
+            className={`w-full p-4 rounded-md ${
+              submitStatus.type === 'success'
+                ? 'bg-green-50 text-green-800 border border-green-200'
+                : 'bg-red-50 text-red-800 border border-red-200'
+            }`}
+          >
+            {submitStatus.message}
+          </div>
+        )}
         <div className="flex w-full flex-col gap-6">
           <div className="flex w-full flex-col gap-1.5">
-            <Label className="font-inter text-base">{messages.contactpg.category}</Label>
-            <DropdownCategory messages={messages} />
+            <Label>{messages.contactpg.category}</Label>
+            <Controller
+              control={control}
+              name="category"
+              render={({ field }) => <DropdownCategory messages={messages} {...field} />}
+            />
+            {errors.category && <span className="text-red-600 text-sm">{errors.category.message}</span>}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.name}</Label>
             <Input
@@ -31,47 +146,65 @@ export default function ContactPage({ messages }: ContactPageProps) {
               type="text"
               placeholder={messages.contactpg.name}
               className="!shadow-sm"
-              required
+              {...register('name')}
             />
+            {errors.name && <span className="text-red-600 text-sm">{errors.name.message}</span>}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.ic}</Label>
             <Input
               size="medium"
-              id="icNumber"
+              id="ic"
               type="text"
               placeholder="000000-00-0000"
               className="!shadow-sm"
-              required
+              {...register('ic', {
+                onChange: e => {
+                  let value = e.target.value.replace(/\D/g, '');
+                  if (value.length > 6) value = value.slice(0, 6) + '-' + value.slice(6);
+                  if (value.length > 9) value = value.slice(0, 9) + '-' + value.slice(9);
+                  e.target.value = value;
+                },
+              })}
             />
+            {errors.ic && <span className="text-red-600 text-sm">{errors.ic.message}</span>}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.address}</Label>
-            <Input
-              size="medium"
-              id="address"
-              type="text"
+            <TextArea
               placeholder={messages.contactpg.address}
+              size="medium"
               className="!shadow-sm"
-              required
+              {...register('address')}
             />
+            {errors.address && <span className="text-red-600 text-sm">{errors.address.message}</span>}
           </div>
+
           <div className="flex gap-4">
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.phone}</Label>
-              <Input
-                prepend={
-                  <InputAddon className="!p-0 !border-r-0">
-                    <DropdownPhoneNo />
-                  </InputAddon>
-                }
-                size="medium"
-                id="phoneNumber"
-                type="number"
-                placeholder="12 345 6789"
-                className="!shadow-sm"
-                required
+              <Controller
+                control={control}
+                name="phoneCode"
+                render={({ field }) => (
+                  <Input
+                    prepend={
+                      <InputAddon className="!p-0 !border-r-0">
+                        <DropdownPhoneNo {...field} />
+                      </InputAddon>
+                    }
+                    size="medium"
+                    id="phone"
+                    type="tel"
+                    placeholder="12 345 6789"
+                    className="!shadow-sm"
+                    {...register('phone')}
+                  />
+                )}
               />
+              {errors.phone && <span className="text-red-600 text-sm">{errors.phone.message}</span>}
             </div>
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.email}</Label>
@@ -79,32 +212,43 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 size="medium"
                 id="email"
                 type="email"
-                placeholder="hello@tech.gov.my"
+                placeholder={messages.contactpg.emailPlaceholder}
                 className="!shadow-sm"
-                required
+                {...register('email')}
               >
                 <InputIcon position="left">
                   <EmailIcon />
                 </InputIcon>
               </Input>
+              {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
             </div>
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.suggestion}</Label>
             <TextArea
               placeholder={messages.contactpg.suggestionPlaceholder}
               size="medium"
-              name="suggestion"
               className="!shadow-sm"
+              {...register('suggestion')}
             />
+            {errors.suggestion && <span className="text-red-600 text-sm">{errors.suggestion.message}</span>}
           </div>
+
+          {/* original muat turun
           <div className="border p-4 !shadow-sm rounded-md flex items-center">
-            <div className="flex-grow flex flex-col ">
+            <div className="flex-grow flex flex-col">
               <div>{messages.contactpg.upload}</div>
               <div className="text-[#6B6B74]">
                 <div>{messages.contactpg.filetype}</div>
                 <div>{messages.contactpg.maxsize}: 25MB</div>
               </div>
+              <input type="file" {...register('file')} />
+              {errors.file && (
+                <span className="text-red-600 text-sm">
+                  {errors.file.message as string}
+                </span>
+              )}
             </div>
             <div>
               <Button variant="default-outline" size="medium">
@@ -112,11 +256,54 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 {messages.contactpg.upload2}
               </Button>
             </div>
-          </div>
+          </div> */}
+
+          {/* updated muat turun
+          <div className="border p-4 !shadow-sm rounded-md flex items-center">
+            <div className="flex-grow flex flex-col">
+              <div>{messages.contactpg.upload}</div>
+              <div className="text-[#6B6B74]">
+                <div>{messages.contactpg.filetype}</div>
+                <div>{messages.contactpg.maxsize}: 25MB</div>
+              </div>
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                {...register("file", {
+                  onChange: (e) => e.target.files?.[0] ?? undefined, 
+                })}
+              />
+
+              {errors.file && (
+                <span className="text-red-600 text-sm">
+                  {errors.file.message as string}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <Button
+                variant="default-outline"
+                size="medium"
+                type="button"
+                onClick={() => fileInputRef.current?.click()} 
+              >
+                <UploadIcon />
+                {messages.contactpg.upload2}
+              </Button>
+            </div>
+          </div> */}
         </div>
+
         <div className="flex w-full flex-col items-center justify-center gap-4">
-          <Button size="medium" className="w-full items-center justify-center !shadow-md">
-            {messages.contactpg.send}
+          <Button
+            type="submit"
+            size="medium"
+            className="w-full items-center justify-center !shadow-md"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>
         </div>
       </form>
@@ -124,8 +311,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
   );
 }
 
-function DropdownPhoneNo() {
-  const [selectedCode, setSelectedCode] = useState('+60');
+function DropdownPhoneNo({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   const countries = [
     { code: '+60', name: 'Malaysia' },
@@ -143,16 +329,9 @@ function DropdownPhoneNo() {
   ];
 
   return (
-    <Select
-      size="small"
-      variant="ghost"
-      value={selectedCode}
-      onValueChange={setSelectedCode}
-      open={open}
-      onOpenChange={setOpen}
-    >
-      <SelectTrigger className=" flex items-center justify-between">
-        <span>{selectedCode}</span>
+    <Select size="small" variant="ghost" value={value} onValueChange={onChange} open={open} onOpenChange={setOpen}>
+      <SelectTrigger className="flex items-center justify-between">
+        <span>{value}</span>
         <ChevronDownIcon
           className={`transform transition-transform duration-100 ease-out ${open ? 'rotate-180' : 'rotate-0'}`}
         />
@@ -168,9 +347,16 @@ function DropdownPhoneNo() {
   );
 }
 
-function DropdownCategory({ messages }: ContactPageProps) {
+function DropdownCategory({
+  messages,
+  value,
+  onChange,
+}: ContactPageProps & {
+  value: string;
+  onChange: (value: string) => void;
+}) {
   return (
-    <Select size="medium" variant="outline">
+    <Select size="medium" variant="outline" value={value} onValueChange={onChange}>
       <SelectTrigger className="w-full justify-between">
         <SelectValue placeholder={messages.contactpg.chooseCategory} />
       </SelectTrigger>

@@ -83,6 +83,20 @@
       "buttonapple": "App Store",
       "buttongoogle": "Google Play",
       "inisiatif": "Sebuah inisiatif"
+    },
+    "aboutsection": {
+      "mygovintro": "Apa itu MyGOV Malaysia?",
+      "body1": "MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat",
+      "body2": "rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan",
+      "body3": "Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,",
+      "body4": "membuat permohonan, menerima notifikasi di samping ciri-ciri lain",
+      "body5": "yang bakal dilancarkan."
+    },
+    "featurestilessection": {
+      "header": "Akses lebih mudah kepada perkhidmatan kerajaan"
+    },
+    "faqsection": {
+      "header": "Soalan Lazim (FAQ)"
     }
   },
 
@@ -96,6 +110,7 @@
     "email": "E-mel",
     "suggestion": "Cadangan",
     "suggestionPlaceholder": "Kongsi cadangan atau maklum balas anda",
+    "emailPlaceholder": "hello@mygov.gov.my",
     "upload": "Muat Naik Fail",
     "filetype": "Jenis fail: JPG, PNG & PDF",
     "maxsize": "Saiz fail maksimum",

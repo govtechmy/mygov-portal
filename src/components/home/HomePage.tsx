@@ -13,7 +13,7 @@ interface HomePageProps {
 
 export default function HomePage({ messages, data }: HomePageProps) {
   return (
-    <div className="mx-auto px-[18px] sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] py-16">
+    <div>
       {/* Hidden SPLaSK Contact Details tag for crawler detection */}
       {/*<div
          {...{ "splwpk-contact-details": "splwpk-contact-details" }}
