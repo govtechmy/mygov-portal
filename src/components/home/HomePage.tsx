@@ -24,12 +24,15 @@ export default function HomePage({ messages }: HomePageProps) {
        </div>*/}
       {/* pass messages here for client component*/}
       <HeroSection messages={messages} />
-      <AboutSection />
+      {/* pass messages here for client component*/}
+      <AboutSection messages={messages} />
+      {/* payload data */}
       <FeaturesTilesSection
         leftItems={data.leftItems}
         rightItems={data.rightItems}
       />
       <FeaturesCarousel features={data.features} />
+      {/* payload data */}
       <FAQSection items={data.faq} />
     </div>
   );

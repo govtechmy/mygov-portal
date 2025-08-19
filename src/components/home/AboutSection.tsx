@@ -1,6 +1,10 @@
 'use client';
 import Image from 'next/image';
 
+interface AboutSectionProps {
+  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+}
+
 export default function AboutSection() {
   return (
     <section className="p-8 max-w-[1000px] mx-auto">
