@@ -10,17 +10,19 @@ import type { PaginatedDocs } from 'payload';
 
 interface ResultMapProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+  initialDocs?: Blog[];
+  initialTotal?: number;
 }
 
-export default function ResultMap({ messages }: ResultMapProps) {
+export default function ResultMap({ messages, initialDocs, initialTotal }: ResultMapProps) {
   const context = useContext(SearchContext);
   if (!context) throw new Error('SearchContext must be used within a SearchProvider');
   const router = useRouter();
   const { locale } = useParams<{ locale: string }>();
   const searchParams = useSearchParams();
   const [page, setPage] = useState(1);
-  const [items, setItems] = useState<Blog[]>([]);
-  const [total, setTotal] = useState(0);
+  const [items, setItems] = useState<Blog[]>(initialDocs ?? []);
+  const [total, setTotal] = useState(initialTotal ?? (initialDocs ? initialDocs.length : 0));
 
   const limit = 12;
 
@@ -38,6 +40,12 @@ export default function ResultMap({ messages }: ResultMapProps) {
   useEffect(() => {
     let isActive = true;
     const run = async () => {
+      // Use server-fetched initial results for the default view (page 1, show all)
+      if (showAll && pageParam === 1 && initialDocs && initialDocs.length > 0) {
+        setItems(initialDocs);
+        setTotal(initialTotal ?? initialDocs.length);
+        return;
+      }
       const res = (await searchResultMap(q, type, from, to, pageParam)) as PaginatedDocs<Blog>;
       if (!isActive) return;
       setItems(res?.docs ?? []);
@@ -45,7 +53,6 @@ export default function ResultMap({ messages }: ResultMapProps) {
       // fall back to docs length if unavailable
       // @ts-expect-error allow different shapes
       setTotal(res?.totalDocs ?? res?.total ?? (res?.docs ? res.docs.length : 0));
-      console.log(res);
     };
     run();
     return () => {
