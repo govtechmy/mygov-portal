@@ -2,7 +2,7 @@
 
 import { Navbar, NavbarLogo, NavbarMenu, NavbarMenuItem, NavbarAction } from '@govtechmy/myds-react/navbar';
 import { Button } from '@govtechmy/myds-react/button';
-import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
+// import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon'; // Temporarily disable dark mode - use default light mode - removing bad setState error
 import { useTheme } from '@/components/providers/theme-provider';
 import { getMessages, type Locale } from '@/lib/i18n';
 import LocaleSwitcher from './locale-switcher';
@@ -16,14 +16,15 @@ interface NavbarComponentProps {
 
 export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const messages = getMessages(locale);
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme(); // Comment for now since not using i18n
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   useEffect(() => {
     setTheme('light');
   }, [setTheme]); // default light mode using useEffect, preventing errors
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  // const toggleTheme = () => {
+  //   setTheme(theme === 'light' ? 'dark' : 'light');
+  // };
 
   return (
     <>

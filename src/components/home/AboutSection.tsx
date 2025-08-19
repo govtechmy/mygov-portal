@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { HomePage as homePageType } from '@/payload-types';
+// import { HomePage as homePageType } from '@/payload-types'; // Comment since not used for now to avoid lint error
 
 export default function AboutSection() {
   return (
