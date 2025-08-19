@@ -12,7 +12,7 @@ interface HomePageProps {
 
 export default function HomePage({ messages }: HomePageProps) {
   return (
-    <div className="mx-auto px-[18px] sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] py-16">
+    <div>
       {/* Hidden SPLaSK Contact Details tag for crawler detection */}
       {/*<div
          {...{ "splwpk-contact-details": "splwpk-contact-details" }}
@@ -24,13 +24,15 @@ export default function HomePage({ messages }: HomePageProps) {
        </div>*/}
       {/* pass messages here for client component*/}
       <HeroSection messages={messages} />
-      {/* pass messages here for client component*/}
-      <AboutSection messages={messages} />
-      {/* payload data */}
-      <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
-      <FeaturesCarousel features={data.features} />
-      {/* payload data */}
-      <FAQSection items={data.faq} />
+      <div className="mx-auto px-[18px] sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] py-16 !border-x-[1px] !border-[#F4F4F5]">
+        {/* pass messages here for client component*/}
+        <AboutSection messages={messages} />
+        {/* payload data */}
+        <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
+        <FeaturesCarousel features={data.features} />
+        {/* payload data */}
+        <FAQSection items={data.faq} />
+      </div>
     </div>
   );
 }

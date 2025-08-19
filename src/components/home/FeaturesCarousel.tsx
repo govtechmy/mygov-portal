@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import useMediaQuery from '@/lib/mediaQuery';
 import { ChevronRightIcon, ChevronLeftIcon } from '@govtechmy/myds-react/icon';
+import Image from 'next/image';
 
 export interface FeatureItem {
   image: string;
@@ -108,11 +109,13 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
         {/* Mobile + Tablet View (scrollable) */}
         <div ref={carouselRefMobile} className="xl:hidden flex flex-row gap-6 overflow-x-auto">
           {features.map((feature, index) => (
-            <img
+            <Image
+              width={314}
+              height={354}
               key={feature.title}
               src={feature.image}
               alt={feature.title}
-              className="w-[314px] h-[354px] border-solid border-8 border-[#E4E4E7] flex-shrink-0 cursor-pointer"
+              className="border-solid border-8 border-[#E4E4E7] flex-shrink-0 cursor-pointer"
               onClick={() => openModal(index)}
             />
           ))}
@@ -128,7 +131,9 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             }}
           >
             {features.map((feature, index) => (
-              <img
+              <Image
+                width={314}
+                height={354}
                 key={feature.title}
                 src={feature.image}
                 alt={feature.title}
@@ -179,7 +184,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             </button>
 
             <div className="flex justify-center">
-              <img
+              <Image
                 src={features[currentIndex].open}
                 alt={features[currentIndex].title}
                 className="w-[200px] h-[247.08px]"
