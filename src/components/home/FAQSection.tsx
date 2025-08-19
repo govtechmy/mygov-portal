@@ -16,7 +16,7 @@ export default function FAQSection({ items }: FAQSectionProps) {
   };
 
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8">
+    <section id="faq" className="max-w-4xl mx-auto px-4 py-8">
       <h2 className="text-3xl font-semibold mb-6">Soalan Lazim (FAQ)</h2>
       <div className="space-y-4">
         {(items as Faq[] | undefined)?.map((item, index) => (
