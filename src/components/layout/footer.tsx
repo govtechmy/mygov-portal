@@ -67,27 +67,37 @@ export default function FooterComponent({}: FooterComponentProps) {
       </FooterSection>
 
       <FooterSection className="text-txt-black-500 md:max-lg:gap-4.5 mx-auto flex w-full max-w-[1000px] max-lg:flex-col justify-between border-none text-sm max-md:gap-4 lg:gap-6">
-        <div className="flex gap-3 max-lg:flex-col ">
-          <p>© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
-          <p className="text-[#D4D4D8] max-lg:hidden">|</p>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
+            <p className="text-xs md:text-sm">© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
 
-          <div className="flex flex-grow gap-3 md:pb-5 items-center">
-            <SiteLink>Disclaimer</SiteLink>
-            <SiteLink>Privacy Policy</SiteLink>
+            <div className="flex gap-3 items-center">
+              <SiteLink className="text-xs md:text-sm">Disclaimer</SiteLink>
+              <SiteLink className="text-xs md:text-sm">Privacy Policy</SiteLink>
+            </div>
           </div>
-          <div className=" flex flex-row gap-3">
-            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
-              <FacebookIcon scale={40} className=" text-[#2563EB]" />
+          <div className="flex flex-row gap-3">
+            <Link
+              href=""
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <FacebookIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
-            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
-              <TwitterXIcon scale={40} className=" text-[#2563EB]" />
+            <Link
+              href=""
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <TwitterXIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
-            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
-              <InstagramIcon scale={40} className=" text-[#2563EB]" />
+            <Link
+              href=""
+              className=" bg-[#F1F5FF] p-2 rounded-full w-8 h-8 md:w-10 md:h-10 flex justify-center items-center hover:shadow-md hover:shadow-gray-300 hover:bg-gray-200"
+            >
+              <InstagramIcon scale={32} className="md:scale-40 text-[#2563EB]" />
             </Link>
           </div>
         </div>
-        <p>Last updated: 15th Aug 2025</p>
+        <p className="text-xs md:text-sm">Last updated: 15th Aug 2025</p>
       </FooterSection>
     </Footer>
   );
