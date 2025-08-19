@@ -1,18 +1,87 @@
 'use client';
 
 import Hero from '@/components/layout/hero';
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
 import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
 import { Label } from '@govtechmy/myds-react/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@govtechmy/myds-react/select';
 import { TextArea } from '@govtechmy/myds-react/textarea';
-import { useState } from 'react';
 
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactSchema, ContactFormData } from '@/lib/contactValidation';
+
+// Global Turnstile state to prevent multiple instances
+const turnstileLoadedRef = { current: false };
+const turnstileWidgets: any[] = [];
+
+// Turnstile widget component
+function TurnstileWidget({ onVerify }: { onVerify: (token: string) => void }) {
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const [isRendered, setIsRendered] = useState(false);
+
+  useEffect(() => {
+    // Prevent multiple renders
+    if (isRendered) return;
+
+    const loadTurnstile = async () => {
+      // Load script only once globally
+      if (!turnstileLoadedRef.current) {
+        turnstileLoadedRef.current = true;
+
+        return new Promise<void>(resolve => {
+          const script = document.createElement('script');
+          script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+          script.async = true;
+          script.defer = true;
+
+          script.onload = () => {
+            resolve();
+          };
+
+          document.head.appendChild(script);
+        });
+      }
+      return Promise.resolve();
+    };
+
+    const renderWidget = async () => {
+      await loadTurnstile();
+
+      if (turnstileRef.current && (window as any).turnstile && !isRendered) {
+        const widget = (window as any).turnstile.render(turnstileRef.current, {
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
+          callback: onVerify,
+          theme: 'light',
+        });
+
+        turnstileWidgets.push(widget);
+        setIsRendered(true);
+      }
+    };
+
+    renderWidget();
+
+    return () => {
+      // Cleanup widget when component unmounts
+      if (isRendered && turnstileWidgets.length > 0) {
+        const widget = turnstileWidgets.pop();
+        if (widget && (window as any).turnstile) {
+          try {
+            (window as any).turnstile.remove(widget);
+          } catch (e) {
+            // Widget might already be removed
+            console.error(e);
+          }
+        }
+      }
+    };
+  }, [onVerify, isRendered]);
+
+  return <div ref={turnstileRef} className="cf-turnstile" />;
+}
 
 interface ContactPageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
@@ -183,6 +252,15 @@ export default function ContactPage({ messages }: ContactPageProps) {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    // Check if Turnstile is verified
+    if (!turnstileToken) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please complete the security verification.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
     setErrorMessage(null);
@@ -240,6 +318,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
         });
         setErrorMessage('');
         reset();
+        setTurnstileToken(''); // Reset Turnstile token
       } else {
         setSubmitStatus({
           type: 'error',
@@ -448,7 +527,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             type="submit"
             size="medium"
             className="w-full items-center justify-center !shadow-md"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !turnstileToken}
           >
             {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>
