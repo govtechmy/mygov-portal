@@ -31,13 +31,13 @@ export default function ModalWindow({ downloads, messages }: ModalWindowProps) {
           <DialogDescription></DialogDescription>
         </DialogHeader>
 
-        <DialogContent className="flex flex-row flex-wrap w-full items-center justify-center">
-          <div className="flex-[200px] w-[400px]">
-            <div className="font-semibold text-xl text-center pb-6">
-              Muat turun aplikasi MyGov Malaysia melalui platform berikut
-            </div>
+        <DialogContent className="flex flex-col flex-wrap w-full items-center justify-center">
+          <div className="font-semibold text-xl text-center pt-12 pb-6 w-[400px]">
+            Muat turun aplikasi MyGov Malaysia melalui platform berikut
+          </div>
 
-            <div className="justify-center items-center flex flex-col gap-2">
+          <div className="flex flex-row items-start justify-center gap-6 mb-4">
+            <div className="justify-center items-center flex flex-col gap-2 pt-2">
               <Link href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525">
                 <div className="flex bg-black h-[35px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
                   <Image src="/home/first_section/Apple.png" alt="App Store" width={21} height={24} />
@@ -66,10 +66,8 @@ export default function ModalWindow({ downloads, messages }: ModalWindowProps) {
                 </div>
               </Link>
             </div>
-          </div>
 
-          <div className="flex-[200px] w-[400px] justify-center h-full pt-10">
-            <Image src="/images/download.png" width={300} height={350} alt="download" />
+            <Image src="/images/download.png" width={150} height={200} alt="download" />
           </div>
         </DialogContent>
 
