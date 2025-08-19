@@ -11,6 +11,8 @@ interface FooterComponentProps {
   locale: Locale;
   footerData: FooterType;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function FooterComponent({ locale, footerData }: FooterComponentProps) {
   // Comment for now since not using i18n
   // export default function FooterComponent({ locale }: FooterComponentProps) {
