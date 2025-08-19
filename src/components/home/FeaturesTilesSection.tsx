@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export interface TileItem {
   icon: string;
@@ -35,7 +36,7 @@ export default function FeaturesTilesSection({ leftItems, rightItems }: Features
         >
           {/* Tile content: Icon and Title */}
           <div className="flex flex-col items-center">
-            <img src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
+            <Image src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
             <p className="text-center text-sm font-medium">{item.title}</p>
           </div>
 
@@ -70,11 +71,11 @@ export default function FeaturesTilesSection({ leftItems, rightItems }: Features
         <div className="flex flex-col justify-center gap-6 w-[200px]">{renderTiles(leftItems, 'left')}</div>
 
         <div className="relative flex-shrink-0">
-          <img
+          <Image
             src="/home/third_section/phone.png"
             alt="MyGOV Malaysia App"
-            width={300}
-            height={600}
+            width={291.12}
+            height={704}
             className="object-cover"
           />
 
@@ -134,7 +135,7 @@ export default function FeaturesTilesSection({ leftItems, rightItems }: Features
             key={i}
             className="flex flex-col w-[200px] items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
           >
-            <img src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
+            <Image src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
             <p className="text-center text-sm font-medium">{item.title}</p>
             <div className="text-center text-xs font-medium text-gray-500 mt-1">
               <ul className="list-disc list-inside">
