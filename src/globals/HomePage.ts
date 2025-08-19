@@ -42,6 +42,17 @@ const HomePage: GlobalConfig = {
           type: 'text',
           required: true,
         },
+        {
+          name: 'highlights',
+          type: 'array',
+          fields: [
+            {
+              name: 'highlight',
+              type: 'text',
+            },
+          ],
+          required: true,
+        },
       ],
     },
     {
@@ -60,6 +71,17 @@ const HomePage: GlobalConfig = {
         {
           name: 'title',
           type: 'text',
+          required: true,
+        },
+        {
+          name: 'highlights',
+          type: 'array',
+          fields: [
+            {
+              name: 'highlight',
+              type: 'text',
+            },
+          ],
           required: true,
         },
       ],

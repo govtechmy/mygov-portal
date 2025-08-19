@@ -458,11 +458,19 @@ export interface HomePage {
   leftItems: {
     icon: string | Media;
     title: string;
+    highlights: {
+      highlight?: string | null;
+      id?: string | null;
+    }[];
     id?: string | null;
   }[];
   rightItems: {
     icon: string | Media;
     title: string;
+    highlights: {
+      highlight?: string | null;
+      id?: string | null;
+    }[];
     id?: string | null;
   }[];
   features?:
@@ -491,6 +499,12 @@ export interface HomePageSelect<T extends boolean = true> {
     | {
         icon?: T;
         title?: T;
+        highlights?:
+          | T
+          | {
+              highlight?: T;
+              id?: T;
+            };
         id?: T;
       };
   rightItems?:
@@ -498,6 +512,12 @@ export interface HomePageSelect<T extends boolean = true> {
     | {
         icon?: T;
         title?: T;
+        highlights?:
+          | T
+          | {
+              highlight?: T;
+              id?: T;
+            };
         id?: T;
       };
   features?:
