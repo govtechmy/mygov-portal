@@ -1,9 +1,9 @@
 'use client';
 
 import Hero from '@/components/layout/hero';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
-import { ChevronDownIcon, EmailIcon } from '@govtechmy/myds-react/icon';
+import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
 import { Label } from '@govtechmy/myds-react/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@govtechmy/myds-react/select';
@@ -18,13 +18,145 @@ interface ContactPageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
 }
 
+declare global {
+  interface Window {
+    turnstile: {
+      render: (container: string | HTMLElement, options: any) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
+    onloadTurnstileCallback: () => void;
+  }
+}
+
 export default function ContactPage({ messages }: ContactPageProps) {
-  // const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [turnstileWidgetId, setTurnstileWidgetId] = useState<string>('');
+  const [turnstileVerified, setTurnstileVerified] = useState<boolean>(false);
+
+  useEffect(() => {
+    const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
+    const isDevelopment = process.env.APP_ENV === 'development';
+
+    // Skip Turnstile in development or if not properly configured
+    if (isDevelopment || !turnstileSiteKey || turnstileSiteKey === '1x00000000000000000000AA') {
+      console.log('Turnstile skipped:', isDevelopment ? 'development mode' : 'not configured');
+      return;
+    }
+
+    // Prevent multiple initializations
+    if (turnstileWidgetId) {
+      return;
+    }
+
+    let scriptLoaded = false;
+    let scriptElement: HTMLScriptElement | null = null;
+    let retryCount = 0;
+    const maxRetries = 3;
+
+    const loadTurnstile = () => {
+      if (!window.turnstile || turnstileWidgetId) {
+        return;
+      }
+
+      try {
+        // Clear any existing widget first
+        const existingWidget = document.querySelector('#turnstile-widget');
+        if (existingWidget) {
+          existingWidget.innerHTML = '';
+        }
+
+        const widgetId = window.turnstile.render('#turnstile-widget', {
+          sitekey: turnstileSiteKey,
+          callback: (token: string) => {
+            console.log('Turnstile success, token received');
+            setTurnstileToken(token);
+            setTurnstileVerified(true);
+          },
+          'expired-callback': () => {
+            console.log('Turnstile token expired');
+            setTurnstileToken('');
+            setTurnstileVerified(false);
+            // Reset the widget when token expires
+            if (window.turnstile && turnstileWidgetId) {
+              window.turnstile.reset(turnstileWidgetId);
+            }
+          },
+          'error-callback': () => {
+            console.log('Turnstile error occurred');
+            setTurnstileToken('');
+            setTurnstileVerified(false);
+          },
+          // Add theme and size options for better UX
+          theme: 'light',
+          size: 'normal',
+        });
+
+        setTurnstileWidgetId(widgetId);
+        console.log('Turnstile widget rendered successfully');
+      } catch (error) {
+        console.error('Error rendering Turnstile widget:', error);
+        // Retry if widget rendering fails
+        if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(loadTurnstile, 1000 * retryCount);
+        }
+      }
+    };
+
+    const initializeTurnstile = () => {
+      if (window.turnstile) {
+        loadTurnstile();
+      } else if (!scriptLoaded) {
+        // Check if script is already loaded
+        const existingScript = document.querySelector('script[src*="turnstile"]');
+        if (existingScript) {
+          scriptLoaded = true;
+          // Wait a bit for the script to initialize
+          setTimeout(loadTurnstile, 100);
+          return;
+        }
+
+        scriptElement = document.createElement('script');
+        scriptElement.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+        scriptElement.async = true;
+        scriptElement.defer = true;
+        scriptElement.onload = () => {
+          scriptLoaded = true;
+          // Add a small delay to ensure Turnstile is fully loaded
+          setTimeout(loadTurnstile, 100);
+        };
+        scriptElement.onerror = () => {
+          console.error('Failed to load Turnstile script');
+        };
+        document.head.appendChild(scriptElement);
+      }
+    };
+
+    // Initialize with a longer delay to ensure DOM is ready and component is fully mounted
+    const timer = setTimeout(initializeTurnstile, 300);
+
+    return () => {
+      clearTimeout(timer);
+      if (turnstileWidgetId && window.turnstile) {
+        try {
+          window.turnstile.remove(turnstileWidgetId);
+        } catch (error) {
+          console.error('Error removing Turnstile widget:', error);
+        }
+      }
+      if (scriptElement && scriptElement.parentNode) {
+        scriptElement.parentNode.removeChild(scriptElement);
+      }
+    };
+  }, [turnstileWidgetId]);
 
   const {
     register,
@@ -233,30 +365,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
             {errors.suggestion && <span className="text-red-600 text-sm">{errors.suggestion.message}</span>}
           </div>
 
-          {/* original muat turun
-          <div className="border p-4 !shadow-sm rounded-md flex items-center">
-            <div className="flex-grow flex flex-col">
-              <div>{messages.contactpg.upload}</div>
-              <div className="text-[#6B6B74]">
-                <div>{messages.contactpg.filetype}</div>
-                <div>{messages.contactpg.maxsize}: 25MB</div>
-              </div>
-              <input type="file" {...register('file')} />
-              {errors.file && (
-                <span className="text-red-600 text-sm">
-                  {errors.file.message as string}
-                </span>
-              )}
-            </div>
-            <div>
-              <Button variant="default-outline" size="medium">
-                <UploadIcon />
-                {messages.contactpg.upload2}
-              </Button>
-            </div>
-          </div> */}
-
-          {/* updated muat turun
           <div className="border p-4 !shadow-sm rounded-md flex items-center">
             <div className="flex-grow flex flex-col">
               <div>{messages.contactpg.upload}</div>
@@ -268,16 +376,12 @@ export default function ContactPage({ messages }: ContactPageProps) {
               <input
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
-                {...register("file", {
-                  onChange: (e) => e.target.files?.[0] ?? undefined, 
+                {...register('file', {
+                  onChange: e => e.target.files?.[0] ?? undefined,
                 })}
               />
 
-              {errors.file && (
-                <span className="text-red-600 text-sm">
-                  {errors.file.message as string}
-                </span>
-              )}
+              {errors.file && <span className="text-red-600 text-sm">{errors.file.message as string}</span>}
             </div>
 
             <div>
@@ -285,13 +389,40 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 variant="default-outline"
                 size="medium"
                 type="button"
-                onClick={() => fileInputRef.current?.click()} 
+                onClick={() => fileInputRef.current?.click()}
               >
                 <UploadIcon />
                 {messages.contactpg.upload2}
               </Button>
             </div>
-          </div> */}
+          </div>
+
+          {/* Row 6: Cloudflare Turnstile */}
+          {process.env.APP_ENV === 'production' &&
+            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
+            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100">
+                    <svg className="h-4 w-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <label className="text-sm font-medium text-gray-700">Security Verification</label>
+                </div>
+
+                <div className="flex justify-center">
+                  <div id="turnstile-widget"></div>
+                </div>
+
+                {/* Hidden input for Turnstile response */}
+                <input type="hidden" name="cf-turnstile-response" value={turnstileToken} />
+              </div>
+            )}
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-4">
