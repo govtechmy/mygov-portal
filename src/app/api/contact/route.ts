@@ -40,14 +40,11 @@ async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
 
 export async function POST(req: NextRequest) {
   try {
-    console.log('ou');
     const formData = await req.formData();
 
     // 🔹 Extract Turnstile token from the form submission
     const turnstileToken = formData.get('cf-turnstile-response')?.toString();
     const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
-
-    console.log('ou2');
     // 🔹 Verify Turnstile before hitting Freshdesk
     if (!turnstileToken) {
       return NextResponse.json({ error: 'Verification token is required' }, { status: 400 });
@@ -58,6 +55,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid verification token' }, { status: 400 });
     }
 
+    formData.delete('cf-turnstile-response'); // Remove Turnstile token from form data
+
     // 🔹 Proceed with Freshdesk request if verified
     const apiKey = process.env.FRESHDESK_API_KEY;
     const url = process.env.FRESHDESK_API_URL;
@@ -66,20 +65,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Freshdesk API credentials not configured' }, { status: 500 });
     }
 
-    console.log(apiKey);
-    console.log(url);
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        Authorization: 'Basic ' + Buffer.from(`${apiKey}:X`).toString('base64'),
-      },
+      headers: { Authorization: 'Basic ' + Buffer.from(`${apiKey}:X`).toString('base64') },
       body: formData,
     });
 
     let data: Record<string, unknown>;
     try {
       data = await response.json();
-    } catch {
+    } catch (err) {
       const text = await response.text();
       data = { response: text };
     }
