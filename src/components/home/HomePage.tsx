@@ -4,6 +4,7 @@ import AboutSection from '@/components/home/AboutSection';
 import FeaturesTilesSection from '@/components/home/FeaturesTilesSection';
 import FeaturesCarousel from '@/components/home/FeaturesCarousel';
 import FAQSection from '@/components/home/FAQSection';
+import KerjasamaSection from './Kerjasama';
 import { HomePage as HomePageType } from '@/payload-types';
 
 interface HomePageProps {
@@ -23,15 +24,18 @@ export default function HomePage({ messages, data }: HomePageProps) {
        >
          Contact Details Available
        </div>*/}
+
       {/* pass messages here for client component*/}
       <HeroSection messages={messages} />
-      {/* pass messages here for client component*/}
-      <AboutSection title={data.aboutTitle} description={data.aboutDescription} />
-      {/* payload data */}
-      <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
-      <FeaturesCarousel features={data.features} />
-      {/* payload data */}
-      <FAQSection items={data.faq} />
+      <div className=" mx-auto sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] !border-x-[1px] !border-[#F4F4F5]">
+        <AboutSection title={data.aboutTitle} description={data.aboutDescription} />
+        {/* payload data */}
+        <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
+        <FeaturesCarousel features={data.features} />
+        {/* payload data */}
+        <FAQSection items={data.faq} />
+        {/*<KerjasamaSection />*/}
+      </div>
     </div>
   );
 }

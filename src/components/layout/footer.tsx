@@ -1,6 +1,8 @@
 'use client';
 
 import { Footer, SiteInfo, FooterSection, SiteLink, FooterLogo } from '@govtechmy/myds-react/footer';
+import { FacebookIcon, TwitterXIcon, InstagramIcon } from '@govtechmy/myds-react/icon';
+import Link from 'next/link';
 import { type Locale } from '@/lib/i18n';
 import Image from 'next/image';
 
@@ -64,13 +66,24 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
       </FooterSection>
 
       <FooterSection className="text-txt-black-500 md:max-lg:gap-4.5 mx-auto flex w-full max-w-[1000px] max-lg:flex-col justify-between border-none text-sm max-md:gap-4 lg:gap-6">
-        <div className="flex gap-3 max-lg:flex-col">
+        <div className="flex gap-3 max-lg:flex-col ">
           <p>© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
           <p className="text-[#D4D4D8] max-lg:hidden">|</p>
 
-          <div className="flex flex-grow gap-3 items-center">
+          <div className="flex flex-grow gap-3 md:pb-5 items-center">
             <SiteLink>Disclaimer</SiteLink>
             <SiteLink>Privacy Policy</SiteLink>
+          </div>
+          <div className=" flex flex-row gap-3">
+            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
+              <FacebookIcon scale={40} className=" text-[#2563EB]" />
+            </Link>
+            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
+              <TwitterXIcon scale={40} className=" text-[#2563EB]" />
+            </Link>
+            <Link href="" className=" bg-[#F1F5FF] p-2 rounded-full w-10 h-10 flex justify-center items-center ">
+              <InstagramIcon scale={40} className=" text-[#2563EB]" />
+            </Link>
           </div>
         </div>
         <p>Last updated: 15th Aug 2025</p>
