@@ -38,12 +38,26 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
   const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [turnstileWidgetId, setTurnstileWidgetId] = useState<string>('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [turnstileVerified, setTurnstileVerified] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isFlutterWebView, setIsFlutterWebView] = useState<boolean>(false);
 
   useEffect(() => {
+    // Simple Flutter WebView detection
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isWebView = userAgent.includes('flutter') || userAgent.includes('webview');
+    setIsFlutterWebView(isWebView);
+
+    if (isWebView) {
+      setTurnstileToken('webview-bypass');
+      setTurnstileVerified(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Skip Turnstile if in Flutter WebView
+    if (isFlutterWebView) return;
+
     const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
     const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
@@ -158,7 +172,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
         scriptElement.parentNode.removeChild(scriptElement);
       }
     };
-  }, [turnstileWidgetId]);
+  }, [turnstileWidgetId, isFlutterWebView]);
 
   const {
     register,
@@ -182,8 +196,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    // Check if Turnstile is verified
-    if (!turnstileToken) {
+    // Skip Turnstile check for WebView
+    if (!isFlutterWebView && !turnstileToken) {
       setSubmitStatus({
         type: 'error',
         message: 'Please complete the security verification.',
@@ -425,7 +439,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
           </div>
 
           {/* Row 6: Cloudflare Turnstile */}
-          {process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
+          {!isFlutterWebView &&
+            process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
               <div className="space-y-3">
@@ -442,7 +457,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   <label className="text-sm font-medium text-gray-700">Security Verification</label>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-left">
                   <div id="turnstile-widget"></div>
                 </div>
 
@@ -457,7 +472,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             type="submit"
             size="medium"
             className="w-full items-center justify-center !shadow-md"
-            disabled={isSubmitting || !turnstileToken}
+            disabled={isSubmitting || (!isFlutterWebView && !turnstileToken)}
           >
             {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>
