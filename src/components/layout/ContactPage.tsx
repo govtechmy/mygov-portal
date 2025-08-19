@@ -337,7 +337,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             {errors.address && <span className="text-red-600 text-sm">{errors.address.message}</span>}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-sm:flex-col max-sm:gap-6">
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.phone}</Label>
               <Controller
@@ -390,8 +390,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
             {errors.suggestion && <span className="text-red-600 text-sm">{errors.suggestion.message}</span>}
           </div>
 
-          <div className="border p-4 !shadow-sm rounded-md flex items-center">
-            <div className="flex-grow flex flex-col">
+          <div className="border p-4 !shadow-sm rounded-md flex items-center justify-between">
+            <div className="flex flex-col">
               <div>{messages.contactpg.upload}</div>
               <div className="text-[#6B6B74]">
                 <div>{messages.contactpg.filetype}</div>
@@ -406,6 +406,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   const file = e.target.files?.[0] ?? undefined;
                   setValue('file', file, { shouldValidate: true });
                 }}
+                className="w-[220px]"
               />
 
               {errors.file && <span className="text-red-600 text-sm">{errors.file.message as string}</span>}
