@@ -2,10 +2,11 @@
 
 import { Navbar, NavbarLogo, NavbarMenu, NavbarMenuItem, NavbarAction } from '@govtechmy/myds-react/navbar';
 import { Button } from '@govtechmy/myds-react/button';
+import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
 import { useTheme } from '@/components/providers/theme-provider';
 import { getMessages, type Locale } from '@/lib/i18n';
 import LocaleSwitcher from './locale-switcher';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'; //temporarily disable dark mode - use default light mode - removing bad setState error
 
 interface NavbarComponentProps {
   locale: Locale;
@@ -14,9 +15,13 @@ interface NavbarComponentProps {
 export default function NavbarComponent({ locale }: NavbarComponentProps) {
   const messages = getMessages(locale);
   const { theme, setTheme } = useTheme();
+  const [isHidden, setIsHidden] = useState(false);
   useEffect(() => {
     setTheme('light');
   }, [setTheme]); // default light mode using useEffect, preventing errors
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <Navbar>
@@ -27,7 +32,11 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
         className="h-full"
       ></NavbarLogo>
 
-      <NavbarMenu>
+      <NavbarMenu
+        id="toHideToggle"
+        classNameNavDesktop=""
+        classNameNavMobile={`top-[-2vh] ${isHidden ? 'block' : 'hidden'}`}
+      >
         <NavbarMenuItem className="flex-none w-fit" href={`/${locale}`}>
           {messages.navigation.main}
         </NavbarMenuItem>
@@ -39,7 +48,7 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
         </NavbarMenuItem>
       </NavbarMenu>
 
-      <NavbarAction>
+      <NavbarAction onClick={() => setIsHidden(prev => !prev)}>
         <div className="flex items-center gap-2">
           {/* integrate properly before theme
           <Button
