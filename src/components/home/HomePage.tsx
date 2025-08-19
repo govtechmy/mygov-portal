@@ -28,7 +28,7 @@ export default function HomePage({ messages, data }: HomePageProps) {
       {/* pass messages here for client component*/}
       <HeroSection messages={messages} />
       <div className=" mx-auto sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] !border-x-[1px] !border-[#F4F4F5]">
-        <AboutSection title={data.aboutTitle} description={data.aboutDescription} />
+        <AboutSection />
         {/* payload data */}
         <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
         <FeaturesCarousel features={data.features} />
