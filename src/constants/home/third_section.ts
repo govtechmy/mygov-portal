@@ -46,10 +46,6 @@ export const rightItems = [
   {
     icon: '/home/third_section/umum.png',
     title: 'Umum',
-    highlights: [
-      'Director Kementerian dan Agensi',
-      'MYSPR Semak',
-      'Portal Data Terbuka',
-    ],
+    highlights: ['Director Kementerian dan Agensi', 'MYSPR Semak', 'Portal Data Terbuka'],
   },
 ];

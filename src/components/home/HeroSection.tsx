@@ -27,56 +27,32 @@ export default function HeroSection({ messages }: HeroSectionProps) {
             {messages.homepg.herosection.header2} <br />
             {messages.homepg.herosection.header3}
           </h1>
-          <p className="text-base font-normal text-[#3F3F46]">
-            {messages.homepg.herosection.parag}
-          </p>
+          <p className="text-base font-normal text-[#3F3F46]">{messages.homepg.herosection.parag}</p>
 
           <div className="flex flex-col-reverse gap-4 sm:flex-row">
             <Link href="https://apps.apple.com/my/app/mygov-malaysia/id6502623525">
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
-                  src="/home/first_section/Apple.png"
-                  alt="App Store"
-                  width={21}
-                  height={24}
-                />
+                <Image src="/home/first_section/Apple.png" alt="App Store" width={21} height={24} />
                 <div className="flex flex-col text-[10px]">
                   <span> {messages.homepg.herosection.buttondownload}</span>
-                  <span className="font-semibold">
-                    {' '}
-                    {messages.homepg.herosection.buttonapple}
-                  </span>
+                  <span className="font-semibold"> {messages.homepg.herosection.buttonapple}</span>
                 </div>
               </div>
             </Link>
             <Link href="https://play.google.com/store/apps/details?id=my.gov.onegovappstore.jdn&hl=en">
               <div className="flex bg-black h-[40px] w-[120px] items-center gap-2 rounded-md border border-[#A6A6A6] p-2 text-white shadow-md transition-shadow hover:shadow-lg">
-                <Image
-                  src="/home/first_section/Playstore.png"
-                  alt="Google Play"
-                  width={21}
-                  height={24}
-                />
+                <Image src="/home/first_section/Playstore.png" alt="Google Play" width={21} height={24} />
                 <div className="flex flex-col text-[10px]">
                   <span> {messages.homepg.herosection.buttondownload}</span>
-                  <span className="font-semibold">
-                    {messages.homepg.herosection.buttongoogle}
-                  </span>
+                  <span className="font-semibold">{messages.homepg.herosection.buttongoogle}</span>
                 </div>
               </div>
             </Link>
           </div>
 
           <div className="flex items-center gap-2 pt-4">
-            <span className="text-sm text-gray-600">
-              {messages.homepg.herosection.inisiatif}
-            </span>
-            <Image
-              src="/home/first_section/sentuhanmadani.png"
-              alt="Madani"
-              width={84}
-              height={32}
-            />
+            <span className="text-sm text-gray-600">{messages.homepg.herosection.inisiatif}</span>
+            <Image src="/home/first_section/sentuhanmadani.png" alt="Madani" width={84} height={32} />
           </div>
         </div>
 

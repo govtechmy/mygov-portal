@@ -6,7 +6,10 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { searchPlugin } from '@payloadcms/plugin-search';
 import PayloadCollections, { Users } from './collections';
+import HomePage from './globals/HomePage';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -19,6 +22,7 @@ export default buildConfig({
     },
   },
   collections: PayloadCollections,
+  globals: [HomePage],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -30,6 +34,15 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    searchPlugin({
+      collections: ['blog'],
+    }),
     // storage-adapter-placeholder
+    vercelBlobStorage({
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
   ],
 });

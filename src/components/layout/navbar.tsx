@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Navbar,
-  NavbarLogo,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarAction,
-} from '@govtechmy/myds-react/navbar';
+import { Navbar, NavbarLogo, NavbarMenu, NavbarMenuItem, NavbarAction } from '@govtechmy/myds-react/navbar';
 import { Button } from '@govtechmy/myds-react/button';
 import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
 import { useTheme } from '@/components/providers/theme-provider';

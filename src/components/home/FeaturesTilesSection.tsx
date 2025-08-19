@@ -12,10 +12,7 @@ interface FeaturesTilesSectionProps {
   rightItems: TileItem[];
 }
 
-export default function FeaturesTilesSection({
-  leftItems,
-  rightItems,
-}: FeaturesTilesSectionProps) {
+export default function FeaturesTilesSection({ leftItems, rightItems }: FeaturesTilesSectionProps) {
   const [activeItem, setActiveItem] = useState<string | null>(null);
   // State to track the item being hovered over.
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -38,13 +35,7 @@ export default function FeaturesTilesSection({
         >
           {/* Tile content: Icon and Title */}
           <div className="flex flex-col items-center">
-            <img
-              src={item.icon}
-              alt={item.title}
-              width={78}
-              height={78}
-              className="mb-3"
-            />
+            <img src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
             <p className="text-center text-sm font-medium">{item.title}</p>
           </div>
 
@@ -76,9 +67,7 @@ export default function FeaturesTilesSection({
 
       {/* This section is for large screens (lg) only */}
       <div className="hidden lg:flex gap-24 flex-row relative">
-        <div className="flex flex-col justify-center gap-6 w-[200px]">
-          {renderTiles(leftItems, 'left')}
-        </div>
+        <div className="flex flex-col justify-center gap-6 w-[200px]">{renderTiles(leftItems, 'left')}</div>
 
         <div className="relative flex-shrink-0">
           <img
@@ -135,9 +124,7 @@ export default function FeaturesTilesSection({
           ></div>
         </div>
 
-        <div className="flex flex-col justify-center gap-6 w-[200px]">
-          {renderTiles(rightItems, 'right')}
-        </div>
+        <div className="flex flex-col justify-center gap-6 w-[200px]">{renderTiles(rightItems, 'right')}</div>
       </div>
 
       {/* This section is for mobile/smaller screens */}
@@ -147,13 +134,7 @@ export default function FeaturesTilesSection({
             key={i}
             className="flex flex-col w-[200px] items-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
           >
-            <img
-              src={item.icon}
-              alt={item.title}
-              width={78}
-              height={78}
-              className="mb-3"
-            />
+            <img src={item.icon} alt={item.title} width={78} height={78} className="mb-3" />
             <p className="text-center text-sm font-medium">{item.title}</p>
             <div className="text-center text-xs font-medium text-gray-500 mt-1">
               <ul className="list-disc list-inside">

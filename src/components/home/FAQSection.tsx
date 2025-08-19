@@ -2,14 +2,10 @@
 
 import { useState } from 'react';
 import { ChevronDownIcon } from '@govtechmy/myds-react/icon';
-
-export interface FAQItem {
-  question: string;
-  answers: string;
-}
+import { HomePage as homePageType, Faq } from '@/payload-types';
 
 interface FAQSectionProps {
-  items: FAQItem[];
+  items: homePageType['faq'];
 }
 
 export default function FAQSection({ items }: FAQSectionProps) {
@@ -23,7 +19,7 @@ export default function FAQSection({ items }: FAQSectionProps) {
     <section className="max-w-4xl mx-auto px-4 py-8">
       <h2 className="text-3xl font-semibold mb-6">Soalan Lazim (FAQ)</h2>
       <div className="space-y-4">
-        {items.map((item, index) => (
+        {(items as Faq[] | undefined)?.map((item, index) => (
           <div
             key={index}
             className="border-b border-gray-200 rounded-lg overflow-hidden"
@@ -32,7 +28,7 @@ export default function FAQSection({ items }: FAQSectionProps) {
               onClick={() => toggleFAQ(index)}
               className="w-full flex justify-between items-center p-4 text-left hover:bg-gray-50 transition"
             >
-              <span className="font-medium">{item.question}</span>
+              <span className="font-medium">{item?.question}</span>
               <ChevronDownIcon
                 className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${openIndex === index ? 'rotate-180' : ''}`}
               />

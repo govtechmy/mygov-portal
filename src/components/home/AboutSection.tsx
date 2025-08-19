@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { HomePage as homePageType } from '@/payload-types';
 
 interface AboutSectionProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
@@ -11,16 +12,12 @@ export default function AboutSection() {
       <div className="rounded-[32px] border border-[#F4F4F5] flex flex-row items-center justify-center">
         <div className="flex flex-row flex-wrap items-stretch justify-center max-w-[800px]">
           <div className="flex-[400px] lg:pt-12 lg:px-12 pt-8 px-8">
-            <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">
-              Apa itu MyGOV Malaysia?
-            </div>
+            <div className="mb-4 text-4xl lg:text-2xl md:text-xl sm:text-lg">Apa itu MyGOV Malaysia?</div>
 
             <div className="text-base leading-relaxed">
-              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat
-              rujukan sehenti bagi perkhidmatan umum yang ditawarkan kerajaan
-              Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan,
-              membuat permohonan, menerima notifikasi di samping ciri-ciri lain
-              yang bakal dilancarkan.
+              MyGOV Malaysia merupakan aplikasi yang dibangunkan sebagai pusat rujukan sehenti bagi perkhidmatan umum
+              yang ditawarkan kerajaan Malaysia. Melalui MyGOV Malaysia, anda dapat melakukan semakan, membuat
+              permohonan, menerima notifikasi di samping ciri-ciri lain yang bakal dilancarkan.
               <div className="pb-10"></div>
             </div>
           </div>

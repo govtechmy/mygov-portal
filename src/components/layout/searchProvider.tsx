@@ -26,9 +26,12 @@ type SearchContextType = {
   query: string;
   setQuery: (query: string) => void;
   result: NewsItem[];
+  type: AllCategories;
   setType: (type: AllCategories) => void;
   dateRange?: DateRange; // updated type
   setDateRange: (range?: DateRange) => void; // updated type
+  showAll: boolean;
+  setShowAll: (value: boolean) => void;
 };
 
 export const SearchContext = createContext<SearchContextType | null>(null);
@@ -37,6 +40,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState<string>('');
   const [type, setType] = useState<AllCategories>('Semua');
   const [dateRange, setDateRange] = useState<DateRange | undefined>(); // updated type
+  const [showAll, setShowAll] = useState<boolean>(true);
 
   const grouped_news = useMemo(() => {
     const group: GroupedNews = {
@@ -117,7 +121,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
   return (
     <SearchContext.Provider
-      value={{ query, setQuery, setType, result, dateRange, setDateRange }}
+      value={{ query, setQuery, type, setType, result, dateRange, setDateRange, showAll, setShowAll }}
     >
       {children}
     </SearchContext.Provider>

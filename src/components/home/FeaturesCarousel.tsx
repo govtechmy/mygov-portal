@@ -19,8 +19,7 @@ interface FeaturesCarouselProps {
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   // separate states
   const [currentFeatureIndexMobile, setCurrentFeatureIndexMobile] = useState(0);
-  const [currentFeatureIndexDesktop, setCurrentFeatureIndexDesktop] =
-    useState(0);
+  const [currentFeatureIndexDesktop, setCurrentFeatureIndexDesktop] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // refs
@@ -38,14 +37,8 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
     itemsPerPage = 2;
   }
 
-  const maxClicksMobile = Math.max(
-    0,
-    features.length - Math.floor(itemsPerPage)
-  );
-  const maxClicksDesktop = Math.min(
-    Math.max(0, features.length - itemsPerPage),
-    3
-  );
+  const maxClicksMobile = Math.max(0, features.length - Math.floor(itemsPerPage));
+  const maxClicksDesktop = Math.min(Math.max(0, features.length - itemsPerPage), 3);
 
   // mobile scroll tracking
   useEffect(() => {
@@ -99,28 +92,21 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
   };
 
   const openModal = (index: number) => {
-    isDesktop
-      ? setCurrentFeatureIndexDesktop(index)
-      : setCurrentFeatureIndexMobile(index);
+    isDesktop ? setCurrentFeatureIndexDesktop(index) : setCurrentFeatureIndexMobile(index);
     setIsModalOpen(true);
   };
 
   const closeModal = () => setIsModalOpen(false);
 
   // which index are we on
-  const currentIndex = isDesktop
-    ? currentFeatureIndexDesktop
-    : currentFeatureIndexMobile;
+  const currentIndex = isDesktop ? currentFeatureIndexDesktop : currentFeatureIndexMobile;
   const maxClicks = isDesktop ? maxClicksDesktop : maxClicksMobile;
 
   return (
     <section className="py-12 sm:py-16 px-4">
       <div className="flex flex-col gap-12">
         {/* Mobile + Tablet View (scrollable) */}
-        <div
-          ref={carouselRefMobile}
-          className="xl:hidden flex flex-row gap-6 overflow-x-auto"
-        >
+        <div ref={carouselRefMobile} className="xl:hidden flex flex-row gap-6 overflow-x-auto">
           {features.map((feature, index) => (
             <img
               key={feature.title}
@@ -159,9 +145,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             onClick={prevFeature}
             disabled={currentIndex === 0}
             className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-              currentIndex === 0
-                ? 'opacity-40 cursor-not-allowed'
-                : 'hover:bg-white'
+              currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
             }`}
           >
             <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
@@ -171,9 +155,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             onClick={nextFeature}
             disabled={currentIndex >= maxClicks}
             className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-              currentIndex >= maxClicks
-                ? 'opacity-40 cursor-not-allowed'
-                : 'hover:bg-white'
+              currentIndex >= maxClicks ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
             }`}
           >
             <ChevronRightIcon className="w-6 h-6 text-gray-800" />
@@ -183,10 +165,7 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
 
       {/* Modal */}
       {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-          onClick={closeModal}
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={closeModal}>
           <div
             className="relative flex flex-col md:flex-row bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
             onClick={e => e.stopPropagation()}
@@ -208,12 +187,8 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
             </div>
             <div className="flex-auto">
               <div className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">
-                  {features[currentIndex].title}
-                </h2>
-                <p className="mt-4 text-gray-700 max-w-sm">
-                  {features[currentIndex].desc}
-                </p>
+                <h2 className="text-2xl font-semibold mb-4">{features[currentIndex].title}</h2>
+                <p className="mt-4 text-gray-700 max-w-sm">{features[currentIndex].desc}</p>
               </div>
             </div>
           </div>

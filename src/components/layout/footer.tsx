@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  Footer,
-  SiteInfo,
-  FooterSection,
-  SiteLinkGroup,
-  SiteLink,
-  FooterLogo,
-} from '@govtechmy/myds-react/footer';
+import { Footer, SiteInfo, FooterSection, SiteLinkGroup, SiteLink, FooterLogo } from '@govtechmy/myds-react/footer';
 import { getMessages, type Locale } from '@/lib/i18n';
 import Image from 'next/image';
 
@@ -24,28 +17,12 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
         <div className="flex flex-row justify-center w-full">
           <div className="flex flex-col items-center justify-center gap-y-4">
             SEBUAH INISIATIF
-            <FooterLogo
-              logo={
-                <img
-                  src="/images/logo-govtech.png"
-                  alt="GovTech Malaysia"
-                  width={240}
-                  height={85}
-                />
-              }
-            />
+            <FooterLogo logo={<img src="/images/logo-govtech.png" alt="GovTech Malaysia" width={240} height={85} />} />
           </div>
           <div className="flex flex-col items-center justify-center gap-y-4">
             DIBANGUNKAN OLEH
             <FooterLogo
-              logo={
-                <img
-                  src="/images/logo-kementerian-digital.png"
-                  alt="GovTech Malaysia"
-                  width={150}
-                  height={92}
-                />
-              }
+              logo={<img src="/images/logo-kementerian-digital.png" alt="GovTech Malaysia" width={150} height={92} />}
             />
           </div>
         </div>
@@ -54,36 +31,13 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
       <div className="flex flex-col items-center w-full pt-4 gap-y-4">
         DENGAN KERJASAMA
         <div className="flex flex-row items-center gap-6">
-          <FooterLogo
-            logo={
-              <img
-                src="/images/logo-mydigital.png"
-                alt="MyDigital"
-                width={210}
-                height={40}
-              />
-            }
-          />
+          <FooterLogo logo={<img src="/images/logo-mydigital.png" alt="MyDigital" width={210} height={40} />} />
+
+          <FooterLogo logo={<img src="/images/logo-mynic.png" alt="MyNIC" width={130} height={40} />} />
 
           <FooterLogo
             logo={
-              <img
-                src="/images/logo-mynic.png"
-                alt="MyNIC"
-                width={130}
-                height={40}
-              />
-            }
-          />
-
-          <FooterLogo
-            logo={
-              <img
-                src="/images/logo-cybersecurity-malaysia.png"
-                alt="CyberSecurity Malaysia"
-                width={200}
-                height={40}
-              />
+              <img src="/images/logo-cybersecurity-malaysia.png" alt="CyberSecurity Malaysia" width={200} height={40} />
             }
           />
         </div>
@@ -92,26 +46,10 @@ export default function FooterComponent({ locale }: FooterComponentProps) {
       <div className="flex flex-col items-center w-full pt-4 gap-y-4">
         KOLABORASI STRATEGIK
         <div className="flex flex-row items-center gap-6">
-          <FooterLogo
-            logo={
-              <img
-                src="/images/logo-mydigitalid.png"
-                alt="MyDigital ID"
-                width={170}
-                height={40}
-              />
-            }
-          />
+          <FooterLogo logo={<img src="/images/logo-mydigitalid.png" alt="MyDigital ID" width={170} height={40} />} />
 
           <FooterLogo
-            logo={
-              <img
-                src="/images/logo-mygcc.png"
-                alt="Malaysia Government Call Center"
-                width={140}
-                height={40}
-              />
-            }
+            logo={<img src="/images/logo-mygcc.png" alt="Malaysia Government Call Center" width={140} height={40} />}
           />
         </div>
       </div>

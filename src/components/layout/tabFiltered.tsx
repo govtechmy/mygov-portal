@@ -4,19 +4,32 @@ import { clx } from '@govtechmy/myds-react/utils';
 import { useContext } from 'react';
 import { SearchContext } from './searchProvider';
 import { NewsCategory } from './NewsItemTypes';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 
 export default function TabFiltered() {
   const context = useContext(SearchContext);
-  if (!context)
-    throw new Error('SearchContext must be used within a SearchProvider');
-
+  if (!context) throw new Error('SearchContext must be used within a SearchProvider');
   const { setType } = context;
+  const router = useRouter();
+  const { locale } = useParams<{ locale: string }>();
+  const searchParams = useSearchParams();
+  const currentType = searchParams.get('type') ?? 'Semua';
   return (
     <Tabs
       size="small"
       variant="pill"
-      defaultValue="Semua"
-      onValueChange={value => setType(value as NewsCategory)}
+      value={currentType}
+      onValueChange={value => {
+        setType(value as NewsCategory);
+        const params = new URLSearchParams(Array.from(searchParams.entries()));
+        if (value === 'Semua') {
+          params.delete('type');
+        } else {
+          params.set('type', value);
+        }
+        params.set('page', '1');
+        router.push(`/${locale}/blog?${params.toString()}`);
+      }}
     >
       <TabsList
         width="full"
