@@ -173,16 +173,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.address}</Label>
-            {/* <Input
-              size="medium"
-              id="address"
-              type="text"
-              id="address"
-              type="text"
-              placeholder={messages.contactpg.address}
-              className="!shadow-sm"
-              {...register('address')}
-            /> */}
             <TextArea
               placeholder={messages.contactpg.address}
               size="medium"
@@ -222,7 +212,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 size="medium"
                 id="email"
                 type="email"
-                placeholder="hello@mygov.gov.my"
+                placeholder={messages.contactpg.emailPlaceholder}
                 className="!shadow-sm"
                 {...register('email')}
               >
