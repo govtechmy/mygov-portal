@@ -14,8 +14,8 @@
     "generate:types": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types"
   },
   "dependencies": {
-    "@govtechmy/myds-react": "^0.0.23",
-    "@govtechmy/myds-style": "^0.0.10",
+    "@govtechmy/myds-react": "^1.0.0",
+    "@govtechmy/myds-style": "^1.0.0",
     "@hookform/resolvers": "^5.2.1",
     "@payloadcms/db-mongodb": "^3.52.0",
     "@payloadcms/next": "^3.52.0",
