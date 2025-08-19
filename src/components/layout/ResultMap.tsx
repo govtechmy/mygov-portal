@@ -4,6 +4,7 @@ import { ClockIcon } from '@govtechmy/myds-react/icon';
 import { AutoPagination } from '@govtechmy/myds-react/pagination';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import type { Blog } from '@/payload-types';
+import { lexicalToPlainText } from '@/lib/lexical';
 import { searchResultMap } from '@/lib/search';
 import type { PaginatedDocs } from 'payload';
 
@@ -66,18 +67,28 @@ export default function ResultMap({ messages }: ResultMapProps) {
               <div className="border-l  border-[#D4D4D8] h-4"></div>
               <div className="flex items-center gap-1 text-[#71717A]">
                 <ClockIcon />
-                <div className="text-sm">Bacaan {item.readtime}</div>
+                <div className="text-sm">Bacaan {item.readtime} Minit</div>
               </div>
             </div>
 
             <div className="flex justify-between py-2 gap-4.5">
               <div className="flex flex-col gap-2">
                 <div className="font-semibold text-base">{item.title}</div>
-                {item.caption && <div className="text-sm">{item.caption}</div>}
+                <div className="text-sm">
+                  {item.caption && item.caption.trim().length > 0
+                    ? item.caption
+                    : lexicalToPlainText(item.content).slice(0, 180)}
+                </div>
               </div>
             </div>
             <div className="flex-grow"></div>
-            <div className="text-sm text-[#]">{new Date(item.datePublished).toLocaleDateString()}</div>
+            <div className="text-sm text-[#]">
+              {new Date(item.datePublished).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </div>
           </div>
         ))}
       </div>
