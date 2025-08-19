@@ -32,11 +32,7 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
         className="h-full"
       ></NavbarLogo>
 
-      <NavbarMenu
-        id="toHideToggle"
-        classNameNavDesktop=""
-        classNameNavMobile={`top-[-2vh] ${isHidden ? 'block' : 'hidden'}`}
-      >
+      <NavbarMenu classNameNavDesktop="" classNameNavMobile={`top-[-2vh] ${isHidden ? 'block' : 'hidden'}`}>
         <NavbarMenuItem className="flex-none w-fit" href={`/${locale}`}>
           {messages.navigation.main}
         </NavbarMenuItem>
