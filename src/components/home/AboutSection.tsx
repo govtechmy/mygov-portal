@@ -2,11 +2,7 @@
 import Image from 'next/image';
 // import { HomePage as homePageType } from '@/payload-types'; // Comment since not used for now to avoid lint error
 
-interface AboutSectionProps {
-  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
-}
 export default function AboutSection() {
-  //export default function AboutSection({ messages }: AboutSectionProps) { // Comment for now since not using i18n
   return (
     <section className="p-8 max-w-[1000px] mx-auto">
       <div className="rounded-[32px] border border-[#F4F4F5] flex flex-row items-center justify-center">
