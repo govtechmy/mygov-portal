@@ -8,7 +8,11 @@ import { lexicalToPlainText } from '@/lib/lexical';
 import { searchResultMap } from '@/lib/search';
 import type { PaginatedDocs } from 'payload';
 
-export default function ResultMap() {
+interface ResultMapProps {
+  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+}
+
+export default function ResultMap({ messages }: ResultMapProps) {
   const context = useContext(SearchContext);
   if (!context) throw new Error('SearchContext must be used within a SearchProvider');
   const router = useRouter();

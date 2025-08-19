@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Navbar,
-  NavbarLogo,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarAction,
-} from '@govtechmy/myds-react/navbar';
+import { Navbar, NavbarLogo, NavbarMenu, NavbarMenuItem, NavbarAction } from '@govtechmy/myds-react/navbar';
 import { Button } from '@govtechmy/myds-react/button';
 import { SunIcon, MoonIcon } from '@govtechmy/myds-react/icon';
 import { useTheme } from '@/components/providers/theme-provider';
@@ -38,13 +32,13 @@ export default function NavbarComponent({ locale }: NavbarComponentProps) {
       ></NavbarLogo>
 
       <NavbarMenu>
-        <NavbarMenuItem href={`/${locale}`}>
+        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}`}>
           {messages.navigation.main}
         </NavbarMenuItem>
-        <NavbarMenuItem href={`/${locale}/blog`}>
+        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}/blog`}>
           {messages.navigation.blog}
         </NavbarMenuItem>
-        <NavbarMenuItem href={`/${locale}/contact`}>
+        <NavbarMenuItem className="flex-none w-fit" href={`/${locale}/contact`}>
           {messages.navigation.contact}
         </NavbarMenuItem>
       </NavbarMenu>
