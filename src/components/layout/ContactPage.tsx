@@ -32,6 +32,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
     control,
     reset,
     formState: { errors },
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -43,7 +44,6 @@ export default function ContactPage({ messages }: ContactPageProps) {
       phoneCode: '+60',
       email: '',
       suggestion: '',
-      // file: undefined,
     },
   });
 
@@ -66,23 +66,23 @@ export default function ContactPage({ messages }: ContactPageProps) {
         .replace(/\s+/g, ' ')
         .trim();
 
-      const freshdeskData = {
-        name: data.name,
-        email: data.email,
-        phone: `${data.phoneCode}${data.phone}`,
-        subject: `${data.category} - ${data.name}`,
-        source: 2,
-        priority: 1,
-        status: 2,
-        description: descriptionHtml,
-      };
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', `${data.phoneCode}${data.phone}`);
+      formData.append('subject', `${data.category} - ${data.name}`);
+      formData.append('source', '2');
+      formData.append('priority', '1');
+      formData.append('status', '2');
+      formData.append('description', descriptionHtml);
+
+      if (data.file) {
+        formData.append('attachments[]', data.file);
+      }
 
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(freshdeskData),
+        body: formData,
       });
 
       const result = await response.json();
@@ -233,31 +233,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
             {errors.suggestion && <span className="text-red-600 text-sm">{errors.suggestion.message}</span>}
           </div>
 
-          {/* original muat turun
-          <div className="border p-4 !shadow-sm rounded-md flex items-center">
-            <div className="flex-grow flex flex-col">
-              <div>{messages.contactpg.upload}</div>
-              <div className="text-[#6B6B74]">
-                <div>{messages.contactpg.filetype}</div>
-                <div>{messages.contactpg.maxsize}: 25MB</div>
-              </div>
-              <input type="file" {...register('file')} />
-              {errors.file && (
-                <span className="text-red-600 text-sm">
-                  {errors.file.message as string}
-                </span>
-              )}
-            </div>
-            <div>
-              <Button variant="default-outline" size="medium">
-                <UploadIcon />
-                {messages.contactpg.upload2}
-              </Button>
-            </div>
-          </div> */}
-
-          {/* updated muat turun
-          <div className="border p-4 !shadow-sm rounded-md flex items-center">
+          {/* <div className="border p-4 !shadow-sm rounded-md flex items-center">
             <div className="flex-grow flex flex-col">
               <div>{messages.contactpg.upload}</div>
               <div className="text-[#6B6B74]">
@@ -268,9 +244,11 @@ export default function ContactPage({ messages }: ContactPageProps) {
               <input
                 type="file"
                 accept=".pdf,.jpg,.jpeg,.png"
-                {...register("file", {
-                  onChange: (e) => e.target.files?.[0] ?? undefined, 
-                })}
+                {...register("file")}
+                onChange={(e) => {
+                  const file = e.target.files?.[0] ?? undefined;
+                  setValue("file", file, { shouldValidate: true }); 
+                }}
               />
 
               {errors.file && (
@@ -292,6 +270,40 @@ export default function ContactPage({ messages }: ContactPageProps) {
               </Button>
             </div>
           </div> */}
+
+          <div className="border p-4 !shadow-sm rounded-md flex items-center">
+            <div className="flex-grow flex flex-col">
+              <div>{messages.contactpg.upload}</div>
+              <div className="text-[#6B6B74]">
+                <div>{messages.contactpg.filetype}</div>
+                <div>{messages.contactpg.maxsize}: 25MB</div>
+              </div>
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                ref={fileInputRef}
+                onChange={e => {
+                  const file = e.target.files?.[0] ?? undefined;
+                  setValue('file', file, { shouldValidate: true });
+                }}
+              />
+
+              {errors.file && <span className="text-red-600 text-sm">{errors.file.message as string}</span>}
+            </div>
+
+            <div>
+              <Button
+                variant="default-outline"
+                size="medium"
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <UploadIcon />
+                {messages.contactpg.upload2}
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-4">
