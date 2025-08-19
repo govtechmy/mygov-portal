@@ -9,8 +9,9 @@ import Image from 'next/image';
 interface FooterComponentProps {
   locale: Locale;
 }
-
-export default function FooterComponent({ locale }: FooterComponentProps) {
+export default function FooterComponent({}: FooterComponentProps) {
+  // Comment for now since not using i18n
+  // export default function FooterComponent({ locale }: FooterComponentProps) {
   return (
     <Footer>
       <div className="flex flex-col items-center w-full">

@@ -4,7 +4,7 @@ import AboutSection from '@/components/home/AboutSection';
 import FeaturesTilesSection from '@/components/home/FeaturesTilesSection';
 import FeaturesCarousel from '@/components/home/FeaturesCarousel';
 import FAQSection from '@/components/home/FAQSection';
-import KerjasamaSection from './Kerjasama';
+//import KerjasamaSection from './Kerjasama'; // Comment since not used for now to avoid lint error
 import { HomePage as HomePageType } from '@/payload-types';
 
 interface HomePageProps {

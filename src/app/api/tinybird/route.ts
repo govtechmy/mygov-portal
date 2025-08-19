@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     try {
       data = await res.json();
     } catch (err) {
-      data = { response: 'error' };
+      data = { response: `error: ${err}` };
     }
 
     return NextResponse.json(data, { status: res.status });

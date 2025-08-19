@@ -14,7 +14,8 @@ interface BlogPageProps {
   initialTotal?: number;
 }
 
-export default function BlogPage({ messages, initialDocs, initialTotal }: BlogPageProps) {
+export default function BlogPage({ initialDocs, initialTotal }: BlogPageProps) {
+  // export default function BlogPage({ messages, initialDocs, initialTotal }: BlogPageProps) { // Comment for now since not using i18n
   return (
     <SearchProvider>
       <Hero title="Blog" search={<SearchBarClient />} datepicker={<DatePickerClient />}></Hero>
