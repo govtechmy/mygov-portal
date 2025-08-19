@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="alternate" type="application/rss+xml" title="MyGov Portal Blog RSS" href="/rss.xml" />
         {/* Tinybird Analytics */}
         <script
           defer
