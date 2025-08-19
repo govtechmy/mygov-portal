@@ -40,10 +40,11 @@ export default function ContactPage({ messages }: ContactPageProps) {
   const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [turnstileWidgetId, setTurnstileWidgetId] = useState<string>('');
   const [turnstileVerified, setTurnstileVerified] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
-    const isDevelopment = process.env.APP_ENV === 'development';
+    const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
     // Skip Turnstile in development or if not properly configured
     if (isDevelopment || !turnstileSiteKey || turnstileSiteKey === '1x00000000000000000000AA') {
@@ -182,8 +183,18 @@ export default function ContactPage({ messages }: ContactPageProps) {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
+    setErrorMessage(null);
 
     try {
+      // --- Captcha check ---
+      const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
+      const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
+
+      if (!isDevelopment && turnstileSiteKey && turnstileSiteKey !== '1x00000000000000000000AA' && !turnstileToken) {
+        setErrorMessage('Please complete the verification before submitting.');
+        return; // stop here, no spinner
+      }
+
       const descriptionHtml = `
         <div>
           <p><strong>Name:</strong> ${data.name}</p>
@@ -224,6 +235,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           type: 'success',
           message: 'Your message has been submitted successfully!',
         });
+        setErrorMessage('');
         reset();
       } else {
         setSubmitStatus({
@@ -233,6 +245,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
       }
     } catch (error) {
       console.error('Error submitting contact form:', error);
+      setErrorMessage('Network error. Please check your connection and try again.');
       setSubmitStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
     } finally {
       setIsSubmitting(false);
@@ -398,7 +411,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           </div>
 
           {/* Row 6: Cloudflare Turnstile */}
-          {process.env.APP_ENV === 'production' &&
+          {process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
               <div className="space-y-3">
@@ -423,6 +436,13 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 <input type="hidden" name="cf-turnstile-response" value={turnstileToken} />
               </div>
             )}
+
+          {/* Error Message */}
+          {errorMessage && (
+            <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {errorMessage}
+            </div>
+          )}
         </div>
 
         <div className="flex w-full flex-col items-center justify-center gap-4">
