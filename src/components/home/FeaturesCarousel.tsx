@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useMediaQuery from '@/lib/mediaQuery';
 import { ChevronRightIcon, ChevronLeftIcon } from '@govtechmy/myds-react/icon';
 
@@ -17,115 +17,155 @@ interface FeaturesCarouselProps {
 }
 
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
-  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+  // separate states
+  const [currentFeatureIndexMobile, setCurrentFeatureIndexMobile] = useState(0);
+  const [currentFeatureIndexDesktop, setCurrentFeatureIndexDesktop] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isMobile = useMediaQuery('(max-width: 640px)');
-  const isLaptop = useMediaQuery('(max-width: 992px)');
-  let itemsPerPage = 4; // default desktop
+  // refs
+  const carouselRefMobile = useRef<HTMLDivElement>(null);
 
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const isTablet = useMediaQuery('(max-width: 992px)');
+  const isDesktop = useMediaQuery('(min-width: 993px)');
+
+  const itemWidth = 338; // 314px + 24px
+  let itemsPerPage = 3; // desktop shows 4 items
   if (isMobile) {
     itemsPerPage = 1.25;
-  } else if (isLaptop) {
+  } else if (isTablet) {
     itemsPerPage = 2;
   }
 
-  // Allow fixed maxIndex for laptop+
-  const maxClicks =
-    isLaptop || !isMobile
-      ? 4
-      : Math.max(0, features.length - Math.floor(itemsPerPage));
+  const maxClicksMobile = Math.max(0, features.length - Math.floor(itemsPerPage));
+  const maxClicksDesktop = Math.min(Math.max(0, features.length - itemsPerPage), 3);
 
+  // mobile scroll tracking
+  useEffect(() => {
+    const carouselElement = carouselRefMobile.current;
+    if (!carouselElement || isDesktop) return;
+
+    const handleScroll = () => {
+      const newIndex = Math.round(carouselElement.scrollLeft / itemWidth);
+      setCurrentFeatureIndexMobile(newIndex);
+    };
+
+    carouselElement.addEventListener('scroll', handleScroll);
+    return () => {
+      carouselElement.removeEventListener('scroll', handleScroll);
+    };
+  }, [isDesktop, itemWidth]);
+
+  // button actions
   const nextFeature = () => {
-    if (currentFeatureIndex < maxClicks) {
-      setCurrentFeatureIndex(prev => prev + 1);
+    if (isDesktop) {
+      if (currentFeatureIndexDesktop < maxClicksDesktop) {
+        setCurrentFeatureIndexDesktop(currentFeatureIndexDesktop + 1);
+      }
+    } else {
+      if (currentFeatureIndexMobile < maxClicksMobile) {
+        const nextIndex = currentFeatureIndexMobile + 1;
+        setCurrentFeatureIndexMobile(nextIndex);
+        carouselRefMobile.current?.scrollTo({
+          left: nextIndex * itemWidth,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
   const prevFeature = () => {
-    if (currentFeatureIndex > 0) {
-      setCurrentFeatureIndex(prev => prev - 1);
+    if (isDesktop) {
+      if (currentFeatureIndexDesktop > 0) {
+        setCurrentFeatureIndexDesktop(currentFeatureIndexDesktop - 1);
+      }
+    } else {
+      if (currentFeatureIndexMobile > 0) {
+        const prevIndex = currentFeatureIndexMobile - 1;
+        setCurrentFeatureIndexMobile(prevIndex);
+        carouselRefMobile.current?.scrollTo({
+          left: prevIndex * itemWidth,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
   const openModal = (index: number) => {
-    setCurrentFeatureIndex(index);
+    isDesktop ? setCurrentFeatureIndexDesktop(index) : setCurrentFeatureIndexMobile(index);
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
+
+  // which index are we on
+  const currentIndex = isDesktop ? currentFeatureIndexDesktop : currentFeatureIndexMobile;
+  const maxClicks = isDesktop ? maxClicksDesktop : maxClicksMobile;
 
   return (
-    <section className=" py-16 relative  md:flex md:justify-end">
-      <div className="overflow-hidden relative ">
-        {/* Carousel track */}
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(-${currentFeatureIndex * 334}px)`,
-          }}
-        >
+    <section className="py-12 sm:py-16 px-4">
+      <div className="flex flex-col gap-12">
+        {/* Mobile + Tablet View (scrollable) */}
+        <div ref={carouselRefMobile} className="xl:hidden flex flex-row gap-6 overflow-x-auto">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 px-2"
-              style={{
-                width: '334px',
-                height: '354px',
-              }}
-            >
-              <div
-                className="flex flex-col md:relative md:left-96 top-0 items-center w-full h-full cursor-pointer rounded-2xl overflow-hidden shadow-2xl bg-yellow-400"
-                onClick={() => openModal(index)}
-              >
-                <div className="flex flex-grow md:absolute  items-center justify-center">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="object-contain w-full h-full"
-                  />
-                </div>
-              </div>
-            </div>
+            <img
+              key={feature.title}
+              src={feature.image}
+              alt={feature.title}
+              className="w-[314px] h-[354px] border-solid border-8 border-[#E4E4E7] flex-shrink-0 cursor-pointer"
+              onClick={() => openModal(index)}
+            />
           ))}
+        </div>
+
+        {/* Desktop View (no scroll, only buttons) */}
+
+        <div className="hidden xl:flex overflow-hidden relative w-full">
+          <div
+            className="flex gap-6 transition-transform duration-500"
+            style={{
+              transform: `translateX(-${currentFeatureIndexDesktop * itemWidth}px)`,
+            }}
+          >
+            {features.map((feature, index) => (
+              <img
+                key={feature.title}
+                src={feature.image}
+                alt={feature.title}
+                className="w-[314px] h-[354px] border-solid border-8 border-[#E4E4E7] flex-shrink-0 cursor-pointer"
+                onClick={() => openModal(index)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={prevFeature}
+            disabled={currentIndex === 0}
+            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+              currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
+            }`}
+          >
+            <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
+          </button>
+
+          <button
+            onClick={nextFeature}
+            disabled={currentIndex >= maxClicks}
+            className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
+              currentIndex >= maxClicks ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white'
+            }`}
+          >
+            <ChevronRightIcon className="w-6 h-6 text-gray-800" />
+          </button>
         </div>
       </div>
 
-      {/* Arrows - bottom right */}
-      <div className="absolute -bottom-6 right-10 flex gap-3">
-        <button
-          onClick={prevFeature}
-          disabled={currentFeatureIndex === 0}
-          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-            currentFeatureIndex === 0
-              ? 'opacity-40 cursor-not-allowed'
-              : 'hover:bg-white'
-          }`}
-        >
-          <ChevronLeftIcon className="w-6 h-6 text-gray-800" />
-        </button>
-
-        <button
-          onClick={nextFeature}
-          disabled={currentFeatureIndex >= maxClicks}
-          className={`flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-white/80 backdrop-blur-md transition-colors ${
-            currentFeatureIndex >= maxClicks
-              ? 'opacity-40 cursor-not-allowed'
-              : 'hover:bg-white'
-          }`}
-        >
-          <ChevronRightIcon className="w-6 h-6 text-gray-800" />
-        </button>
-      </div>
-
-      {/* Modal Popup */}
+      {/* Modal */}
       {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-          onClick={closeModal}
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={closeModal}>
           <div
             className="relative flex flex-col md:flex-row bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full mx-4"
             onClick={e => e.stopPropagation()}
@@ -135,37 +175,20 @@ export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
               className="absolute top-4 right-4 p-1.5 rounded-lg border border-[#E4E4E7] text-gray-500 hover:text-gray-800"
               aria-label="Close modal"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              ✕
             </button>
 
             <div className="flex justify-center">
               <img
-                src={features[currentFeatureIndex].open}
-                alt={features[currentFeatureIndex].title}
+                src={features[currentIndex].open}
+                alt={features[currentIndex].title}
                 className="w-[200px] h-[247.08px]"
               />
             </div>
             <div className="flex-auto">
               <div className="p-6">
-                <h2 className="text-2xl font-semibold mb-4">
-                  {features[currentFeatureIndex].title}
-                </h2>
-                <p className="mt-4 text-gray-700 max-w-sm">
-                  {features[currentFeatureIndex].desc}
-                </p>
+                <h2 className="text-2xl font-semibold mb-4">{features[currentIndex].title}</h2>
+                <p className="mt-4 text-gray-700 max-w-sm">{features[currentIndex].desc}</p>
               </div>
             </div>
           </div>

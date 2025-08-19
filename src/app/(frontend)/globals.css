@@ -48,6 +48,25 @@
     #navbar button[aria-label='Open navigation menu'] {
       display: none !important;
     }
+
+    #navbar button[aria-label='Close navigation menu'] {
+      display: none !important;
+    }
+
+    /* Increase height / padding of mobile dropdown */
+    #navbar ~ div.shadow-context-menu {
+      padding-top: 2rem; /* default is 0.75rem (p-3) */
+      padding-bottom: 2rem;
+    }
+
+    .bg-bg-white.shadow-context-menu.absolute.z-40.block.xl\:hidden.h-fit.w-full.rounded-b-lg.p-3.transition-transform.motion-reduce\:transition-none.overflow-autp.max-h-full.-mb-16.translate-y-full {
+      top: 4px !important; /* top-2 */
+      bottom: auto !important; /* disable bottom-full */
+      margin-bottom: 100px !important;
+      transform: translateY(150%) !important;
+      display: none !important;
+      background-color: red;
+    }
   }
 }
 

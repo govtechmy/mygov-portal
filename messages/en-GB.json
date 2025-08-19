@@ -13,6 +13,7 @@
       }
     }
   },
+
   "portal": {
     "title": "Welcome to MyGov Portal",
     "subtitle": "Your gateway to Malaysian government services",
@@ -29,6 +30,7 @@
       "description": "Get in touch with government departments and agencies."
     }
   },
+
   "navigation": {
     "home": "Go Home",
     "notFound": "Page Not Found",
@@ -38,6 +40,7 @@
     "contact": "Contact Us",
     "download": "Download App"
   },
+
   "footer": {
     "address": "Aras 13, 14 & 15, Blok Menara, Menara Usahawan, No. 18, Persiaran Perdana, Presint 2, Pusat Pentadbiran Kerajaan Persekutuan, 62000 Putrajaya, Malaysia",
     "followUs": "Follow us",
@@ -71,6 +74,21 @@
       "lastUpdated": "Last updated: 11th March 2025"
     }
   },
+
+  "homepg": {
+    "herosection": {
+      "mygovmy": "MYGOV MALAYSIA",
+      "header1": "One-Stop Application",
+      "header2": "Digital Services",
+      "header3": "Government",
+      "parag": "   Integrating Government Services in a Single Application",
+      "buttondownload": "Download on",
+      "buttonapple": "App Store",
+      "buttongoogle": "Google Play",
+      "inisiatif": "An initiative of"
+    }
+  },
+
   "contactpg": {
     "contactUs": "Contact Us",
     "category": "Category",

@@ -3,20 +3,10 @@
 import Hero from '@/components/layout/hero';
 import { useRef } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
-import {
-  ChevronDownIcon,
-  EmailIcon,
-  UploadIcon,
-} from '@govtechmy/myds-react/icon';
+import { ChevronDownIcon, EmailIcon, UploadIcon } from '@govtechmy/myds-react/icon';
 import { Input, InputAddon, InputIcon } from '@govtechmy/myds-react/input';
 import { Label } from '@govtechmy/myds-react/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@govtechmy/myds-react/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@govtechmy/myds-react/select';
 import { TextArea } from '@govtechmy/myds-react/textarea';
 import { useState } from 'react';
 
@@ -106,8 +96,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
       } else {
         setSubmitStatus({
           type: 'error',
-          message:
-            result.error || 'Failed to submit your message. Please try again.',
+          message: result.error || 'Failed to submit your message. Please try again.',
         });
       }
     } catch (error) {
@@ -144,15 +133,9 @@ export default function ContactPage({ messages }: ContactPageProps) {
             <Controller
               control={control}
               name="category"
-              render={({ field }) => (
-                <DropdownCategory messages={messages} {...field} />
-              )}
+              render={({ field }) => <DropdownCategory messages={messages} {...field} />}
             />
-            {errors.category && (
-              <span className="text-red-600 text-sm">
-                {errors.category.message}
-              </span>
-            )}
+            {errors.category && <span className="text-red-600 text-sm">{errors.category.message}</span>}
           </div>
 
           <div className="flex w-full flex-col gap-1.5">
@@ -165,11 +148,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
               className="!shadow-sm"
               {...register('name')}
             />
-            {errors.name && (
-              <span className="text-red-600 text-sm">
-                {errors.name.message}
-              </span>
-            )}
+            {errors.name && <span className="text-red-600 text-sm">{errors.name.message}</span>}
           </div>
 
           <div className="flex w-full flex-col gap-1.5">
@@ -183,23 +162,21 @@ export default function ContactPage({ messages }: ContactPageProps) {
               {...register('ic', {
                 onChange: e => {
                   let value = e.target.value.replace(/\D/g, '');
-                  if (value.length > 6)
-                    value = value.slice(0, 6) + '-' + value.slice(6);
-                  if (value.length > 9)
-                    value = value.slice(0, 9) + '-' + value.slice(9);
+                  if (value.length > 6) value = value.slice(0, 6) + '-' + value.slice(6);
+                  if (value.length > 9) value = value.slice(0, 9) + '-' + value.slice(9);
                   e.target.value = value;
                 },
               })}
             />
-            {errors.ic && (
-              <span className="text-red-600 text-sm">{errors.ic.message}</span>
-            )}
+            {errors.ic && <span className="text-red-600 text-sm">{errors.ic.message}</span>}
           </div>
 
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.address}</Label>
             {/* <Input
               size="medium"
+              id="address"
+              type="text"
               id="address"
               type="text"
               placeholder={messages.contactpg.address}
@@ -212,11 +189,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
               className="!shadow-sm"
               {...register('address')}
             />
-            {errors.address && (
-              <span className="text-red-600 text-sm">
-                {errors.address.message}
-              </span>
-            )}
+            {errors.address && <span className="text-red-600 text-sm">{errors.address.message}</span>}
           </div>
 
           <div className="flex gap-4">
@@ -241,11 +214,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   />
                 )}
               />
-              {errors.phone && (
-                <span className="text-red-600 text-sm">
-                  {errors.phone.message}
-                </span>
-              )}
+              {errors.phone && <span className="text-red-600 text-sm">{errors.phone.message}</span>}
             </div>
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.email}</Label>
@@ -261,11 +230,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
                   <EmailIcon />
                 </InputIcon>
               </Input>
-              {errors.email && (
-                <span className="text-red-600 text-sm">
-                  {errors.email.message}
-                </span>
-              )}
+              {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
             </div>
           </div>
 
@@ -277,11 +242,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
               className="!shadow-sm"
               {...register('suggestion')}
             />
-            {errors.suggestion && (
-              <span className="text-red-600 text-sm">
-                {errors.suggestion.message}
-              </span>
-            )}
+            {errors.suggestion && <span className="text-red-600 text-sm">{errors.suggestion.message}</span>}
           </div>
 
           {/* original muat turun
@@ -360,13 +321,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
   );
 }
 
-function DropdownPhoneNo({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-}) {
+function DropdownPhoneNo({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   const countries = [
     { code: '+60', name: 'Malaysia' },
@@ -384,20 +339,11 @@ function DropdownPhoneNo({
   ];
 
   return (
-    <Select
-      size="small"
-      variant="ghost"
-      value={value}
-      onValueChange={onChange}
-      open={open}
-      onOpenChange={setOpen}
-    >
+    <Select size="small" variant="ghost" value={value} onValueChange={onChange} open={open} onOpenChange={setOpen}>
       <SelectTrigger className="flex items-center justify-between">
         <span>{value}</span>
         <ChevronDownIcon
-          className={`transform transition-transform duration-100 ease-out ${
-            open ? 'rotate-180' : 'rotate-0'
-          }`}
+          className={`transform transition-transform duration-100 ease-out ${open ? 'rotate-180' : 'rotate-0'}`}
         />
       </SelectTrigger>
       <SelectContent className="p-0">
@@ -420,12 +366,7 @@ function DropdownCategory({
   onChange: (value: string) => void;
 }) {
   return (
-    <Select
-      size="medium"
-      variant="outline"
-      value={value}
-      onValueChange={onChange}
-    >
+    <Select size="medium" variant="outline" value={value} onValueChange={onChange}>
       <SelectTrigger className="w-full justify-between">
         <SelectValue placeholder={messages.contactpg.chooseCategory} />
       </SelectTrigger>

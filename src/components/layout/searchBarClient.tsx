@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { newsData } from "./NewsItemTypes";
-import { useRouter } from "next/navigation";
-import { ChevronRightIcon } from "@govtechmy/myds-react/icon";
-import { Pill } from "@govtechmy/myds-react/pill";
+import { useContext, useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { ChevronRightIcon } from '@govtechmy/myds-react/icon';
+import { Pill } from '@govtechmy/myds-react/pill';
 import {
   SearchBar,
   SearchBarInputContainer,
@@ -14,17 +13,46 @@ import {
   SearchBarHint,
   SearchBarResults,
   SearchBarResultsItem,
-} from "@govtechmy/myds-react/search-bar";
+} from '@govtechmy/myds-react/search-bar';
+import { searchBarServer } from '@/lib/search';
+import type { Blog } from '@/payload-types';
+import { SearchContext } from './searchProvider';
 
 export default function SearchBarClient() {
+  const searchCtx = useContext(SearchContext);
+  if (!searchCtx) throw new Error('SearchContext must be used within a SearchProvider');
+  const { dateRange, type } = searchCtx;
   const [hasFocus, setHasFocus] = useState(false);
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState<Blog[]>([]);
   const hasQuery = query.length > 0;
   const router = useRouter();
+  const { locale } = useParams<{ locale: string }>();
 
-  const results = newsData.filter((item) =>
-    item.category.toLowerCase().includes(query.toLowerCase())
-  );
+  useEffect(() => {
+    let isActive = true;
+
+    const run = async () => {
+      if (!query) {
+        setResults([]);
+        return;
+      }
+      try {
+        const res = await searchBarServer(query);
+        if (!isActive) return;
+        // Payload returns PaginatedDocs<Blog>
+        setResults(res?.docs ?? []);
+      } catch {
+        if (!isActive) return;
+        setResults([]);
+      }
+    };
+
+    run();
+    return () => {
+      isActive = false;
+    };
+  }, [query]);
 
   return (
     <div className="max-w-[600px] px-4">
@@ -44,7 +72,19 @@ export default function SearchBarClient() {
             onFocus={() => setHasFocus(true)}
           />
           {query && <SearchBarClearButton onClick={() => setQuery('')} />}
-          <SearchBarSearchButton />
+          <SearchBarSearchButton
+            onClick={() => {
+              const params = new URLSearchParams();
+              params.set('q', query);
+              if (type && type !== 'Semua') params.set('type', type);
+              if (dateRange?.from) params.set('from', dateRange.from.toISOString());
+              if (dateRange?.to) params.set('to', dateRange.to.toISOString());
+              params.set('page', '1');
+              setResults([]);
+              setHasFocus(false);
+              router.push(`/${locale}/blog?${params.toString()}`);
+            }}
+          />
           {!hasFocus && (
             <SearchBarHint className="hidden lg:flex">
               Press <Pill size="small">/</Pill> to search
@@ -53,27 +93,18 @@ export default function SearchBarClient() {
         </SearchBarInputContainer>
 
         <SearchBarResults open={hasQuery && hasFocus}>
-          {hasQuery && !results.length && (
-            <p className="text-txt-black-900 text-center">No results found</p>
-          )}
+          {hasQuery && !results.length && <p className="text-txt-black-900 text-center">No results found</p>}
 
           {hasQuery && results.length > 0 && (
             <div
-              onMouseDown={(e) => e.preventDefault()} // prevent blur before click
+              onMouseDown={e => e.preventDefault()} // prevent blur before click
               className="max-h-[400px] overflow-y-scroll"
             >
-              {results.map((item) => (
-                <SearchBarResultsItem
-                  key={item.id}
-                  value={item.description}
-                  className="cursor-pointer"
-                >
-                  <button onClick={() => router.push(`blog/${item.id}`)}>
+              {results.map(item => (
+                <SearchBarResultsItem key={item.id} value={item.title} className="cursor-pointer">
+                  <button onClick={() => router.push(`/${locale}/blog/${item.id}`)}>
                     <p className="line-clamp-1 flex-1">
-                      {item.category}{" "}
-                      <span className="text-txt-black-500 text-xs">
-                        {item.title}
-                      </span>
+                      {item.type} <span className="text-txt-black-500 text-xs">{item.title}</span>
                     </p>
                   </button>
                   <ChevronRightIcon />
