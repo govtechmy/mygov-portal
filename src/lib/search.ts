@@ -5,10 +5,22 @@ import config from '@/payload.config';
 import type { Blog } from '@/payload-types';
 
 export async function searchBarServer(query: string) {
+  // Short-circuit very short queries to avoid unnecessary server work
+  if (!query || query.trim().length < 2) {
+    // Minimal shape needed by callers
+    return { docs: [] } as { docs: Blog[] };
+  }
   const payload = await getPayload({ config });
   const results = await payload.find({
     collection: 'blog',
     limit: 10,
+    depth: 0,
+    // Only fields needed for the suggestion list
+    select: {
+      id: true,
+      title: true,
+      type: true,
+    },
     where: {
       OR: [
         {
@@ -67,6 +79,17 @@ export async function searchResultMap(query: string, type: string, dateFrom: str
     limit: 12,
     page,
     sort: '-datePublished',
+    depth: 0,
+    // Only fields needed by ResultMap cards
+    select: {
+      id: true,
+      title: true,
+      type: true,
+      readtime: true,
+      datePublished: true,
+      caption: true,
+      content: true,
+    },
     where: andConditions.length ? ({ AND: andConditions } as unknown as Where) : undefined,
   });
   return results;

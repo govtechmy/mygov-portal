@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo, useRef } from 'react';
 import { SearchContext } from './searchProvider';
 import { ClockIcon } from '@govtechmy/myds-react/icon';
 import { AutoPagination } from '@govtechmy/myds-react/pagination';
@@ -9,12 +9,11 @@ import { searchResultMap } from '@/lib/search';
 import type { PaginatedDocs } from 'payload';
 
 interface ResultMapProps {
-  messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
   initialDocs?: Blog[];
   initialTotal?: number;
 }
 
-export default function ResultMap({ messages, initialDocs, initialTotal }: ResultMapProps) {
+export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps) {
   const context = useContext(SearchContext);
   if (!context) throw new Error('SearchContext must be used within a SearchProvider');
   const router = useRouter();
@@ -25,6 +24,8 @@ export default function ResultMap({ messages, initialDocs, initialTotal }: Resul
   const [total, setTotal] = useState(initialTotal ?? (initialDocs ? initialDocs.length : 0));
 
   const limit = 12;
+  const debounceMs = 200;
+  const timerRef = useRef<number | undefined>(undefined);
 
   const q = searchParams.get('q') ?? '';
   const type = searchParams.get('type') ?? 'Semua';
@@ -39,7 +40,9 @@ export default function ResultMap({ messages, initialDocs, initialTotal }: Resul
 
   useEffect(() => {
     let isActive = true;
-    const run = async () => {
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(async () => {
+      if (!isActive) return;
       // Use server-fetched initial results for the default view (page 1, show all)
       if (showAll && pageParam === 1 && initialDocs && initialDocs.length > 0) {
         setItems(initialDocs);
@@ -53,50 +56,61 @@ export default function ResultMap({ messages, initialDocs, initialTotal }: Resul
       // fall back to docs length if unavailable
       // @ts-expect-error allow different shapes
       setTotal(res?.totalDocs ?? res?.total ?? (res?.docs ? res.docs.length : 0));
-    };
-    run();
+    }, debounceMs);
     return () => {
       isActive = false;
+      if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-  }, [q, type, from, to, pageParam, showAll]);
+  }, [q, type, from, to, pageParam, showAll, initialDocs, initialTotal]);
+
+  function ResultCard({ item, onClick }: { item: Blog; onClick: () => void }) {
+    const excerpt = useMemo(() => {
+      if (item.caption && item.caption.trim().length > 0) return item.caption;
+      // Avoid heavy work if content missing
+      if (!item.content) return '';
+      return lexicalToPlainText(item.content).slice(0, 180);
+    }, [item.caption, item.content]);
+
+    const formattedDate = useMemo(() => {
+      return new Date(item.datePublished).toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
+    }, [item.datePublished]);
+
+    return (
+      <div
+        key={item.id}
+        className="border shadow-sm border-[#E4E4E7] rounded-md p-6 flex flex-col hover:cursor-pointer"
+        onClick={onClick}
+      >
+        <div className="flex gap-2 items-center">
+          <div className="text-sm font-semibold text-[#6B6B74]">{item.type}</div>
+          <div className="border-l  border-[#D4D4D8] h-4"></div>
+          <div className="flex items-center gap-1 text-[#71717A]">
+            <ClockIcon />
+            <div className="text-sm">Bacaan {item.readtime} Minit</div>
+          </div>
+        </div>
+
+        <div className="flex justify-between py-2 gap-4.5">
+          <div className="flex flex-col gap-2">
+            <div className="font-semibold text-base">{item.title}</div>
+            <div className="text-sm">{excerpt}</div>
+          </div>
+        </div>
+        <div className="flex-grow"></div>
+        <div className="text-sm text-[#]">{formattedDate}</div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="icon-custom-grid-cols grid gap-6 py-8">
         {items.map(item => (
-          <div
-            key={item.id}
-            className="border shadow-sm border-[#E4E4E7] rounded-md p-6 flex flex-col hover:cursor-pointer"
-            onClick={() => router.push(`blog/${item.id}`)}
-          >
-            <div className="flex gap-2 items-center">
-              <div className="text-sm font-semibold text-[#6B6B74]">{item.type}</div>
-              <div className="border-l  border-[#D4D4D8] h-4"></div>
-              <div className="flex items-center gap-1 text-[#71717A]">
-                <ClockIcon />
-                <div className="text-sm">Bacaan {item.readtime} Minit</div>
-              </div>
-            </div>
-
-            <div className="flex justify-between py-2 gap-4.5">
-              <div className="flex flex-col gap-2">
-                <div className="font-semibold text-base">{item.title}</div>
-                <div className="text-sm">
-                  {item.caption && item.caption.trim().length > 0
-                    ? item.caption
-                    : lexicalToPlainText(item.content).slice(0, 180)}
-                </div>
-              </div>
-            </div>
-            <div className="flex-grow"></div>
-            <div className="text-sm text-[#]">
-              {new Date(item.datePublished).toLocaleDateString('en-GB', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </div>
-          </div>
+          <ResultCard key={item.id} item={item} onClick={() => router.push(`blog/${item.id}`)} />
         ))}
       </div>
 
