@@ -1,6 +1,7 @@
 'use client';
 
 import Hero from '@/components/layout/hero';
+import { useRef } from 'react';
 import { Button } from '@govtechmy/myds-react/button';
 import {
   ChevronDownIcon,
@@ -19,135 +20,70 @@ import {
 import { TextArea } from '@govtechmy/myds-react/textarea';
 import { useState } from 'react';
 
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { contactSchema, ContactFormData } from '@/lib/contactValidation';
+
 interface ContactPageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
 }
 
 export default function ContactPage({ messages }: ContactPageProps) {
-  const [formData, setFormData] = useState({
-    category: '',
-    name: '',
-    ic: '',
-    address: '',
-    phone: '',
-    phoneCode: '+60',
-    email: '',
-    suggestion: '',
-  });
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      category: '',
+      name: '',
+      ic: '',
+      address: '',
+      phone: '',
+      phoneCode: '+60',
+      email: '',
+      suggestion: '',
+      // file: undefined,
+    },
+  });
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
-  //   setSubmitStatus({ type: null, message: '' });
-
-  //   try {
-  //     const descriptionHtml = `
-  //     <div>
-  //       <p><strong>Name:</strong> ${formData.name}</p>
-  //       <p><strong>Email:</strong> ${formData.email}</p>
-  //       <p><strong>Phone:</strong> ${formData.phoneCode} ${formData.phone}</p>
-  //       <p><strong>IC:</strong> ${formData.ic}</p>
-  //       <p><strong>Address:</strong> ${formData.address}</p>
-  //       <p><strong>Category:</strong> ${formData.category}</p>
-  //       <p><strong>Suggestion:</strong> ${formData.suggestion}</p>
-  //     </div>
-  //     `;
-
-  //     const minifiedDescriptionHtml = descriptionHtml
-  //       .replace(/\s+/g, ' ')
-  //       .trim();
-  //     const freshdeskData = {
-  //       name: formData.name,
-  //       email: formData.email,
-  //       phone: `${formData.phoneCode}${formData.phone}`,
-  //       subject: `${formData.category} - ${formData.name}`,
-  //       source: 2, // PORTAL
-  //       priority: 2, // Medium priority
-  //       status: 2, // Open status
-  //       description: minifiedDescriptionHtml,
-  //     };
-
-  //     const response = await fetch(process.env.FRESHDESK_API_URL ?? '', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: 'Basic ' + btoa(process.env.FRESHDESK_API_KEY ?? ''),
-  //       },
-  //       body: JSON.stringify(freshdeskData),
-  //     });
-
-  //     const result = await response.json();
-
-  //     if (response.ok) {
-  //       setSubmitStatus({
-  //         type: 'success',
-  //         message: 'Your message has been submitted successfully!',
-  //       });
-
-  //       // Reset form
-  //       setFormData({
-  //         category: '',
-  //         name: '',
-  //         ic: '',
-  //         address: '',
-  //         phone: '',
-  //         phoneCode: '+60',
-  //         email: '',
-  //         suggestion: '',
-  //       });
-  //     } else {
-  //       setSubmitStatus({
-  //         type: 'error',
-  //         message:
-  //           result.error || 'Failed to submit your message. Please try again.',
-  //       });
-  //     }
-  //   } catch (error) {
-  //     setSubmitStatus({
-  //       type: 'error',
-  //       message: 'An error occurred. Please try again later.',
-  //     });
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
     try {
       const descriptionHtml = `
         <div>
-          <p><strong>Name:</strong> ${formData.name}</p>
-          <p><strong>Email:</strong> ${formData.email}</p>
-          <p><strong>Phone:</strong> ${formData.phoneCode} ${formData.phone}</p>
-          <p><strong>IC:</strong> ${formData.ic}</p>
-          <p><strong>Address:</strong> ${formData.address}</p>
-          <p><strong>Category:</strong> ${formData.category}</p>
-          <p><strong>Suggestion:</strong> ${formData.suggestion}</p>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> ${data.email}</p>
+          <p><strong>Phone:</strong> ${data.phoneCode} ${data.phone}</p>
+          <p><strong>IC:</strong> ${data.ic}</p>
+          <p><strong>Address:</strong> ${data.address}</p>
+          <p><strong>Category:</strong> ${data.category}</p>
+          <p><strong>Suggestion:</strong> ${data.suggestion}</p>
         </div>
       `
         .replace(/\s+/g, ' ')
         .trim();
 
       const freshdeskData = {
-        name: formData.name,
-        email: formData.email,
-        phone: `${formData.phoneCode}${formData.phone}`,
-        subject: `${formData.category} - ${formData.name}`,
-        source: 2, // PORTAL
-        priority: 1, // Medium
-        status: 2, // Open
+        name: data.name,
+        email: data.email,
+        phone: `${data.phoneCode}${data.phone}`,
+        subject: `${data.category} - ${data.name}`,
+        source: 2,
+        priority: 1,
+        status: 2,
         description: descriptionHtml,
       };
 
@@ -166,16 +102,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           type: 'success',
           message: 'Your message has been submitted successfully!',
         });
-        setFormData({
-          category: '',
-          name: '',
-          ic: '',
-          address: '',
-          phone: '',
-          phoneCode: '+60',
-          email: '',
-          suggestion: '',
-        });
+        reset();
       } else {
         setSubmitStatus({
           type: 'error',
@@ -197,7 +124,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
     <div>
       <Hero title={messages.contactpg.contactUs}></Hero>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="mx-auto flex max-w-[876px] flex-col items-center justify-center gap-12 px-4 py-20 font-inter"
       >
         {submitStatus.type && (
@@ -213,15 +140,21 @@ export default function ContactPage({ messages }: ContactPageProps) {
         )}
         <div className="flex w-full flex-col gap-6">
           <div className="flex w-full flex-col gap-1.5">
-            <Label className="font-inter text-base">
-              {messages.contactpg.category}
-            </Label>
-            <DropdownCategory
-              messages={messages}
-              value={formData.category}
-              onChange={value => handleInputChange('category', value)}
+            <Label>{messages.contactpg.category}</Label>
+            <Controller
+              control={control}
+              name="category"
+              render={({ field }) => (
+                <DropdownCategory messages={messages} {...field} />
+              )}
             />
+            {errors.category && (
+              <span className="text-red-600 text-sm">
+                {errors.category.message}
+              </span>
+            )}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.name}</Label>
             <Input
@@ -230,11 +163,15 @@ export default function ContactPage({ messages }: ContactPageProps) {
               type="text"
               placeholder={messages.contactpg.name}
               className="!shadow-sm"
-              value={formData.name}
-              onChange={e => handleInputChange('name', e.target.value)}
-              required
+              {...register('name')}
             />
+            {errors.name && (
+              <span className="text-red-600 text-sm">
+                {errors.name.message}
+              </span>
+            )}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.ic}</Label>
             <Input
@@ -243,45 +180,72 @@ export default function ContactPage({ messages }: ContactPageProps) {
               type="text"
               placeholder="000000-00-0000"
               className="!shadow-sm"
-              value={formData.ic}
-              onChange={e => handleInputChange('ic', e.target.value)}
-              required
+              {...register('ic', {
+                onChange: e => {
+                  let value = e.target.value.replace(/\D/g, '');
+                  if (value.length > 6)
+                    value = value.slice(0, 6) + '-' + value.slice(6);
+                  if (value.length > 9)
+                    value = value.slice(0, 9) + '-' + value.slice(9);
+                  e.target.value = value;
+                },
+              })}
             />
+            {errors.ic && (
+              <span className="text-red-600 text-sm">{errors.ic.message}</span>
+            )}
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.address}</Label>
-            <Input
+            {/* <Input
               size="medium"
               id="address"
               type="text"
               placeholder={messages.contactpg.address}
               className="!shadow-sm"
-              value={formData.address}
-              onChange={e => handleInputChange('address', e.target.value)}
-              required
+              {...register('address')}
+            /> */}
+            <TextArea
+              placeholder={messages.contactpg.address}
+              size="medium"
+              className="!shadow-sm"
+              {...register('address')}
             />
+            {errors.address && (
+              <span className="text-red-600 text-sm">
+                {errors.address.message}
+              </span>
+            )}
           </div>
+
           <div className="flex gap-4">
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.phone}</Label>
-              <Input
-                prepend={
-                  <InputAddon className="!p-0 !border-r-0">
-                    <DropdownPhoneNo
-                      value={formData.phoneCode}
-                      onChange={value => handleInputChange('phoneCode', value)}
-                    />
-                  </InputAddon>
-                }
-                size="medium"
-                id="phone"
-                type="tel"
-                placeholder="12 345 6789"
-                className="!shadow-sm"
-                value={formData.phone}
-                onChange={e => handleInputChange('phone', e.target.value)}
-                required
+              <Controller
+                control={control}
+                name="phoneCode"
+                render={({ field }) => (
+                  <Input
+                    prepend={
+                      <InputAddon className="!p-0 !border-r-0">
+                        <DropdownPhoneNo {...field} />
+                      </InputAddon>
+                    }
+                    size="medium"
+                    id="phone"
+                    type="tel"
+                    placeholder="12 345 6789"
+                    className="!shadow-sm"
+                    {...register('phone')}
+                  />
+                )}
               />
+              {errors.phone && (
+                <span className="text-red-600 text-sm">
+                  {errors.phone.message}
+                </span>
+              )}
             </div>
             <div className="flex w-full flex-col gap-1.5">
               <Label>{messages.contactpg.email}</Label>
@@ -291,33 +255,49 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 type="email"
                 placeholder="hello@tech.gov.my"
                 className="!shadow-sm"
-                value={formData.email}
-                onChange={e => handleInputChange('email', e.target.value)}
-                required
+                {...register('email')}
               >
                 <InputIcon position="left">
                   <EmailIcon />
                 </InputIcon>
               </Input>
+              {errors.email && (
+                <span className="text-red-600 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
           </div>
+
           <div className="flex w-full flex-col gap-1.5">
             <Label>{messages.contactpg.suggestion}</Label>
             <TextArea
               placeholder={messages.contactpg.suggestionPlaceholder}
               size="medium"
               className="!shadow-sm"
-              value={formData.suggestion}
-              onChange={e => handleInputChange('suggestion', e.target.value)}
+              {...register('suggestion')}
             />
+            {errors.suggestion && (
+              <span className="text-red-600 text-sm">
+                {errors.suggestion.message}
+              </span>
+            )}
           </div>
+
+          {/* original muat turun
           <div className="border p-4 !shadow-sm rounded-md flex items-center">
-            <div className="flex-grow flex flex-col ">
+            <div className="flex-grow flex flex-col">
               <div>{messages.contactpg.upload}</div>
               <div className="text-[#6B6B74]">
                 <div>{messages.contactpg.filetype}</div>
                 <div>{messages.contactpg.maxsize}: 25MB</div>
               </div>
+              <input type="file" {...register('file')} />
+              {errors.file && (
+                <span className="text-red-600 text-sm">
+                  {errors.file.message as string}
+                </span>
+              )}
             </div>
             <div>
               <Button variant="default-outline" size="medium">
@@ -325,8 +305,46 @@ export default function ContactPage({ messages }: ContactPageProps) {
                 {messages.contactpg.upload2}
               </Button>
             </div>
-          </div>
+          </div> */}
+
+          {/* updated muat turun
+          <div className="border p-4 !shadow-sm rounded-md flex items-center">
+            <div className="flex-grow flex flex-col">
+              <div>{messages.contactpg.upload}</div>
+              <div className="text-[#6B6B74]">
+                <div>{messages.contactpg.filetype}</div>
+                <div>{messages.contactpg.maxsize}: 25MB</div>
+              </div>
+
+              <input
+                type="file"
+                accept=".pdf,.jpg,.jpeg,.png"
+                {...register("file", {
+                  onChange: (e) => e.target.files?.[0] ?? undefined, 
+                })}
+              />
+
+              {errors.file && (
+                <span className="text-red-600 text-sm">
+                  {errors.file.message as string}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <Button
+                variant="default-outline"
+                size="medium"
+                type="button"
+                onClick={() => fileInputRef.current?.click()} 
+              >
+                <UploadIcon />
+                {messages.contactpg.upload2}
+              </Button>
+            </div>
+          </div> */}
         </div>
+
         <div className="flex w-full flex-col items-center justify-center gap-4">
           <Button
             type="submit"
@@ -374,7 +392,7 @@ function DropdownPhoneNo({
       open={open}
       onOpenChange={setOpen}
     >
-      <SelectTrigger className=" flex items-center justify-between">
+      <SelectTrigger className="flex items-center justify-between">
         <span>{value}</span>
         <ChevronDownIcon
           className={`transform transition-transform duration-100 ease-out ${
