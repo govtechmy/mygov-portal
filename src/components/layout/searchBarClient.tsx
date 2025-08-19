@@ -15,6 +15,7 @@ import {
   SearchBarResultsItem,
 } from '@govtechmy/myds-react/search-bar';
 import { searchBarServer } from '@/lib/search';
+import { trackSearch, trackButtonClick } from '@/lib/analytics';
 import type { Blog } from '@/payload-types';
 import { SearchContext } from './searchProvider';
 
@@ -80,6 +81,14 @@ export default function SearchBarClient() {
           {query && <SearchBarClearButton onClick={() => setQuery('')} />}
           <SearchBarSearchButton
             onClick={() => {
+              // Track search event
+              if (query.trim()) {
+                trackSearch(query.trim(), {
+                  search_type: type || 'Semua',
+                  has_date_range: !!(dateRange?.from || dateRange?.to),
+                });
+              }
+
               const params = new URLSearchParams();
               params.set('q', query);
               if (type && type !== 'Semua') params.set('type', type);
@@ -108,7 +117,17 @@ export default function SearchBarClient() {
             >
               {results.map(item => (
                 <SearchBarResultsItem key={item.id} value={item.title} className="cursor-pointer">
-                  <button onClick={() => router.push(`/${locale}/blog/${item.id}`)}>
+                  <button
+                    onClick={() => {
+                      // Track result click
+                      trackButtonClick('search_result_click', {
+                        result_title: item.title,
+                        result_type: item.type,
+                        search_query: query,
+                      });
+                      router.push(`/${locale}/blog/${item.id}`);
+                    }}
+                  >
                     <p className="line-clamp-1 flex-1">
                       {item.type} <span className="text-txt-black-500 text-xs">{item.title}</span>
                     </p>
