@@ -3,6 +3,7 @@ node_modules/
 .pnp
 .pnp.js
 
+
 # Production builds
 .next/
 out/
@@ -85,3 +86,7 @@ jspm_packages/
 # Package lock files
 package-lock.json
 yarn.lock
+
+
+src/app/(payload)/admin/importMap.js
+src/payload-types.ts
