@@ -22,6 +22,7 @@ export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps)
   const [page, setPage] = useState(1);
   const [items, setItems] = useState<Blog[]>(initialDocs ?? []);
   const [total, setTotal] = useState(initialTotal ?? (initialDocs ? initialDocs.length : 0));
+  const [isLoading, setIsLoading] = useState(false);
 
   const limit = 12;
   const debounceMs = 200;
@@ -41,12 +42,19 @@ export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps)
   useEffect(() => {
     let isActive = true;
     if (timerRef.current) window.clearTimeout(timerRef.current);
+
+    // Set loading state when search parameters change
+    if (!showAll || pageParam !== 1 || !initialDocs || initialDocs.length === 0) {
+      setIsLoading(true);
+    }
+
     timerRef.current = window.setTimeout(async () => {
       if (!isActive) return;
       // Use server-fetched initial results for the default view (page 1, show all)
       if (showAll && pageParam === 1 && initialDocs && initialDocs.length > 0) {
         setItems(initialDocs);
         setTotal(initialTotal ?? initialDocs.length);
+        setIsLoading(false);
         return;
       }
       const res = (await searchResultMap(q, type, from, to, pageParam)) as PaginatedDocs<Blog>;
@@ -56,12 +64,35 @@ export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps)
       // fall back to docs length if unavailable
       // @ts-expect-error allow different shapes
       setTotal(res?.totalDocs ?? res?.total ?? (res?.docs ? res.docs.length : 0));
+      setIsLoading(false);
     }, debounceMs);
     return () => {
       isActive = false;
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
   }, [q, type, from, to, pageParam, showAll, initialDocs, initialTotal]);
+
+  // Loading skeleton component
+  const LoadingSkeleton = () => (
+    <div className="border shadow-sm border-[#E4E4E7] rounded-md p-6 flex flex-col animate-pulse">
+      <div className="flex gap-2 items-center">
+        <div className="w-20 h-4 bg-gray-200 rounded"></div>
+        <div className="border-l border-[#D4D4D8] h-4"></div>
+        <div className="flex items-center gap-1">
+          <div className="w-4 h-4 bg-gray-200 rounded"></div>
+          <div className="w-24 h-4 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+      <div className="flex justify-between py-2 gap-4.5">
+        <div className="flex flex-col gap-2">
+          <div className="w-48 h-5 bg-gray-200 rounded"></div>
+          <div className="w-64 h-4 bg-gray-200 rounded"></div>
+        </div>
+      </div>
+      <div className="flex-grow"></div>
+      <div className="w-24 h-4 bg-gray-200 rounded"></div>
+    </div>
+  );
 
   function ResultCard({ item, onClick }: { item: Blog; onClick: () => void }) {
     const excerpt = useMemo(() => {
@@ -109,9 +140,11 @@ export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps)
   return (
     <div>
       <div className="icon-custom-grid-cols grid gap-6 py-8">
-        {items.map(item => (
-          <ResultCard key={item.id} item={item} onClick={() => router.push(`blog/${item.id}`)} />
-        ))}
+        {isLoading
+          ? // Show loading skeletons
+            Array.from({ length: limit }).map((_, index) => <LoadingSkeleton key={index} />)
+          : // Show actual results
+            items.map(item => <ResultCard key={item.id} item={item} onClick={() => router.push(`blog/${item.id}`)} />)}
       </div>
 
       <AutoPagination
@@ -120,6 +153,7 @@ export default function ResultMap({ initialDocs, initialTotal }: ResultMapProps)
         count={total}
         type="default"
         onPageChange={nextPage => {
+          setIsLoading(true); // Set loading when page changes
           setPage(nextPage);
           const params = new URLSearchParams(Array.from(searchParams.entries()));
           params.set('page', String(nextPage));
