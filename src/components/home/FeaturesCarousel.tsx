@@ -12,7 +12,7 @@ interface FeaturesCarouselProps {
 }
 
 export default function FeaturesCarousel({ features }: FeaturesCarouselProps) {
-  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isMobile = useMediaQuery('(max-width: 640px)');
