@@ -38,8 +38,12 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
   const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [turnstileWidgetId, setTurnstileWidgetId] = useState<string>('');
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [turnstileVerified, setTurnstileVerified] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const [isFlutterWebView, setIsFlutterWebView] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,11 +56,15 @@ export default function ContactPage({ messages }: ContactPageProps) {
       setTurnstileToken('webview-bypass');
       setTurnstileVerified(true);
     }
-  }, []);
 
-  useEffect(() => {
     // Skip Turnstile if in Flutter WebView
     if (isFlutterWebView) return;
+
+    const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
+    if (!isTurnstileEnabled) {
+      console.log('Turnstile is disabled');
+      return;
+    }
 
     const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
     const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
@@ -211,12 +219,15 @@ export default function ContactPage({ messages }: ContactPageProps) {
 
     try {
       // --- Captcha check ---
+      const isTurnstileEnabled = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true';
       const turnstileSiteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY;
       const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === 'development';
 
-      if (!isDevelopment && turnstileSiteKey && turnstileSiteKey !== '1x00000000000000000000AA' && !turnstileToken) {
-        setErrorMessage('Please complete the verification before submitting.');
-        return; // stop here, no spinner
+      if (isTurnstileEnabled) {
+        if (!isDevelopment && turnstileSiteKey && turnstileSiteKey !== '1x00000000000000000000AA' && !turnstileToken) {
+          setErrorMessage('Please complete the verification before submitting.');
+          return; // stop here, no spinner
+        }
       }
 
       const descriptionHtml = `
@@ -242,7 +253,10 @@ export default function ContactPage({ messages }: ContactPageProps) {
       formData.append('priority', '1');
       formData.append('status', '2');
       formData.append('description', descriptionHtml);
-      formData.append('cf-turnstile-response', turnstileToken);
+
+      if (isTurnstileEnabled) {
+        formData.append('cf-turnstile-response', turnstileToken);
+      }
 
       if (data.file) {
         formData.append('attachments[]', data.file);
@@ -441,6 +455,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           {/* Row 6: Cloudflare Turnstile */}
           {!isFlutterWebView &&
             process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
+            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true' &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
               <div className="space-y-3">
@@ -472,7 +487,10 @@ export default function ContactPage({ messages }: ContactPageProps) {
             type="submit"
             size="medium"
             className="w-full items-center justify-center !shadow-md"
-            disabled={isSubmitting || (!isFlutterWebView && !turnstileToken)}
+            disabled={
+              isSubmitting ||
+              (!isFlutterWebView && !turnstileToken && process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true')
+            }
           >
             {isSubmitting ? 'Submitting...' : messages.contactpg.send}
           </Button>
