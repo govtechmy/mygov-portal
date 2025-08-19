@@ -71,10 +71,10 @@ export default function FooterComponent({}: FooterComponentProps) {
           <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
             <p className="text-xs md:text-sm">© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
 
-            <div className="flex gap-3 items-center">
+            {/* <div className="flex gap-3 items-center">
               <SiteLink className="text-xs md:text-sm">Disclaimer</SiteLink>
               <SiteLink className="text-xs md:text-sm">Privacy Policy</SiteLink>
-            </div>
+            </div> */}
           </div>
           <div className="flex flex-row gap-3">
             <Link
