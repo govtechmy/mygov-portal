@@ -455,6 +455,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
           {/* Row 6: Cloudflare Turnstile */}
           {!isFlutterWebView &&
             process.env.NEXT_PUBLIC_APP_ENV === 'production' &&
+            process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED === 'true' &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY &&
             process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY !== '1x00000000000000000000AA' && (
               <div className="space-y-3">
