@@ -82,7 +82,13 @@ export default function ResultMap({ messages }: ResultMapProps) {
               </div>
             </div>
             <div className="flex-grow"></div>
-            <div className="text-sm text-[#]">{new Date(item.datePublished).toLocaleDateString()}</div>
+            <div className="text-sm text-[#]">
+              {new Date(item.datePublished).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </div>
           </div>
         ))}
       </div>
