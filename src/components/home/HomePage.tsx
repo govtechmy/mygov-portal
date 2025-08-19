@@ -4,13 +4,14 @@ import AboutSection from '@/components/home/AboutSection';
 import FeaturesTilesSection from '@/components/home/FeaturesTilesSection';
 import FeaturesCarousel from '@/components/home/FeaturesCarousel';
 import FAQSection from '@/components/home/FAQSection';
-import { data } from '@/constants/home';
+import { HomePage as HomePageType } from '@/payload-types';
 
 interface HomePageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
+  data: HomePageType;
 }
 
-export default function HomePage({ messages }: HomePageProps) {
+export default function HomePage({ messages, data }: HomePageProps) {
   return (
     <div className="mx-auto px-[18px] sm:px-[18px] md:px-[24px] lg:px-[24px] xl:px-[24px] max-w-[1328px] py-16">
       {/* Hidden SPLaSK Contact Details tag for crawler detection */}
@@ -25,7 +26,7 @@ export default function HomePage({ messages }: HomePageProps) {
       {/* pass messages here for client component*/}
       <HeroSection messages={messages} />
       {/* pass messages here for client component*/}
-      <AboutSection messages={messages} />
+      <AboutSection title={data.aboutTitle} description={data.aboutDescription} />
       {/* payload data */}
       <FeaturesTilesSection leftItems={data.leftItems} rightItems={data.rightItems} />
       <FeaturesCarousel features={data.features} />
