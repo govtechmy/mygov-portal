@@ -26,6 +26,7 @@ export async function GET(request: Request) {
       title: true,
       datePublished: true,
       content: true,
+      type: true,
     },
   });
 
@@ -42,7 +43,7 @@ export async function GET(request: Request) {
       <item>
         <title>${title}</title>
         <link>${url}</link>
-        <category>${type}</category>
+        <category>${type.toUpperCase()}</category>
         <guid isPermaLink=\"true\">${guid}</guid>
         <pubDate>${pubDate}</pubDate>
         <description>${description}</description>
