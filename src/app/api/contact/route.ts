@@ -68,6 +68,40 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.FRESHDESK_API_KEY;
     const url = process.env.FRESHDESK_API_URL;
 
+    const subject = formData.get('subject')?.toString();
+    let freshSubjectCategories = '';
+
+    if (subject?.includes('Pertanyaan')) {
+      //Pertanyaan)
+      freshSubjectCategories = 'Pertanyaan';
+    }
+
+    if (subject?.includes('Aduan')) {
+      //Aduan)
+      freshSubjectCategories = 'Aduan';
+    }
+
+    if (subject?.includes('Cadangan')) {
+      //Cadangan)
+      freshSubjectCategories = 'Cadangan/Maklum Balas';
+    }
+
+    if (subject?.includes('Maklum Balas')) {
+      //Maklum Balas)
+      freshSubjectCategories = 'Maklum Balas';
+    }
+
+    if (subject?.includes('AduanMyGOV')) {
+      //Maklum Balas)
+      freshSubjectCategories = 'MyGOV';
+    }
+
+    if (subject?.includes('AduanMyDigital')) {
+      freshSubjectCategories = 'MyDigital ID';
+    }
+
+    formData.append('custom_fields.cf_categories', freshSubjectCategories.toString() || '');
+
     if (!apiKey || !url) {
       return NextResponse.json({ error: 'Freshdesk API credentials not configured' }, { status: 500 });
     }
