@@ -34,10 +34,19 @@ export async function GET(request: Request) {
       const title = escapeXml(doc.title ?? '');
       const url = `${origin}/${defaultLocale}/blog/${doc.id}`;
       const guid = url;
+      const type = doc.type;
       const pubDate = doc.datePublished ? new Date(doc.datePublished).toUTCString() : new Date().toUTCString();
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
-      return `\n    <item>\n      <title>${title}</title>\n      <link>${url}</link>\n      <guid isPermaLink=\"true\">${guid}</guid>\n      <pubDate>${pubDate}</pubDate>\n      <description>${description}</description>\n    </item>`;
+      return `\n    
+      <item>
+        <title>${title}</title>
+        <link>${url}</link>
+        <category>${type}</category>
+        <guid isPermaLink=\"true\">${guid}</guid>
+        <pubDate>${pubDate}</pubDate>
+        <description>${description}</description>
+      </item>`;
     })
     .join('');
 
