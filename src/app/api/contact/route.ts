@@ -96,14 +96,14 @@ export async function POST(req: NextRequest) {
       freshSubjectCategories = 'MyGOV';
     }
 
-    if (subject?.includes('AduanMyDigital ID')) {
+    if (subject?.includes('Aduan-MyDigital ID')) {
       freshSubjectCategories = 'MyDigital ID';
     }
 
     formData.append('custom_fields[cf_categories]', freshSubjectCategories);
     formData.append('custom_fields[cf_sub_categories]', 'Technical issue');
 
-    // console.log(formData);
+    console.log(formData);
 
     if (!apiKey || !url) {
       return NextResponse.json({ error: 'Freshdesk API credentials not configured' }, { status: 500 });

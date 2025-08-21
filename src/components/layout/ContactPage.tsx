@@ -525,7 +525,7 @@ function DropdownCategory({
         <SelectItem className="h-[40px]" value="Cadangan">
           {messages.contactpg.suggestionDropdown}
         </SelectItem>
-        <SelectItem className="h-[40px]" value="AduanMyDigital ID">
+        <SelectItem className="h-[40px]" value="Aduan-MyDigital ID">
           {messages.contactpg.reportDropdown}
         </SelectItem>
         <SelectItem className="h-[40px]" value="AduanMyGOV">
