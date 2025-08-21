@@ -19,23 +19,6 @@ interface ContactPageProps {
   messages: ReturnType<typeof import('@/lib/i18n').getMessages>;
 }
 
-type ContactPayload = {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  source: number;
-  priority: number;
-  status: number;
-  description: string;
-  attachment?: {
-    name: string;
-    type: string;
-    size: number;
-    content?: string;
-  };
-};
-
 declare global {
   interface Window {
     turnstile: {
@@ -264,55 +247,55 @@ export default function ContactPage({ messages }: ContactPageProps) {
         .replace(/\s+/g, ' ')
         .trim();
 
-      // const formData = new FormData();
-      // formData.append('name', data.name);
-      // formData.append('email', data.email);
-      // formData.append('phone', `${data.phoneCode}${data.phone}`);
-      // formData.append('subject', `${data.category} - ${data.name}`);
-      // formData.append('source', '2');
-      // formData.append('priority', '1');
-      // formData.append('status', '2');
-      // formData.append('description', descriptionHtml);
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', `${data.phoneCode}${data.phone}`);
+      formData.append('subject', `${data.category} - ${data.name}`);
+      formData.append('source', '2');
+      formData.append('priority', '1');
+      formData.append('status', '2');
+      formData.append('description', descriptionHtml);
 
       // if (isTurnstileEnabled) {
       //   formData.append('cf-turnstile-response', turnstileToken);
       // }
 
-      // if (data.file) {
-      //   formData.append('attachments[]', data.file);
-      // }
-
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   body: formData,
-      // });
-
-      const payload: ContactPayload = {
-        name: data.name,
-        email: data.email,
-        phone: `${data.phoneCode}${data.phone}`,
-        subject: `${data.category} - ${data.name}`,
-        source: 2,
-        priority: 1,
-        status: 2,
-        description: descriptionHtml,
-      };
-
-      // if (data.file) {
-      //   payload.attachment = {
-      //     name: data.file.name,
-      //     type: data.file.type,
-      //     size: data.file.size,
-      //   };
-      // }
+      if (data.file) {
+        formData.append('attachments[]', data.file);
+      }
 
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        body: formData,
       });
+
+      // const payload: ContactPayload = {
+      //   name: data.name,
+      //   email: data.email,
+      //   phone: `${data.phoneCode}${data.phone}`,
+      //   subject: `${data.category} - ${data.name}`,
+      //   source: 2,
+      //   priority: 1,
+      //   status: 2,
+      //   description: descriptionHtml,
+      // };
+
+      // // if (data.file) {
+      // //   payload.attachment = {
+      // //     name: data.file.name,
+      // //     type: data.file.type,
+      // //     size: data.file.size,
+      // //   };
+      // // }
+
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(payload),
+      // });
 
       const result = await response.json();
 
