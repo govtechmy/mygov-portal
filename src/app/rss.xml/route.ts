@@ -2,6 +2,7 @@ import { getPayload } from 'payload';
 import config from '@/payload.config';
 import { lexicalToPlainText } from '@/lib/lexical';
 import { defaultLocale } from '@/lib/i18n';
+import { resolveMediaSrc } from '@/lib/media';
 
 function escapeXml(value: string): string {
   return value
@@ -27,6 +28,7 @@ export async function GET(request: Request) {
       datePublished: true,
       content: true,
       type: true,
+      picture: true,
     },
   });
 
@@ -39,6 +41,7 @@ export async function GET(request: Request) {
       const pubDate = doc.datePublished ? new Date(doc.datePublished).toUTCString() : new Date().toUTCString();
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
+      const picture = resolveMediaSrc(doc.picture ?? '');
       return `\n    
       <item>
         <title>${title}</title>
@@ -47,6 +50,7 @@ export async function GET(request: Request) {
         <guid isPermaLink=\"true\">${guid}</guid>
         <pubDate>${pubDate}</pubDate>
         <description>${description}</description>
+        <image>${picture}</image> 
       </item>`;
     })
     .join('');
