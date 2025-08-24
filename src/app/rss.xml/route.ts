@@ -42,7 +42,7 @@ export async function GET(request: Request) {
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
       const picture = resolveMediaSrc(doc.picture);
-      const pictureUrl = picture ? `${origin}/${picture}` : '';
+      const pictureUrl = picture ? `${origin}${picture}` : '';
       return `\n    
       <item>
         <title>${title}</title>
