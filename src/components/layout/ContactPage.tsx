@@ -320,6 +320,7 @@ export default function ContactPage({ messages }: ContactPageProps) {
     } finally {
       setIsSubmitting(false);
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
