@@ -2,7 +2,7 @@ import { getPayload } from 'payload';
 import config from '@/payload.config';
 import { lexicalToPlainText } from '@/lib/lexical';
 import { defaultLocale } from '@/lib/i18n';
-import { resolveMediaSrc } from '@/lib/media';
+import { resolveMediaRssSrc } from '@/lib/media';
 
 function escapeXml(value: string): string {
   return value
@@ -36,33 +36,56 @@ export async function GET(request: Request) {
     .map(doc => {
       const title = escapeXml(doc.title ?? '');
       const url = `${origin}/${defaultLocale}/blog/${doc.id}`;
-      const guid = url;
-      const type = doc.type;
-      const pubDate = doc.datePublished ? new Date(doc.datePublished).toUTCString() : new Date().toUTCString();
+      const type = typeof doc.type === 'string' ? doc.type : '';
+      const category = `mygov-${type}`;
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
-      const picture = resolveMediaSrc(doc.picture);
+      const picture = resolveMediaRssSrc(doc.picture);
       const pictureUrl = picture ? `${origin}${picture}` : '';
-      return `\n    
-      <item>
-        <title>${title}</title>
-        <link>${url}</link>
-        <category>${type.toUpperCase()}</category>
-        <guid isPermaLink=\"true\">${guid}</guid>
-        <pubDate>${pubDate}</pubDate>
-        <description>${description}</description>
-        <image>${pictureUrl}</image> 
-      </item>`;
+
+      const formatTimestamp = (dateInput: unknown) => {
+        const d = dateInput ? new Date(String(dateInput)) : new Date();
+        const pad = (n: number) => (n < 10 ? `0${n}` : String(n));
+        const yyyy = d.getFullYear();
+        const mm = pad(d.getMonth() + 1);
+        const dd = pad(d.getDate());
+        const hh = pad(d.getHours());
+        const min = pad(d.getMinutes());
+        const ss = pad(d.getSeconds());
+        return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+      };
+
+      const timestamp = formatTimestamp(doc.datePublished);
+
+      const buildKeywords = (inputTitle: string) => {
+        const words = (inputTitle || '')
+          .toLowerCase()
+          .replace(/[^a-z0-9\s,\-]/g, '')
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 4);
+        return words.join(', ');
+      };
+
+      const keywords = escapeXml(buildKeywords(doc.title ?? ''));
+
+      return `\n    <item>
+      <category>${category}</category>
+      <title>${title}</title>
+      <link>${url}</link>
+      <description>${description}</description>
+      ${pictureUrl ? `<media:content type="image/jpeg" url="${pictureUrl}"/>` : ''}
+      <keyword>${keywords}</keyword>
+      <timestamp>${timestamp}</timestamp>
+    </item>`;
     })
     .join('');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+  const xml = `<?xml version="1.0" ?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
   <channel>
-    <title>MyGov Portal Blog</title>
-    <link>${origin}</link>
-    <description>Latest articles from MyGov Portal</description>
-    <language>ms-MY</language>${itemsXml}\n  </channel>
+    <title>MyGov Malaysia Blog</title>
+    <link>${origin}/blog</link>${itemsXml}\n  </channel>
 </rss>`;
 
   return new Response(xml, {
