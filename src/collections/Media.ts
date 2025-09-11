@@ -12,5 +12,17 @@ export const Media: CollectionConfig = {
       required: false,
     },
   ],
-  upload: true,
+  upload: {
+    imageSizes: [
+      {
+        name: 'rss',
+        formatOptions: {
+          format: 'jpg',
+          options: {
+            quality: 50,
+          },
+        },
+      },
+    ],
+  },
 };
