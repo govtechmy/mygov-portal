@@ -9,8 +9,9 @@ import { getPayload } from 'payload';
 import config from '@/payload.config';
 
 export const metadata: Metadata = {
-  title: 'MyGov Portal - Malaysian Government Services',
-  description: 'Official Malaysian government portal providing access to government services and information',
+  title: 'MyGOV Malaysia - Aplikasi Pusat Sehenti Digital Perkhidmatan Kerajaan Malaysia',
+  description:
+    'MyGOV Malaysia adalah aplikasi yang dibangunkan sebagai menyatukan perkhidmatan kerajaan Malaysia dalam satu aplikasi.',
 };
 
 interface LocaleLayoutProps {

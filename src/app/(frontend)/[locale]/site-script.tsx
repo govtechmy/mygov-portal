@@ -4,7 +4,7 @@ export default function SiteScript() {
       dangerouslySetInnerHTML={{
         __html: `
           // Site-wide scripts can go here
-          console.log('MyGov Portal loaded successfully');
+          console.log('MyGOV Malaysia loaded successfully');
         `,
       }}
     />
