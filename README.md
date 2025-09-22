@@ -1,4 +1,4 @@
-# MyGov Portal
+# MyGOV Malaysia
 
 A modern, multilingual government portal built with Next.js and PayloadCMS, designed to provide citizens with easy access to government services and information.
 

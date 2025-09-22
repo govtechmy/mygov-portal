@@ -15,10 +15,10 @@
   },
 
   "portal": {
-    "title": "Welcome to MyGov Portal",
-    "subtitle": "Your gateway to Malaysian government services",
+    "title": "Welcome to MyGOV Malaysia",
+    "subtitle": "Your gateway to all in one Malaysian e-government services",
     "main": {
-      "title": "Government Services",
+      "title": "E-Government Services",
       "description": "Access a wide range of government services and applications."
     },
     "blog": {
