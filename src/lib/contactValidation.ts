@@ -7,7 +7,10 @@ export const contactSchema = z.object({
   address: z.string().min(5, 'Alamat tidak sah'),
   phoneCode: z.string().min(2),
   phone: z.string().regex(/^[0-9]{7,12}$/, 'Nombor telefon tidak sah'),
-  email: z.string().email('Alamat emel tidak sah'), //yes
+  email: z
+    .string()
+    .email('Alamat emel tidak sah')
+    .refine(value => !value.toLowerCase().endsWith('@mygov.gov.my'), { message: 'Alamat emel tidak sah' }), // Disallow @mygov.gov.my domain
   suggestion: z.string().min(5, 'Sila masukkan sekurang-kurangnya 5 aksara'),
   file: z
     .any()
