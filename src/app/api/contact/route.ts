@@ -71,39 +71,40 @@ export async function POST(req: NextRequest) {
     const subject = formData.get('subject')?.toString();
     let freshSubjectCategories = '';
     let freshSubjectSubCategories = '';
+    let freshSubjectSubSubCategories = '';
+    let removeCFNA = false;
 
-    if (subject?.includes('Pertanyaan')) {
-      freshSubjectCategories = 'Pertanyaan';
-      freshSubjectSubCategories = 'Others';
-    }
-
-    if (subject?.includes('Aduan')) {
-      freshSubjectCategories = 'Aduan';
-      freshSubjectSubCategories = 'Others';
-    }
-
-    if (subject?.includes('Cadangan')) {
-      freshSubjectCategories = 'Cadangan/Maklum Balas';
-      freshSubjectSubCategories = 'Feedback';
-    }
-
-    if (subject?.includes('Maklum Balas')) {
-      freshSubjectCategories = 'Maklum Balas';
-      freshSubjectSubCategories = 'Feedback';
-    }
-
-    if (subject?.includes('AduanMyGOV')) {
-      freshSubjectCategories = 'MyGOV';
-      freshSubjectSubCategories = 'MyGOV - General';
-    }
-
-    if (subject?.includes('Aduan-MyDigital ID')) {
-      freshSubjectCategories = 'MyDigital ID';
-      freshSubjectSubCategories = 'Technical issue';
+    switch (true) {
+      case subject?.includes('Pertanyaan'):
+        freshSubjectCategories = 'Lain Lain';
+        freshSubjectSubCategories = 'Lain lain';
+        removeCFNA = true;
+        break;
+      case subject?.includes('Cadangan'):
+        freshSubjectCategories = 'Lain Lain';
+        freshSubjectSubCategories = 'Lain lain';
+        removeCFNA = true;
+        break;
+      case subject?.includes('Maklum Balas'):
+        freshSubjectCategories = 'Lain Lain';
+        freshSubjectSubCategories = 'Lain lain';
+        removeCFNA = true;
+        break;
+      case subject?.includes('AduanMyGOV'):
+        freshSubjectCategories = 'MyGOV';
+        freshSubjectSubCategories = 'Perkhidmatan';
+        freshSubjectSubSubCategories = 'Lain lain';
+        break;
+      case subject?.includes('Aduan-MyDigital ID'):
+        freshSubjectCategories = 'MyDigital ID';
+        freshSubjectSubCategories = 'Akaun & Akses';
+        freshSubjectSubSubCategories = 'Lain lain';
+        break;
     }
 
     formData.append('custom_fields[cf_categories]', freshSubjectCategories);
     formData.append('custom_fields[cf_sub_categories]', freshSubjectSubCategories);
+    if (!removeCFNA) formData.append('custom_fields[cf_na]', freshSubjectSubSubCategories);
 
     if (!apiKey || !url) {
       return NextResponse.json({ error: 'Freshdesk API credentials not configured' }, { status: 500 });
