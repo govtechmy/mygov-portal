@@ -18,7 +18,7 @@
     "@govtechmy/myds-style": "^1.0.0",
     "@hookform/resolvers": "^5.2.1",
     "@payloadcms/db-mongodb": "^3.52.0",
-    "@payloadcms/next": "^3.52.0",
+    "@payloadcms/next": "^3.55.1",
     "@payloadcms/payload-cloud": "^3.52.0",
     "@payloadcms/plugin-search": "^3.52.0",
     "@payloadcms/richtext-lexical": "^3.52.0",
