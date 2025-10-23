@@ -102,15 +102,6 @@ export async function POST(req: NextRequest) {
         break;
     }
 
-    const description = formData.get('description')?.toString();
-    if (description) {
-      const suggestionMatch = description.match(/<p><strong>Suggestion:<\/strong>\s*(.*?)<\/p>/);
-      if (suggestionMatch && suggestionMatch[1]) {
-        const suggestionText = suggestionMatch[1].trim();
-        formData.append('custom_fields[cf_suggestion]', suggestionText);
-      }
-    }
-
     formData.append('custom_fields[cf_categories]', freshSubjectCategories);
     formData.append('custom_fields[cf_sub_categories]', freshSubjectSubCategories);
 

@@ -256,6 +256,8 @@ export default function ContactPage({ messages }: ContactPageProps) {
       formData.append('priority', '1');
       formData.append('status', '2');
       formData.append('description', descriptionHtml);
+      // formData.append('suggestion', data.suggestion);
+      formData.append('custom_fields[cf_suggestion]', data.suggestion);
 
       // if (isTurnstileEnabled) {
       //   formData.append('cf-turnstile-response', turnstileToken);
