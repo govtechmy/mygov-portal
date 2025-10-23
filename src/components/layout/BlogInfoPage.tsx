@@ -67,17 +67,16 @@ export default function BlogInfoPage({ blog }: BlogInfoPageProps) {
         <div className="gap-6 flex flex-col">
           <RichText data={blog.content as SerializedEditorState} className="whitespace-pre-line" />
         </div>
-        <hr className="border-t border-black my-2 w-full" />
+        {/* <hr className="border-t border-black my-2 w-full" />
         <div className="self-start">
           <Button variant="default-outline" className="w-[200px] gap-1.5">
             <PdfIcon className="shrink-0" />
-
             <div className="text-start w-full">
               <div className="max-w-[151px] truncate">22072025_SIARAN_SDDSSDDAS</div>
               <div className="text-[#71717A] text-xs">1.2MB</div>
             </div>
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
