@@ -105,6 +105,7 @@ export async function POST(req: NextRequest) {
     formData.append('custom_fields[cf_categories]', freshSubjectCategories);
     formData.append('custom_fields[cf_sub_categories]', freshSubjectSubCategories);
     formData.append('custom_fields[cf_suggestion]', formData.get('suggestion')?.toString() || '');
+    formData.delete('suggestion');
     if (!removeCFNA) formData.append('custom_fields[cf_na]', freshSubjectSubSubCategories);
 
     if (!apiKey || !url) {
