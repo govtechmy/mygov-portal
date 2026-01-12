@@ -24,8 +24,8 @@ importers:
         specifier: ^3.52.0
         version: 3.52.0(@types/react@19.1.10)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.2)
       '@payloadcms/payload-cloud':
-        specifier: ^3.52.0
-        version: 3.52.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))
+        specifier: ^3.70.0
+        version: 3.70.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))
       '@payloadcms/plugin-search':
         specifier: ^3.52.0
         version: 3.52.0(@types/react@19.1.10)(graphql@16.11.0)(monaco-editor@0.52.2)(next@15.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.77.4))(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.2)
@@ -1143,11 +1143,11 @@ packages:
     peerDependencies:
       payload: 3.52.0
 
-  '@payloadcms/email-nodemailer@3.52.0':
-    resolution: {integrity: sha512-2lC5MVm3AT/jrfwJk+zd7dmSlnqLhRJNyi0QowDyLgXeOLXpzyakJ6KzK0OjbArNY1rqny00jw8G1/lJtpywKA==}
+  '@payloadcms/email-nodemailer@3.70.0':
+    resolution: {integrity: sha512-hBI6h+MFOAar0vZrQKV5tmvWDJl6LUK6ruoJAl8wQTZzzGPbZb+yXA0pFj9emimF8m624SI41eA5ZuEkkPm9ZQ==}
     engines: {node: ^18.20.2 || >=20.9.0}
     peerDependencies:
-      payload: 3.52.0
+      payload: 3.70.0
 
   '@payloadcms/graphql@3.52.0':
     resolution: {integrity: sha512-F8jaMldtxzgVUVYt18t36OgcYf6wUkM9kFVxbtY4LzpzaUVV8NhaBQsPKWAOGCOSn4wqJITbLVHm6edh6WjTwg==}
@@ -1164,10 +1164,10 @@ packages:
       next: ^15.2.3
       payload: 3.52.0
 
-  '@payloadcms/payload-cloud@3.52.0':
-    resolution: {integrity: sha512-y3pEWtV7/s8GFov+iW6VjkGW+LKBeXyL+iOojU9Bcre1fupmInfMyVu7zI1BS4c8w48Ia8GmDJzJgjkCOItLvQ==}
+  '@payloadcms/payload-cloud@3.70.0':
+    resolution: {integrity: sha512-o1oGAcMtCL7kqCgE6LYog5ABz8S7ke3+ZcKClqyfc3cLFI4lxg+nQ1rGJdmrsTKcLUo76ow+8tEOViI9dS9ExQ==}
     peerDependencies:
-      payload: 3.52.0
+      payload: 3.70.0
 
   '@payloadcms/plugin-cloud-storage@3.52.0':
     resolution: {integrity: sha512-LQ4144YVrVW5T9x0jKPMSWFj2UNaBrByS+84Z8PNvXNiWI3tCSGvzUR31kbiKXfO057qE2UZt+g//ZrL1H+pUA==}
@@ -3713,8 +3713,8 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
-  nodemailer@6.9.16:
-    resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
+  nodemailer@7.0.12:
+    resolution: {integrity: sha512-H+rnK5bX2Pi/6ms3sN4/jRQvYSMltV6vqup/0SFOrxYYY/qoNvhXPlYq3e+Pm9RFJRwrMGbMIwi81M4dxpomhA==}
     engines: {node: '>=6.0.0'}
 
   normalize-path@3.0.0:
@@ -6012,9 +6012,9 @@ snapshots:
       - socks
       - supports-color
 
-  '@payloadcms/email-nodemailer@3.52.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))':
+  '@payloadcms/email-nodemailer@3.70.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))':
     dependencies:
-      nodemailer: 6.9.16
+      nodemailer: 7.0.12
       payload: 3.52.0(graphql@16.11.0)(typescript@5.9.2)
 
   '@payloadcms/graphql@3.52.0(graphql@16.11.0)(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))(typescript@5.9.2)':
@@ -6055,15 +6055,15 @@ snapshots:
       - supports-color
       - typescript
 
-  '@payloadcms/payload-cloud@3.52.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))':
+  '@payloadcms/payload-cloud@3.70.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))':
     dependencies:
       '@aws-sdk/client-cognito-identity': 3.864.0
       '@aws-sdk/client-s3': 3.864.0
       '@aws-sdk/credential-providers': 3.864.0
       '@aws-sdk/lib-storage': 3.864.0(@aws-sdk/client-s3@3.864.0)
-      '@payloadcms/email-nodemailer': 3.52.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))
+      '@payloadcms/email-nodemailer': 3.70.0(payload@3.52.0(graphql@16.11.0)(typescript@5.9.2))
       amazon-cognito-identity-js: 6.3.15
-      nodemailer: 6.9.16
+      nodemailer: 7.0.12
       payload: 3.52.0(graphql@16.11.0)(typescript@5.9.2)
     transitivePeerDependencies:
       - aws-crt
@@ -7987,7 +7987,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.39.1(eslint@9.33.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.33.0(jiti@2.5.1)))(eslint@9.33.0(jiti@2.5.1)):
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.39.1(eslint@9.33.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.33.0(jiti@2.5.1)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -8009,7 +8009,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.33.0(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.39.1(eslint@9.33.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.33.0(jiti@2.5.1)))(eslint@9.33.0(jiti@2.5.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.39.1(eslint@9.33.0(jiti@2.5.1))(typescript@5.9.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.33.0(jiti@2.5.1))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -9134,7 +9134,7 @@ snapshots:
 
   node-releases@2.0.19: {}
 
-  nodemailer@6.9.16: {}
+  nodemailer@7.0.12: {}
 
   normalize-path@3.0.0: {}
 
