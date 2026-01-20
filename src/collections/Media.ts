@@ -1,18 +1,16 @@
-import type { CollectionConfig } from 'payload';
+import { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: { singular: 'Media', plural: 'Media' },
+  admin: { useAsTitle: 'filename' },
+  fields: [{ name: 'filename', type: 'text', required: true }],
   access: {
-    read: () => true,
+    read: () => true, // public read
   },
-  fields: [
-    {
-      name: 'alt',
-      type: 'text',
-      required: false,
-    },
-  ],
   upload: {
+    staticDir: 'mygov-image',
+    mimeTypes: ['image/*', 'video/*', 'application/pdf'],
     imageSizes: [
       {
         name: 'rss',

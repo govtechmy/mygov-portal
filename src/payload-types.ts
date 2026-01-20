@@ -157,12 +157,12 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
   thumbnailURL?: string | null;
-  filename?: string | null;
+  filename: string;
   mimeType?: string | null;
   filesize?: number | null;
   width?: number | null;
@@ -365,7 +365,7 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

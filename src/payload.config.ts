@@ -6,11 +6,11 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { searchPlugin } from '@payloadcms/plugin-search';
 import PayloadCollections, { Users } from './collections';
 import HomePage from './globals/HomePage';
 import Footer from './globals/Footer';
+import { s3Storage } from '@payloadcms/storage-s3';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -38,12 +38,23 @@ export default buildConfig({
     searchPlugin({
       collections: ['blog'],
     }),
-    // storage-adapter-placeholder
-    vercelBlobStorage({
+    s3Storage({
       collections: {
-        media: true,
+        // media: true,
+        media: {
+          prefix: process.env.S3_PREFIX || '', // Optional: prefix for folder inside bucket
+        },
       },
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      bucket: process.env.S3_BUCKET_NAME || '',
+      config: {
+        endpoint: process.env.S3_ENDPOINT,
+        region: process.env.AWS_REGION || '',
+        credentials: {
+          accessKeyId: process.env.AWS_KEY_ID || '',
+          secretAccessKey: process.env.AWS_ACCESS_ID || '',
+        },
+      },
+      clientUploads: true, // allow client-side uploads
     }),
   ],
 });
