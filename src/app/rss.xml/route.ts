@@ -40,7 +40,7 @@ export async function GET(request: Request) {
       const category = `mygov-${type}`;
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
-      const picture = resolveMediaCloudFrontRssSrc(doc.picture); // resolve CF url if applicable
+      const picture = resolveMediaCloudFrontRssSrc(doc.picture);
 
       let pictureUrl = picture ? `${origin}${picture}` : '';
       if (picture.startsWith('https://') && picture.includes('cloudfront.net')) {
