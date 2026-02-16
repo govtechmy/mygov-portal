@@ -2,7 +2,7 @@ import { getPayload } from 'payload';
 import config from '@/payload.config';
 import { lexicalToPlainText } from '@/lib/lexical';
 import { defaultLocale } from '@/lib/i18n';
-import { resolveMediaRssSrc } from '@/lib/media';
+import { resolveMediaCloudFrontRssSrc } from '@/lib/media';
 
 function escapeXml(value: string): string {
   return value
@@ -40,8 +40,12 @@ export async function GET(request: Request) {
       const category = `mygov-${type}`;
       const descriptionSource = lexicalToPlainText(doc.content as unknown);
       const description = escapeXml(descriptionSource ? String(descriptionSource) : '');
-      const picture = resolveMediaRssSrc(doc.picture);
-      const pictureUrl = picture ? `${origin}${picture}` : '';
+      const picture = resolveMediaCloudFrontRssSrc(doc.picture);
+
+      let pictureUrl = picture ? `${origin}${picture}` : '';
+      if (picture.startsWith('https://') && picture.includes('cloudfront.net')) {
+        pictureUrl = picture;
+      }
 
       const formatTimestamp = (dateInput: unknown) => {
         const d = dateInput ? new Date(String(dateInput)) : new Date();
