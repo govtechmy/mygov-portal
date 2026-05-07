@@ -76,24 +76,24 @@ export async function POST(req: NextRequest) {
 
     switch (true) {
       case subject?.includes('Pertanyaan'):
-        freshSubjectCategories = 'Lain Lain';
-        freshSubjectSubCategories = 'Lain lain';
+        freshSubjectCategories = 'Lain-lain';
+        freshSubjectSubCategories = 'Isu Tidak Berkaitan';
         removeCFNA = true;
         break;
       case subject?.includes('Cadangan'):
-        freshSubjectCategories = 'Lain Lain';
-        freshSubjectSubCategories = 'Lain lain';
+        freshSubjectCategories = 'Lain-lain';
+        freshSubjectSubCategories = 'Isu Tidak Berkaitan';
         removeCFNA = true;
         break;
       case subject?.includes('Maklum Balas'):
-        freshSubjectCategories = 'Lain Lain';
-        freshSubjectSubCategories = 'Lain lain';
+        freshSubjectCategories = 'Lain-lain';
+        freshSubjectSubCategories = 'Isu Tidak Berkaitan';
         removeCFNA = true;
         break;
       case subject?.includes('AduanMyGOV'):
         freshSubjectCategories = 'MyGOV';
         freshSubjectSubCategories = 'Perkhidmatan';
-        freshSubjectSubSubCategories = 'Lain lain';
+        freshSubjectSubSubCategories = 'Lain-lain';
         break;
       case subject?.includes('Aduan-MyDigital ID'):
         freshSubjectCategories = 'MyDigital ID';
