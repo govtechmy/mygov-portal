@@ -125,5 +125,35 @@
     "reportDropdown": "Complaint-MyDigital ID",
     "reportDropdownMyGov": "Aduan-Aplikasi MyGOV Malaysia",
     "questionsDropdown": "Questions"
+  },
+
+  "privacypg": {
+    "title": "JDN MOBILE APPLICATION PRIVACY POLICY",
+    "privacyTitle": "Privacy",
+    "privacy": "JDN Mobile Application, which includes Agency Services, Social Media Feeds, Programs and Activities, and Government Directory Searches (hereinafter referred to as the \"Application\"), is developed for the public (hereinafter referred to as the \"User\") to facilitate access to online services offered by JDN via smartphones. The Application can be downloaded from the Google Play Store and Apple App Store. The government ensures that the personal information collected aligns with the provisions of the Personal Data Protection Act 2010 (Act 709).",
+
+    "personalInfoTitle": "Personal Information",
+    "personalInfo": "This Application will not record the user's personal data unless permission is granted and provided voluntarily by the users. This information is not shared with other organizations for any other purposes unless specifically stated.",
+
+    "collectedInfoTitle": "Information Collected",
+    "collectedInfo": {
+      "intro": "The Application collects data submitted with user's consent and voluntarily through the application registration process for access to the application system.",
+      "itemsTitle": "The personal data collected includes:",
+      "items": ["User's name", "Identification Number", "Phone Number", "Email"],
+      "use": "The collected personal data will not be used for any purposes other than those mentioned above.",
+      "disclosure": "The collected personal data will not be disclosed to any third parties or transferred outside Malaysia for commercial purposes."
+    },
+
+    "effectsOfNotProvidingPersonalDataTitle": "Effects of Not Providing Personal Data",
+    "effectsOfNotProvidingPersonalData": "If the personal data provided is insufficient or unsatisfactory, the user’s application or request for any purpose mentioned above may not be accepted or acted upon, and access to the services offered by the Application may be denied or affected.",
+
+    "confidentialityTitle": "Confidentiality",
+    "confidentiality": "Personal data collected by the Application will be kept confidential according to this Privacy Policy and in compliance with any applicable laws that may be in effect from time to time.",
+
+    "dataSecurityTitle": "Data Security",
+    "dataSecurity": "The Application implements security features that adhere to global standards to protect the confidentiality and security of user information.",
+
+    "changeToPrivacyPolicyTitle": "Changes to the Privacy Policy",
+    "changeToPrivacyPolicy": "If this Privacy Policy is amended, the updates will be made on this page."
   }
 }

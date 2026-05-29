@@ -1,19 +1,7 @@
 export default function HeroPattern({ ...props }) {
   return (
-    <svg
-      width="1600"
-      height="900"
-      viewBox="0 0 1600 900"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <g
-        clipPath="url(#g)"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeDasharray="10"
-      >
+    <svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <g clipPath="url(#g)" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="10">
         <path
           d="M-44.9116 162.773C127.431 257.931 -6.75922 623.4 255.289 609.618C350.143 604.629 442.544 579.21 537.927 578.891C635.381 578.565 719.764 617.177 796.002 675.407C872.268 733.659 944.884 764.673 1040.61 774.662C1150.86 786.165 1252.71 831.076 1359.5 857.195C1447.89 878.812 1540.76 860.363 1629.93 852.635C1683.66 847.979 1724.37 864.116 1774.54 883.401"
           stroke="url(#A)"
@@ -144,355 +132,131 @@ export default function HeroPattern({ ...props }) {
         />
       </g>
       <defs>
-        <linearGradient
-          id="A"
-          x1="868.821"
-          y1="512.688"
-          x2="751.39"
-          y2="819.337"
-          xlinkHref="#h"
-        >
+        <linearGradient id="A" x1="868.821" y1="512.688" x2="751.39" y2="819.337" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="B"
-          x1="875.858"
-          y1="491.379"
-          x2="762.637"
-          y2="787.034"
-          xlinkHref="#h"
-        >
+        <linearGradient id="B" x1="875.858" y1="491.379" x2="762.637" y2="787.034" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="C"
-          x1="879.782"
-          y1="473.267"
-          x2="769.989"
-          y2="759.968"
-          xlinkHref="#h"
-        >
+        <linearGradient id="C" x1="879.782" y1="473.267" x2="769.989" y2="759.968" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="D"
-          x1="881.058"
-          y1="457.846"
-          x2="777.116"
-          y2="729.271"
-          xlinkHref="#h"
-        >
+        <linearGradient id="D" x1="881.058" y1="457.846" x2="777.116" y2="729.271" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="E"
-          x1="880.154"
-          y1="444.612"
-          x2="781.23"
-          y2="702.933"
-          xlinkHref="#h"
-        >
+        <linearGradient id="E" x1="880.154" y1="444.612" x2="781.23" y2="702.933" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="F"
-          x1="877.539"
-          y1="433.053"
-          x2="783.769"
-          y2="677.917"
-          xlinkHref="#h"
-        >
+        <linearGradient id="F" x1="877.539" y1="433.053" x2="783.769" y2="677.917" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="G"
-          x1="873.683"
-          y1="422.666"
-          x2="784.947"
-          y2="654.383"
-          xlinkHref="#h"
-        >
+        <linearGradient id="G" x1="873.683" y1="422.666" x2="784.947" y2="654.383" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="H"
-          x1="869.052"
-          y1="412.939"
-          x2="785.515"
-          y2="631.08"
-          xlinkHref="#h"
-        >
+        <linearGradient id="H" x1="869.052" y1="412.939" x2="785.515" y2="631.08" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="I"
-          x1="864.116"
-          y1="403.374"
-          x2="784.932"
-          y2="610.146"
-          xlinkHref="#h"
-        >
+        <linearGradient id="I" x1="864.116" y1="403.374" x2="784.932" y2="610.146" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="J"
-          x1="859.342"
-          y1="393.457"
-          x2="785.138"
-          y2="587.226"
-          xlinkHref="#h"
-        >
+        <linearGradient id="J" x1="859.342" y1="393.457" x2="785.138" y2="587.226" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="K"
-          x1="855.202"
-          y1="382.682"
-          x2="786.489"
-          y2="562.112"
-          xlinkHref="#h"
-        >
+        <linearGradient id="K" x1="855.202" y1="382.682" x2="786.489" y2="562.112" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="L"
-          x1="852.159"
-          y1="370.546"
-          x2="787.524"
-          y2="539.328"
-          xlinkHref="#h"
-        >
+        <linearGradient id="L" x1="852.159" y1="370.546" x2="787.524" y2="539.328" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="M"
-          x1="850.687"
-          y1="356.537"
-          x2="789.538"
-          y2="516.217"
-          xlinkHref="#h"
-        >
+        <linearGradient id="M" x1="850.687" y1="356.537" x2="789.538" y2="516.217" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="N"
-          x1="851.248"
-          y1="340.152"
-          x2="787.441"
-          y2="506.772"
-          xlinkHref="#h"
-        >
+        <linearGradient id="N" x1="851.248" y1="340.152" x2="787.441" y2="506.772" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="O"
-          x1="853.922"
-          y1="321.848"
-          x2="785.118"
-          y2="501.514"
-          xlinkHref="#h"
-        >
+        <linearGradient id="O" x1="853.922" y1="321.848" x2="785.118" y2="501.514" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="P"
-          x1="857.662"
-          y1="304.238"
-          x2="784.099"
-          y2="496.332"
-          xlinkHref="#h"
-        >
+        <linearGradient id="P" x1="857.662" y1="304.238" x2="784.099" y2="496.332" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="Q"
-          x1="863.344"
-          y1="285.599"
-          x2="788.706"
-          y2="480.502"
-          xlinkHref="#h"
-        >
+        <linearGradient id="Q" x1="863.344" y1="285.599" x2="788.706" y2="480.502" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="R"
-          x1="870.36"
-          y1="269.6"
-          x2="796.778"
-          y2="461.744"
-          xlinkHref="#h"
-        >
+        <linearGradient id="R" x1="870.36" y1="269.6" x2="796.778" y2="461.744" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="S"
-          x1="877.493"
-          y1="255.8"
-          x2="805.212"
-          y2="444.55"
-          xlinkHref="#h"
-        >
+        <linearGradient id="S" x1="877.493" y1="255.8" x2="805.212" y2="444.55" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="T"
-          x1="886.879"
-          y1="238.04"
-          x2="813.789"
-          y2="428.899"
-          xlinkHref="#h"
-        >
+        <linearGradient id="T" x1="886.879" y1="238.04" x2="813.789" y2="428.899" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="U"
-          x1="902.515"
-          y1="205.63"
-          x2="822.557"
-          y2="414.425"
-          xlinkHref="#h"
-        >
+        <linearGradient id="U" x1="902.515" y1="205.63" x2="822.557" y2="414.425" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="V"
-          x1="920.857"
-          y1="167.42"
-          x2="831.385"
-          y2="401.057"
-          xlinkHref="#h"
-        >
+        <linearGradient id="V" x1="920.857" y1="167.42" x2="831.385" y2="401.057" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="W"
-          x1="937.712"
-          y1="133.914"
-          x2="840.2"
-          y2="388.547"
-          xlinkHref="#h"
-        >
+        <linearGradient id="W" x1="937.712" y1="133.914" x2="840.2" y2="388.547" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="X"
-          x1="952.852"
-          y1="105.339"
-          x2="848.947"
-          y2="376.667"
-          xlinkHref="#h"
-        >
+        <linearGradient id="X" x1="952.852" y1="105.339" x2="848.947" y2="376.667" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="Y"
-          x1="966.196"
-          y1="81.56"
-          x2="857.388"
-          y2="365.689"
-          xlinkHref="#h"
-        >
+        <linearGradient id="Y" x1="966.196" y1="81.56" x2="857.388" y2="365.689" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="Z"
-          x1="978.076"
-          y1="61.341"
-          x2="865.833"
-          y2="354.443"
-          xlinkHref="#h"
-        >
+        <linearGradient id="Z" x1="978.076" y1="61.341" x2="865.833" y2="354.443" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="a"
-          x1="989.034"
-          y1="42.928"
-          x2="874.114"
-          y2="343.018"
-          xlinkHref="#h"
-        >
+        <linearGradient id="a" x1="989.034" y1="42.928" x2="874.114" y2="343.018" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="b"
-          x1="998.145"
-          y1="28.346"
-          x2="882.559"
-          y2="330.178"
-          xlinkHref="#h"
-        >
+        <linearGradient id="b" x1="998.145" y1="28.346" x2="882.559" y2="330.178" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="c"
-          x1="1005.95"
-          y1="15.838"
-          x2="890.45"
-          y2="317.447"
-          xlinkHref="#h"
-        >
+        <linearGradient id="c" x1="1005.95" y1="15.838" x2="890.45" y2="317.447" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="d"
-          x1="1012.11"
-          y1="5.928"
-          x2="898.126"
-          y2="303.575"
-          xlinkHref="#h"
-        >
+        <linearGradient id="d" x1="1012.11" y1="5.928" x2="898.126" y2="303.575" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="e"
-          x1="1018.48"
-          y1="-6.576"
-          x2="905.549"
-          y2="288.321"
-          xlinkHref="#h"
-        >
+        <linearGradient id="e" x1="1018.48" y1="-6.576" x2="905.549" y2="288.321" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>
-        <linearGradient
-          id="f"
-          x1="1024.18"
-          y1="-19.73"
-          x2="912.696"
-          y2="271.39"
-          xlinkHref="#h"
-        >
+        <linearGradient id="f" x1="1024.18" y1="-19.73" x2="912.696" y2="271.39" xlinkHref="#h">
           <stop stopColor="#2563eb" stopOpacity=".5" />
           <stop offset=".71" stopColor="#2563eb" stopOpacity=".1" />
         </linearGradient>

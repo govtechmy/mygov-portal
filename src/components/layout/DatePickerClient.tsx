@@ -1,16 +1,12 @@
 'use client';
 
 import { useContext } from 'react';
-import {
-  DateRange,
-  DateRangePicker,
-} from '@govtechmy/myds-react/daterange-picker';
+import { DateRange, DateRangePicker } from '@govtechmy/myds-react/daterange-picker';
 import { SearchContext } from './searchProvider';
 
 export default function DatePickerClient() {
   const context = useContext(SearchContext);
-  if (!context)
-    throw new Error('SearchContext must be used within a SearchProvider');
+  if (!context) throw new Error('SearchContext must be used within a SearchProvider');
 
   const { dateRange, setDateRange } = context;
 

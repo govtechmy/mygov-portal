@@ -79,14 +79,13 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
 
       <FooterSection className="text-txt-black-500 md:max-lg:gap-4.5 mx-auto flex w-full max-w-[1000px] max-lg:flex-col justify-between border-none text-sm max-md:gap-4 lg:gap-6">
         <div className="flex flex-col gap-3">
-          <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
-            <p className="text-xs md:text-sm">© 2025 Kementerian Digital. Semua hakcipta terpelihara.</p>
-
-            {/* <div className="flex gap-3 items-center">
-              <SiteLink className="text-xs md:text-sm">Disclaimer</SiteLink>
-              <SiteLink className="text-xs md:text-sm">Privacy Policy</SiteLink>
-            </div> */}
+          <div className="flex flex-row md:flex-row gap-3 items-start md:items-center">
+            <p className="text-xs md:text-sm">© 2026 Kementerian Digital. Semua hakcipta terpelihara.</p>
+            <Link href={`/${locale}/privacy`} className="text-xs md:text-sm">
+              Privacy Policy
+            </Link>
           </div>
+
           <div className="flex flex-row gap-3">
             <Link
               href={footerData.facebookUrl || ''}
@@ -121,7 +120,7 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
             </Link>
           </div>
         </div>
-        <p className="text-xs md:text-sm">Last updated: 15th Aug 2025</p>
+        <p className="text-xs md:text-sm">Last updated: 3 June 2026</p>
       </FooterSection>
     </Footer>
   );

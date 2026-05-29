@@ -10,8 +10,7 @@ export const faq = [
     answers: `Aplikasi MyGOV hanya boleh digunakan oleh individu warganegara Malaysia yang mempunyai MyDigital ID.`,
   },
   {
-    question:
-      '3. Apa yang perlu saya lakukan jika masih tidak mempunyai MyDigital ID?',
+    question: '3. Apa yang perlu saya lakukan jika masih tidak mempunyai MyDigital ID?',
     answers: `Anda perlu mempunyai akaun MyDigital ID untuk log masuk ke aplikasi MyGOV. Sila layari www.digital-id.my untuk muat turun dan daftar MyDigital ID terlebih dahulu sebelum menggunakan aplikasi MyGOV. Pastikan anda menggunakan aplikasi MyDigital ID sekurang-kurangnya versi 2.3.2 untuk memudahkan proses log masuk ke MyGOV.`,
   },
   {
@@ -19,8 +18,7 @@ export const faq = [
     answers: `Aplikasi ini boleh dimuat turun menerusi Apple App Store dan Google Play Store. Untuk memastikan anda mendapat aplikasi yang betul, cari "MyGOV Malaysia" semasa membuat carian.`,
   },
   {
-    question:
-      '5. Apakah spesifikasi minimum sistem pengendalian peranti yang diperlukan untuk memuat turun MyGOV?',
+    question: '5. Apakah spesifikasi minimum sistem pengendalian peranti yang diperlukan untuk memuat turun MyGOV?',
     answers: `Peranti anda perlu menggunakan sistem pengendalian/operating system (OS) minimum berikut untuk memastikan keserasian dan prestasi optimum aplikasi MyGOV:
 
 Peranti Android: Memerlukan Android OS 12 atau versi lebih baharu. Contoh peranti yang serasi termasuk:
@@ -47,8 +45,7 @@ Langkah 2 - Cari dan tap pada Umum (General) > Perihal (About)
 Jika peranti anda menggunakan versi OS yang lebih lama, anda mungkin perlu mengemas kini sistem pengendalian terlebih dahulu sebelum dapat memuat turun aplikasi.`,
   },
   {
-    question:
-      '6. Apakah senarai perkhidmatan yang terdapat dalam aplikasi ini?',
+    question: '6. Apakah senarai perkhidmatan yang terdapat dalam aplikasi ini?',
     answers: `Antara kategori perkhidmatan yang terdapat dalam aplikasi ini adalah termasuk:
 
 Pengangkutan seperti Semakan Saman JPJ dan sebagainya
@@ -64,8 +61,7 @@ Anda boleh melakukan semakan, paparan notifikasi / info / tinjauan, permohonan* 
 *Ciri baharu akan datang*`,
   },
   {
-    question:
-      '7. Apakah agensi yang terlibat dalam menyediakan perkhidmatan di aplikasi MyGOV?',
+    question: '7. Apakah agensi yang terlibat dalam menyediakan perkhidmatan di aplikasi MyGOV?',
     answers: `Aplikasi MyGOV kini menyediakan pelbagai perkhidmatan daripada agensi kerajaan, antaranya:
 
 Jabatan Pengangkutan Jalan (JPJ)
@@ -77,13 +73,11 @@ Suruhanjaya Pilihan Raya (SPR)
 Selain itu, terdapat juga perkhidmatan yang melibatkan kerjasama rentas agensi. Lebih banyak agensi akan turut serta dalam aplikasi ini bagi memperluaskan lagi perkhidmatan yang ditawarkan kepada pengguna.`,
   },
   {
-    question:
-      '8. Bagaimanakah cara saya mengakses perkhidmatan yang disediakan?',
+    question: '8. Bagaimanakah cara saya mengakses perkhidmatan yang disediakan?',
     answers: `Anda boleh memilih kategori perkhidmatan yang diingini dalam aplikasi dan ikuti arahan yang diberikan untuk mendapatkan maklumat atau melakukan semakan.`,
   },
   {
-    question:
-      '9. Bolehkah saya menggunakan aplikasi ini untuk melakukan semakan bagi pihak orang lain?',
+    question: '9. Bolehkah saya menggunakan aplikasi ini untuk melakukan semakan bagi pihak orang lain?',
     answers: `Semakan untuk orang lain adalah bergantung kepada kebenaran agensi yang menyediakan perkhidmatan.
 
 Buat masa ini, hanya perkhidmatan dalam kategori Pengangkutan yang TIDAK membenarkan semakan untuk orang lain, iaitu bagi perkhidmatan di bawah:
@@ -99,8 +93,7 @@ Semakan Status Senarai Hitam
 Selain daripada kategori tersebut, semua perkhidmatan lain membenarkan pengguna menyemak maklumat untuk orang lain.`,
   },
   {
-    question:
-      '10. Jika saya gagal mengakses perkhidmatan, adakah ini bermakna data saya hilang?',
+    question: '10. Jika saya gagal mengakses perkhidmatan, adakah ini bermakna data saya hilang?',
     answers: `Jangan risau, kegagalan akses tidak bermakna data anda hilang. Maklumat peribadi dan rekod masih disimpan oleh agensi kerajaan yang bertanggungjawab, contohnya JPJ untuk lesen memandu.
 
 Aplikasi MyGOV hanya berfungsi sebagai platform yang menghubungkan pengguna dengan perkhidmatan-perkhidmatan digital agensi kerajaan dan tidak menyimpan sebarang data pengguna.`,
@@ -118,8 +111,7 @@ Peribadi – Notifikasi khas seperti ucapan hari lahir dan peringatan penting be
     answers: `Bahagian "Berita" menyampaikan maklumat terkini daripada portal berita utama dan sumber yang dipercayai.`,
   },
   {
-    question:
-      '13. Bagaimana cara untuk menutup atau menghentikan notifikasi aplikasi ini?',
+    question: '13. Bagaimana cara untuk menutup atau menghentikan notifikasi aplikasi ini?',
     answers: `Anda boleh menutup notifikasi dengan cara berikut:
 
 1. Pergi ke tetapan (settings) telefon anda.
@@ -133,8 +125,7 @@ Peribadi – Notifikasi khas seperti ucapan hari lahir dan peringatan penting be
     answers: `Jika terdapat kesilapan atau keraguan, anda boleh menyemak dan mengemas kini maklumat anda di mana-mana pejabat Jabatan Pendaftaran Negara (JPN) untuk diselaraskan semula dalam aplikasi MyGOV.`,
   },
   {
-    question:
-      '15. Apakah akan berlaku jika saya tidak aktif dalam aplikasi MyGOV untuk tempoh tertentu?',
+    question: '15. Apakah akan berlaku jika saya tidak aktif dalam aplikasi MyGOV untuk tempoh tertentu?',
     answers: `Untuk tujuan keselamatan, jika anda tidak aktif selama lima minit, aplikasi MyGOV akan log keluar secara automatik. Anda perlu log masuk semula untuk meneruskan penggunaan.`,
   },
   {
@@ -153,23 +144,19 @@ Peribadi – Notifikasi khas seperti ucapan hari lahir dan peringatan penting be
     answers: `Aplikasi MyGOV hanya menggunakan MyDigital ID untuk log masuk. Untuk mendapatkan bantuan permasalahan login, sila log aduan anda di sini.`,
   },
   {
-    question:
-      '19. Adakah aplikasi ini akan menerima kemas kini (software update)?',
+    question: '19. Adakah aplikasi ini akan menerima kemas kini (software update)?',
     answers: `Sudah tentu! Kami mengemas kini MyGOV secara berkala untuk memperkenalkan ciri-ciri dan perkhidmatan baharu, meningkatkan prestasi dan menangani sebarang isu. Pastikan anda mengaktifkan fungsi kemas kini automatik pada peranti anda untuk menikmati penambahbaikan terkini.`,
   },
   {
-    question:
-      '20. Adakah maklumat peribadi saya yang dimasukkan dalam aplikasi ini selamat?',
+    question: '20. Adakah maklumat peribadi saya yang dimasukkan dalam aplikasi ini selamat?',
     answers: `Aplikasi ini tidak menyimpan sebarang maklumat peribadi anda.`,
   },
   {
-    question:
-      '21. Adakah maklumat akaun saya selamat jika saya berkongsi peranti dengan orang lain?',
+    question: '21. Adakah maklumat akaun saya selamat jika saya berkongsi peranti dengan orang lain?',
     answers: `Kerahsiaan pengguna dan keselamatan anda adalah penting bagi kami. Kami mengesyorkan agar anda tidak berkongsi maklumat  log masuk anda dengan orang lain.`,
   },
   {
-    question:
-      '22. Bagaimanakah cara untuk menyahpasang aplikasi (uninstall) jika saya tidak mahu menggunakannya lagi?',
+    question: '22. Bagaimanakah cara untuk menyahpasang aplikasi (uninstall) jika saya tidak mahu menggunakannya lagi?',
     answers: `Jika anda memutuskan untuk menyahpasang aplikasi ini, sila ikuti proses standard peranti anda untuk menghapus aplikasi.`,
   },
 ];

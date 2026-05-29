@@ -122,5 +122,35 @@
     "reportDropdown": "Aduan-MyDigital ID",
     "reportDropdownMyGov": "Aduan-Aplikasi MyGOV Malaysia",
     "questionsDropdown": "Pertanyaan"
+  },
+
+  "privacypg": {
+    "title": "DASAR PRIVASI APLIKASI MUDAH ALIH JDN",
+    "privacyTitle": "Privasi",
+    "privacy": "Aplikasi Mudah Alih JDN yang merangkumi Perkhidmatan Agensi, Suapan Media Sosial, Program dan Aktiviti, Carian Direktori Kerajaan (selepas ini dirujuk sebagai \"Aplikasi\"), adalah aplikasi yang dibangunkan untuk orang awam (selepas ini dirujuk sebagai \"Pengguna\") bagi memudahkan capaian kepada perkhidmatan atas talian yang ditawarkan oleh JDN kepada pengguna dengan menggunakan telefon pintar. Aplikasi ini boleh dimuat turun di Google Play Store dan Apple App Store. Kerajaan memastikan bahawa maklumat peribadi yang dikumpulkan adalah selari dengan peruntukan Akta Perlindungan Data Peribadi 2010 (Akta 709).",
+
+    "personalInfoTitle": "Maklumat Peribadi",
+    "personalInfo": "Aplikasi ini tidak akan merekodkan data peribadi pengguna kecuali dengan kebenaran dan diberikan secara sukarela oleh pengguna. Maklumat ini tidak dikongsi dengan organisasi lain bagi tujuan lain kecuali dinyatakan secara khusus.",
+
+    "collectedInfoTitle": "Maklumat yang Dikumpul",
+    "collectedInfo": {
+      "intro": "Aplikasi ini mengumpulkan data yang dikemukakan atas persetujuan pengguna dan dilakukan secara sukarela melalui proses pendaftaran aplikasi untuk capaian ke sistem aplikasi.",
+      "itemsTitle": "Data peribadi yang dikumpul adalah seperti berikut:",
+      "items": ["Nama pengguna", "Nombor kad pengenalan", "Nombor telefon", "E-mel"],
+      "use": "Data peribadi yang dikumpul tidak akan digunakan untuk apa-apa tujuan selain daripada yang disebutkan di atas.",
+      "disclosure": "Data peribadi yang dikumpulkan tidak akan didedahkan kepada mana-mana pihak ketiga atau dipindahkan ke tempat di luar Malaysia untuk tujuan komersil."
+    },
+
+    "effectsOfNotProvidingPersonalDataTitle": "Kesan Jika Data Peribadi Tidak Dibenarkan",
+    "effectsOfNotProvidingPersonalData": "Sekiranya data peribadi yang dibekalkan tidak mencukupi ataupun tidak memuaskan, maka permohonan atau permintaan pengguna untuk sebarang tujuan di atas tidak diterima atau diambil tindakan atau penggunaan perkhidmatan yang ditawarkan oleh Aplikasi mungkin ditolak atau terjejas.",
+
+    "confidentialityTitle": "Kerahsiaan",
+    "confidentiality": "Data peribadi yang dikumpul oleh Aplikasi akan disimpan dengan sulit menurut Dasar Privasi ini selaras dengan sebarang undang-undang yang berkenaan yang mungkin berkuat kuasa dari semasa ke semasa.",
+
+    "dataSecurityTitle": "Keselamatan Data",
+    "dataSecurity": "Aplikasi ini menerapkan ciri keselamatan yang mematuhi piawaian global untuk melindungi kerahsiaan dan keselamatan maklumat pengguna.",
+
+    "changeToPrivacyPolicyTitle": "Perubahan kepada Dasar Privasi",
+    "changeToPrivacyPolicy": "Sekiranya dasar privasi ini dipinda, pindaan tersebut akan dikemas kini di halaman ini."
   }
 }

@@ -25,10 +25,7 @@ export default function MastheadComponent({ locale }: MastheadComponentProps) {
         <MastheadTrigger>{messages.masthead.trigger}</MastheadTrigger>
       </MastheadHeader>
       <MastheadContent>
-        <MastheadSection
-          icon={<PutrajayaIcon />}
-          title={messages.masthead.sections.domain.title}
-        >
+        <MastheadSection icon={<PutrajayaIcon />} title={messages.masthead.sections.domain.title}>
           {messages.masthead.sections.domain.content}
         </MastheadSection>
         <MastheadSection

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Faq: CollectionConfig = {
   slug: 'faq',
@@ -20,6 +20,4 @@ export const Faq: CollectionConfig = {
       required: true,
     },
   ],
-}
-
-
+};
