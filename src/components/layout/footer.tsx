@@ -82,7 +82,7 @@ export default function FooterComponent({ locale, footerData }: FooterComponentP
           <div className="flex flex-row md:flex-row gap-3 items-start md:items-center">
             <p className="text-xs md:text-sm">© 2026 Kementerian Digital. Semua hakcipta terpelihara.</p>
             <Link href={`/${locale}/privacy`} className="text-xs md:text-sm">
-              Privacy Policy
+              Dasar Privasi
             </Link>
           </div>
 
