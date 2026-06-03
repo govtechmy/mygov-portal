@@ -31,29 +31,24 @@ export default function PrivacyPage({ messages }: PrivacyPageProps) {
         </div>
 
         <div className="mb-8">
-          <Label className="text-lg font-semibold uppercase">{messages.privacypg.personalInfoTitle}</Label>
-          <p className="leading-7 text-slate-600">{messages.privacypg.personalInfo}</p>
-        </div>
-
-        <div className="mb-8">
           <Label className="text-lg font-semibold uppercase">{messages.privacypg.collectedInfoTitle}</Label>
           <ol
-            className="list-[lower-alpha] list-outside space-y-4 pl-6 text-slate-700"
-            style={{ listStyleType: 'lower-alpha', paddingInlineStart: '1.5rem' }}
+            className="list-number list-outside space-y-4 pl-6 text-slate-700"
+            style={{ listStyleType: 'number', paddingInlineStart: '1.5rem' }}
           >
             <li className="leading-7 text-slate-600">{messages.privacypg.collectedInfo.intro}</li>
             <li className="leading-7 text-slate-600">
               <Label>{messages.privacypg.collectedInfo.itemsTitle}</Label>
-              <ol
-                className="list-[upper-roman] list-outside space-y-2 pl-6 text-slate-700"
-                style={{ listStyleType: 'upper-roman', paddingInlineStart: '1.5rem' }}
+              <ul
+                className="list-[disc] list-outside space-y-2 pl-6 text-slate-700"
+                style={{ listStyleType: 'disc', paddingInlineStart: '1.5rem' }}
               >
                 {messages.privacypg.collectedInfo.items.map((item, index) => (
                   <li key={index} className="leading-7 text-slate-600">
                     {item}
                   </li>
                 ))}
-              </ol>
+              </ul>
             </li>
             <li className="leading-7 text-slate-600">{messages.privacypg.collectedInfo.use}</li>
             <li className="leading-7 text-slate-600">{messages.privacypg.collectedInfo.disclosure}</li>
@@ -61,10 +56,29 @@ export default function PrivacyPage({ messages }: PrivacyPageProps) {
         </div>
 
         <div className="mb-8">
-          <Label className="text-lg font-semibold uppercase">
-            {messages.privacypg.effectsOfNotProvidingPersonalDataTitle}
-          </Label>
-          <p className="leading-7 text-slate-600">{messages.privacypg.effectsOfNotProvidingPersonalData}</p>
+          <div>
+            <Label className="text-lg font-semibold uppercase">{messages.privacypg.purposeOfDataCollectionTitle}</Label>
+          </div>
+          <Label>{messages.privacypg.purposeOfDataCollection}</Label>
+          <ul
+            className="list-[disc] list-outside space-y-2 pl-6 text-slate-700"
+            style={{ listStyleType: 'disc', paddingInlineStart: '1.5rem' }}
+          >
+            {messages.privacypg.purposeOfDataCollectionItems.map((item, index) => (
+              <li key={index} className="leading-7 text-slate-600">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mb-8">
+          <Label className="text-lg font-semibold uppercase">{messages.privacypg.retentionOfPersonalDataTitle}</Label>
+          <p className="leading-7 text-slate-600">{messages.privacypg.retentionOfPersonalData}</p>
+        </div>
+        <div className="mb-8">
+          <Label className="text-lg font-semibold uppercase">{messages.privacypg.consentTitle}</Label>
+          <p className="leading-7 text-slate-600">{messages.privacypg.consent}</p>
         </div>
         <div className="mb-8">
           <Label className="text-lg font-semibold uppercase">{messages.privacypg.confidentialityTitle}</Label>
@@ -74,9 +88,31 @@ export default function PrivacyPage({ messages }: PrivacyPageProps) {
           <Label className="text-lg font-semibold uppercase">{messages.privacypg.dataSecurityTitle}</Label>
           <p className="leading-7 text-slate-600">{messages.privacypg.dataSecurity}</p>
         </div>
+
         <div className="mb-8">
-          <Label className="text-lg font-semibold uppercase">{messages.privacypg.changeToPrivacyPolicyTitle}</Label>
-          <p className="leading-7 text-slate-600">{messages.privacypg.changeToPrivacyPolicy}</p>
+          <div>
+            <Label className="text-lg font-semibold uppercase">{messages.privacypg.yourRightsTitle}</Label>
+          </div>
+          <Label>{messages.privacypg.yourRights}</Label>
+          <ul
+            className="list-[disc] list-outside space-y-2 pl-6 text-slate-700"
+            style={{ listStyleType: 'disc', paddingInlineStart: '1.5rem' }}
+          >
+            {messages.privacypg.yourRightsItems.map((item, index) => (
+              <li key={index} className="leading-7 text-slate-600">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mb-8">
+          <Label className="text-lg font-semibold uppercase">{messages.privacypg.changesToPrivacyPolicyTitle}</Label>
+          <p className="leading-7 text-slate-600">{messages.privacypg.changesToPrivacyPolicy}</p>
+        </div>
+        <div className="mb-8">
+          <Label className="text-lg font-semibold uppercase">{messages.privacypg.eligibilityTitle}</Label>
+          <p className="leading-7 text-slate-600">{messages.privacypg.eligibility}</p>
         </div>
       </div>
     </div>

@@ -128,32 +128,62 @@
   },
 
   "privacypg": {
-    "title": "JDN MOBILE APPLICATION PRIVACY POLICY",
-    "privacyTitle": "Privacy",
-    "privacy": "JDN Mobile Application, which includes Agency Services, Social Media Feeds, Programs and Activities, and Government Directory Searches (hereinafter referred to as the \"Application\"), is developed for the public (hereinafter referred to as the \"User\") to facilitate access to online services offered by JDN via smartphones. The Application can be downloaded from the Google Play Store and Apple App Store. The government ensures that the personal information collected aligns with the provisions of the Personal Data Protection Act 2010 (Act 709).",
+    "title": "APPLICATION PRIVACY POLICY",
+    "privacyTitle": "PRIVACY",
+    "privacy": "The MyGOV Malaysia app (hereinafter referred to as the \"Application\"), is an application developed to enhance user experience without the need for specific software to users using smartphones. The app can be downloaded on the Google Play Store, Huawei App Gallery and Apple App Store. MyGOV Malaysia ensures that the personal information collected is in line with the provisions of the Personal Data Protection Act 2010 (Act 709).",
 
-    "personalInfoTitle": "Personal Information",
-    "personalInfo": "This Application will not record the user's personal data unless permission is granted and provided voluntarily by the users. This information is not shared with other organizations for any other purposes unless specifically stated.",
-
-    "collectedInfoTitle": "Information Collected",
+    "collectedInfoTitle": "INFORMATION COLLECTED",
     "collectedInfo": {
-      "intro": "The Application collects data submitted with user's consent and voluntarily through the application registration process for access to the application system.",
-      "itemsTitle": "The personal data collected includes:",
-      "items": ["User's name", "Identification Number", "Phone Number", "Email"],
-      "use": "The collected personal data will not be used for any purposes other than those mentioned above.",
-      "disclosure": "The collected personal data will not be disclosed to any third parties or transferred outside Malaysia for commercial purposes."
+      "intro": "This application collects data submitted upon user consent and done voluntarily through the application registration process for access to the application system.",
+      "itemsTitle": "The personal data collected is as follows:",
+      "items": [
+        "Name;",
+        "Identification number;",
+        "Email address;",
+        "Biometric data e.g. face recognition;",
+        "Photographs or audio or video recordings that you share with us;",
+        "Activity logs."
+      ],
+      "use": "Personal data collected will not be used for any purposes other than those mentioned above.",
+      "disclosure": "Personal data collected will not be disclosed to any third party or transferred to a place outside Malaysia for commercial purposes."
     },
 
-    "effectsOfNotProvidingPersonalDataTitle": "Effects of Not Providing Personal Data",
-    "effectsOfNotProvidingPersonalData": "If the personal data provided is insufficient or unsatisfactory, the user’s application or request for any purpose mentioned above may not be accepted or acted upon, and access to the services offered by the Application may be denied or affected.",
+    "purposeOfDataCollectionTitle": "PURPOSE OF DATA COLLECTION",
+    "purposeOfDataCollection": "We may collect, use, disclose and/or process your personal data for one or more of the following purposes:",
+    "purposeOfDataCollectionItems": [
+      "to assess, address or fulfil your registration, feedback or complaints for our Application;",
+      "to respond to your enquiries and complaints and to generally resolve disputes;",
+      "to update, consolidate and improve the accuracy of our records;",
+      "to produce data, reports and statistics which have been aggregated in a manner that does not identify you as an individual;",
+      "to produce statistics for internal and statutory reporting and/or record-keeping requirements;",
+      "to meet the disclosure requirements of any law binding on Government of Malaysia."
+    ],
 
-    "confidentialityTitle": "Confidentiality",
-    "confidentiality": "Personal data collected by the Application will be kept confidential according to this Privacy Policy and in compliance with any applicable laws that may be in effect from time to time.",
+    "retentionOfPersonalDataTitle": "RETENTION OF PERSONAL DATA",
+    "retentionOfPersonalData": "We retain your Personal Data only for the period necessary to fulfil the Purposes outlined in this Policy unless a longer retention period is required or allowed by law. Once your Personal Data is no longer necessary for the Purposes, or we no longer have a legal purpose for retaining your Personal Data, we shall take steps to erase, destroy or prevent access or use of such Personal Data for any purpose other than compliance with this Policy, or for purposes of safety, security, fraud prevention and detection, in accordance with the requirements of applicable laws.",
 
-    "dataSecurityTitle": "Data Security",
-    "dataSecurity": "The Application implements security features that adhere to global standards to protect the confidentiality and security of user information.",
+    "consentTitle": "CONSENT",
+    "consent": "This Application requires your personal data to be collected. If you choose not to provide this data, some functions of the Application may not work properly, or we may be unable to process your requests.",
 
-    "changeToPrivacyPolicyTitle": "Changes to the Privacy Policy",
-    "changeToPrivacyPolicy": "If this Privacy Policy is amended, the updates will be made on this page."
+    "confidentialityTitle": "CONFIDENTIALITY",
+    "confidentiality": "The personal data collected by the Application will be kept confidential in accordance with this Privacy Policy in accordance with any applicable laws that may be in force from time to time.",
+
+    "dataSecurityTitle": "DATA SECURITY",
+    "dataSecurity": "The app implements security features that comply with global standards to protect the confidentiality and security of user information.",
+
+    "yourRightsTitle": "YOUR RIGHT",
+    "yourRights": "You have the right to:",
+    "yourRightsItems": [
+      "Know how your data is being collected and used",
+      "For what purpose your data is used",
+      "Make correction to your personal data information via MyGOV Malaysia Helpdesk",
+      "Withdraw your consent for the collection, use and disclosure of your personal data at any time"
+    ],
+
+    "changesToPrivacyPolicyTitle": "CHANGES TO PRIVACY POLICY",
+    "changesToPrivacyPolicy": "This Privacy Policy may be amended from time to time. Any amendments made to this Privacy Policy will be updated on this page.",
+
+    "eligibilityTitle": "ELIGIBILITY",
+    "eligibility": "This Application is intended to be used by those who are aged 18 years and above. By registering for this Application, you represent and warrant to us that you are at least 18 years old and your registration and your use of this Application is in compliance with any and all applicable laws and regulations. If you are under the age of 18, you are required to ensure that your parents or legal guardian consent on your behalf to the processing of your Personal Data as described in this Privacy Policy."
   }
 }
