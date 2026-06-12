@@ -23,7 +23,7 @@ A modern, multilingual government portal built with Next.js and PayloadCMS, desi
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) + [MyDS Design System](https://myds.design/)
 - **Language**: TypeScript
 - **Forms**: React Hook Form + Zod validation
-- **Storage**: Vercel Blob Storage
+- **Storage**: Pluggable via [Storage Adapters](https://payloadcms.com/docs/upload/storage-adapters) (default: Vercel Blob)
 - **Deployment**: Vercel
 - **Package Manager**: pnpm
 

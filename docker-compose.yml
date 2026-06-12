@@ -1,0 +1,83 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: mygov_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: mongoadmin
+      MONGO_INITDB_DATABASE: mygov
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_configdb:/data/configdb
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mygov_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_ENV=${APP_ENV}
+        - AUTH_TOKEN=${AUTH_TOKEN}
+        - BLOB_READ_WRITE_TOKEN=${BLOB_READ_WRITE_TOKEN}
+        - CLOUDFLARE_TURNSTILE_SECRET_KEY=${CLOUDFLARE_TURNSTILE_SECRET_KEY}
+        - DATABASE_URI=${DATABASE_URI}
+        - FRESHDESK_API_KEY=${FRESHDESK_API_KEY}
+        - FRESHDESK_API_URL=${FRESHDESK_API_URL}
+        - NEXT_PUBLIC_APP_ENV=${NEXT_PUBLIC_APP_ENV}
+        - NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED=${NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_ENABLED}
+        - NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+        - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+    container_name: mygov_app
+    restart: unless-stopped
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: pnpm dev
+    networks:
+      - mygov_network
+    stdin_open: true
+    tty: true
+
+  # Optional: MongoDB UI for development
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mygov_mongo_express
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongoadmin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongoadmin
+      ME_CONFIG_MONGODB_URL: mongodb://mongoadmin:mongoadmin@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_SITE_BASEURL: /mongo-express
+    ports:
+      - '8081:8081'
+    networks:
+      - mygov_network
+
+volumes:
+  mongodb_data:
+  mongodb_configdb:
+
+networks:
+  mygov_network:
+    driver: bridge
